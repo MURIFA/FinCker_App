@@ -238,7 +238,6 @@ public class loginView extends javax.swing.JFrame {
 
     private void CLoseLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CLoseLabel2MouseClicked
         // TODO add your handling code here:
-        System.exit(0);
 
     }//GEN-LAST:event_CLoseLabel2MouseClicked
 
