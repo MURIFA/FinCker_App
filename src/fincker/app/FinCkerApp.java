@@ -15,6 +15,10 @@ public class FinCkerApp {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        loginView lgf =new loginView();
+        lgf.setLocationRelativeTo(null);
+        lgf.setVisible(true);
+
     }
     
 }
