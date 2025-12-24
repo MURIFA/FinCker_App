@@ -17,8 +17,7 @@ public class tentangView extends javax.swing.JFrame {
      */
     public tentangView() {
         initComponents();
-        this.setLocationRelativeTo(null);
-   
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
