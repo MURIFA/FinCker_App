@@ -26,12 +26,12 @@ public class dashboardView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        navbarDashboard = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
+        btnBeranda = new javax.swing.JButton();
+        btnTentang = new javax.swing.JButton();
+        btnLaporan = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -50,64 +50,85 @@ public class dashboardView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(51, 102, 255));
+        navbarDashboard.setBackground(new java.awt.Color(255, 133, 0));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("FINCKER APP");
 
-        jButton1.setText("Logout");
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Beranda");
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setFocusPainted(false);
+        btnBeranda.setForeground(new java.awt.Color(255, 255, 255));
+        btnBeranda.setText("Beranda");
+        btnBeranda.setBorderPainted(false);
+        btnBeranda.setContentAreaFilled(false);
+        btnBeranda.setFocusPainted(false);
+        btnBeranda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBerandaActionPerformed(evt);
+            }
+        });
 
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Tentang");
-        jButton3.setBorderPainted(false);
-        jButton3.setContentAreaFilled(false);
-        jButton3.setFocusPainted(false);
+        btnTentang.setForeground(new java.awt.Color(255, 255, 255));
+        btnTentang.setText("Tentang");
+        btnTentang.setBorderPainted(false);
+        btnTentang.setContentAreaFilled(false);
+        btnTentang.setFocusPainted(false);
+        btnTentang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTentangActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Laporan");
+        btnLaporan.setText("Laporan");
+        btnLaporan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLaporanActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout navbarDashboardLayout = new javax.swing.GroupLayout(navbarDashboard);
+        navbarDashboard.setLayout(navbarDashboardLayout);
+        navbarDashboardLayout.setHorizontalGroup(
+            navbarDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(navbarDashboardLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(btnBeranda)
                 .addGap(73, 73, 73)
-                .addComponent(jButton3)
+                .addComponent(btnTentang)
                 .addGap(55, 55, 55)
-                .addComponent(jButton4)
+                .addComponent(btnLaporan)
                 .addGap(130, 130, 130)
-                .addComponent(jButton1)
+                .addComponent(btnLogout)
                 .addGap(26, 26, 26))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        navbarDashboardLayout.setVerticalGroup(
+            navbarDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(navbarDashboardLayout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(navbarDashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(btnLogout)
+                    .addComponent(btnBeranda)
+                    .addComponent(btnTentang)
+                    .addComponent(btnLaporan))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 60));
+        getContentPane().add(navbarDashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 60));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 204));
+        jPanel2.setBackground(new java.awt.Color(0, 153, 153));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Riwayat");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -170,7 +191,7 @@ public class dashboardView extends javax.swing.JFrame {
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 60, 640, -1));
 
-        jPanel4.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel4.setBackground(new java.awt.Color(0, 102, 102));
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -236,6 +257,7 @@ public class dashboardView extends javax.swing.JFrame {
                 .addContainerGap(52, Short.MAX_VALUE))
         );
 
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Tabungan");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -270,6 +292,59 @@ public class dashboardView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnTentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTentangActionPerformed
+        // TODO add your handling code here:
+        // Buka halaman Tentang
+    tentangView aboutPage = new tentangView();
+    aboutPage.setVisible(true);
+    
+    // Tutup Dashboard sementara
+    this.dispose();
+    }//GEN-LAST:event_btnTentangActionPerformed
+
+    private void btnBerandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBerandaActionPerformed
+        // TODO add your handling code here:
+        // 1. Panggil method loadData() yang sudah kita buat sebelumnya
+    loadData(); 
+    
+    // 2. (Opsional) Refresh tabel riwayat mini jika ada
+    // loadTabelMini(); 
+    
+    // 3. Beri notifikasi kecil bahwa data sudah segar
+    javax.swing.JOptionPane.showMessageDialog(this, "Tampilan berhasil diperbarui!");
+    }//GEN-LAST:event_btnBerandaActionPerformed
+
+    private void btnLaporanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaporanActionPerformed
+        // TODO add your handling code here:
+        // 1. Buka jendela Laporan
+    laporanView reportPage = new laporanView();
+    reportPage.setVisible(true);
+    
+    // 2. Tutup Dashboard (agar user fokus di laporan)
+    this.dispose();
+    }//GEN-LAST:event_btnLaporanActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        // 1. Konfirmasi dulu agar tidak kepencet tidak sengaja
+    int jawaban = javax.swing.JOptionPane.showConfirmDialog(
+            this, 
+            "Apakah Anda yakin ingin keluar?", 
+            "Konfirmasi Logout", 
+            javax.swing.JOptionPane.YES_NO_OPTION
+    );
+    
+    // 2. Jika user pilih YES
+    if (jawaban == javax.swing.JOptionPane.YES_OPTION) {
+        // Buka WelcomeView (Tampilan Awal)
+        welcomeView awal = new welcomeView();
+        awal.setVisible(true);
+        
+        // Tutup Dashboard
+        this.dispose();
+    }
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -307,10 +382,10 @@ public class dashboardView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnBeranda;
+    private javax.swing.JButton btnLaporan;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnTentang;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -321,11 +396,15 @@ public class dashboardView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel navbarDashboard;
     // End of variables declaration//GEN-END:variables
+
+    private void loadData() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
