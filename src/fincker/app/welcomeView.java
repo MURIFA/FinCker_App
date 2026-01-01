@@ -17,7 +17,17 @@ public class welcomeView extends javax.swing.JFrame {
      */
     public welcomeView() {
         initComponents();
-    }
+    
+        // 1. Agar window muncul persis di tengah layar monitor
+    this.setLocationRelativeTo(null); 
+    
+    // 2. KUNCI UKURAN (Solusi paling gampang untuk Absolute Layout)
+    // Dengan ini, user tidak bisa maximize window, jadi desainmu tetap rapi & tidak ada area abu-abu.
+    this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
+    
+    // 3. (Opsional) Kasih Judul di atas window
+    this.setTitle("FinCker - Selamat Datang");
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,6 +37,7 @@ public class welcomeView extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         lblJudul = new javax.swing.JLabel();
@@ -34,29 +45,49 @@ public class welcomeView extends javax.swing.JFrame {
         btnMulai = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setPreferredSize(new java.awt.Dimension(1000, 600));
+        getContentPane().setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
         lblJudul.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         lblJudul.setForeground(new java.awt.Color(255, 255, 255));
         lblJudul.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblJudul.setText("FINCKER");
-        jPanel1.add(lblJudul, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(90, 360, 0, 0);
+        jPanel1.add(lblJudul, gridBagConstraints);
 
         lblTagline.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblTagline.setForeground(new java.awt.Color(255, 255, 255));
         lblTagline.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTagline.setText("Solusi Cerdas Keuangan Anda.");
-        jPanel1.add(lblTagline, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(6, 340, 0, 309);
+        jPanel1.add(lblTagline, gridBagConstraints);
 
         btnMulai.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnMulai.setText("MULAI SEKARANG");
         btnMulai.addActionListener(this::btnMulaiActionPerformed);
-        jPanel1.add(btnMulai, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 360, 210, 50));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 33;
+        gridBagConstraints.ipady = 18;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(175, 350, 90, 0);
+        jPanel1.add(btnMulai, gridBagConstraints);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 500));
+        getContentPane().add(jPanel1, "card2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
