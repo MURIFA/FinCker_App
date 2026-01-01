@@ -28,10 +28,10 @@ public class tentangView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         navbarTentang = new javax.swing.JPanel();
         lblJudul = new javax.swing.JLabel();
         btnKembali = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
@@ -43,7 +43,12 @@ public class tentangView extends javax.swing.JFrame {
         lblNama3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setPreferredSize(new java.awt.Dimension(1000, 600));
+        getContentPane().setLayout(new java.awt.CardLayout());
+
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1000, 600));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         navbarTentang.setBackground(new java.awt.Color(255, 153, 0));
 
@@ -61,7 +66,7 @@ public class tentangView extends javax.swing.JFrame {
             .addGroup(navbarTentangLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(lblJudul)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 632, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 642, Short.MAX_VALUE)
                 .addComponent(btnKembali)
                 .addGap(26, 26, 26))
         );
@@ -75,10 +80,7 @@ public class tentangView extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        getContentPane().add(navbarTentang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 60));
-
-        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(navbarTentang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 60));
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
@@ -88,21 +90,21 @@ public class tentangView extends javax.swing.JFrame {
         jTextArea1.setWrapStyleWord(true);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 830, 70));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 830, 60));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblFoto1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fincker/app/gambar/rizky.png"))); // NOI18N
+        lblFoto1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fincker/app/gambar/1.jpg"))); // NOI18N
         lblFoto1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblFoto1.setPreferredSize(new java.awt.Dimension(650, 650));
         jPanel2.add(lblFoto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 140, 140));
 
-        lblFoto2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fincker/app/gambar/rahma.png"))); // NOI18N
+        lblFoto2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fincker/app/gambar/3.jpg"))); // NOI18N
         lblFoto2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblFoto2.setPreferredSize(new java.awt.Dimension(650, 650));
         jPanel2.add(lblFoto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 140, 140));
 
-        lblFoto3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fincker/app/gambar/aziz.png"))); // NOI18N
+        lblFoto3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fincker/app/gambar/2.jpg"))); // NOI18N
         lblFoto3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblFoto3.setPreferredSize(new java.awt.Dimension(650, 650));
         jPanel2.add(lblFoto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, 140, 140));
@@ -121,7 +123,7 @@ public class tentangView extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 830, 280));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 500));
+        getContentPane().add(jPanel1, "card3");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

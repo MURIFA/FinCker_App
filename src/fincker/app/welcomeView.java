@@ -39,7 +39,19 @@ public class welcomeView extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel() {
+            // 1. Muat Gambar (Ganti nama file sesuai punyamu)
+            java.awt.Image backgroundImage = new javax.swing.ImageIcon(getClass().getResource("/fincker/app/gambar/bg-welcome.gif")).getImage();
+
+            // 2. Timpa cara menggambar Panel
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                super.paintComponent(g); // Gambar panel dasar dulu
+
+                // Gambar background melar memenuhi panel
+                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
         lblJudul = new javax.swing.JLabel();
         lblTagline = new javax.swing.JLabel();
         btnMulai = new javax.swing.JButton();
@@ -49,6 +61,7 @@ public class welcomeView extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1000, 600));
         jPanel1.setLayout(new java.awt.GridBagLayout());
 
         lblJudul.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
@@ -93,18 +106,18 @@ public class welcomeView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMulaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMulaiActionPerformed
-    // TODO add your handling code here:
-    // 1. Siapkan halaman Login
-    loginView loginPage = new loginView();
-    
-    // 2. Trik agar Login muncul pas di tengah layar (biar transisinya mulus)
-    loginPage.setLocationRelativeTo(null);
-    
-    // 3. Tampilkan halaman Login
-    loginPage.setVisible(true);
-    
-    // 4. Tutup halaman Welcome (agar tidak menumpuk di memori)
-    this.dispose();
+        // TODO add your handling code here:
+        // 1. Siapkan halaman Login
+        loginView loginPage = new loginView();
+
+        // 2. Trik agar Login muncul pas di tengah layar (biar transisinya mulus)
+        loginPage.setLocationRelativeTo(null);
+
+        // 3. Tampilkan halaman Login
+        loginPage.setVisible(true);
+
+        // 4. Tutup halaman Welcome (agar tidak menumpuk di memori)
+        this.dispose();
     }//GEN-LAST:event_btnMulaiActionPerformed
 
     /**
