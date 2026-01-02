@@ -44,7 +44,7 @@ public class inputView extends javax.swing.JFrame {
         getContentPane().setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1000, 600));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jPanel1, "card2");
 

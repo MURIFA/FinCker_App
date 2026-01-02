@@ -28,7 +28,7 @@ public class profileView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel() {
+        jPanel2 = new javax.swing.JPanel() {
             // 1. Muat Gambar (Ganti nama file sesuai punyamu)
             java.awt.Image backgroundImage = new javax.swing.ImageIcon(getClass().getResource("/fincker/app/gambar/bg-tentang-profile.gif")).getImage();
 
@@ -45,10 +45,10 @@ public class profileView extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1000, 600));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel1, "card2");
+        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel2.setPreferredSize(new java.awt.Dimension(1280, 720));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jPanel2, "card2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -79,6 +79,6 @@ public class profileView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

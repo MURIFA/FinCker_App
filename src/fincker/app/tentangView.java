@@ -52,10 +52,11 @@ public class tentangView extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1000, 600));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

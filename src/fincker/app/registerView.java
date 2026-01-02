@@ -1,22 +1,21 @@
-package fincker.app;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+package fincker.app;
 
 /**
  *
  * @author Muham
  */
-public class loginView extends javax.swing.JFrame {
+public class registerView extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(loginView.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(registerView.class.getName());
 
     /**
-     * Creates new form loginView
+     * Creates new form registerView
      */
-    public loginView() {
+    public registerView() {
         initComponents();
     }
 
@@ -77,7 +76,7 @@ public class loginView extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new loginView().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new registerView().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
