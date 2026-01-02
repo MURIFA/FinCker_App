@@ -57,7 +57,6 @@ public class welcomeView extends javax.swing.JFrame {
         btnMulai = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 600));
         getContentPane().setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
@@ -72,7 +71,7 @@ public class welcomeView extends javax.swing.JFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(90, 360, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(183, 353, 0, 0);
         jPanel1.add(lblJudul, gridBagConstraints);
 
         lblTagline.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -84,7 +83,7 @@ public class welcomeView extends javax.swing.JFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 340, 0, 309);
+        gridBagConstraints.insets = new java.awt.Insets(6, 333, 0, 316);
         jPanel1.add(lblTagline, gridBagConstraints);
 
         btnMulai.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -97,7 +96,7 @@ public class welcomeView extends javax.swing.JFrame {
         gridBagConstraints.ipadx = 33;
         gridBagConstraints.ipady = 18;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(175, 350, 90, 0);
+        gridBagConstraints.insets = new java.awt.Insets(82, 350, 90, 0);
         jPanel1.add(btnMulai, gridBagConstraints);
 
         getContentPane().add(jPanel1, "card2");

@@ -28,12 +28,19 @@ public class tentangView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        navbarTentang = new javax.swing.JPanel();
-        lblJudul = new javax.swing.JLabel();
-        btnKembali = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel() {
+            // 1. Muat Gambar (Ganti nama file sesuai punyamu)
+            java.awt.Image backgroundImage = new javax.swing.ImageIcon(getClass().getResource("/fincker/app/gambar/bg-tentang-profile.gif")).getImage();
+
+            // 2. Timpa cara menggambar Panel
+            @Override
+            protected void paintComponent(java.awt.Graphics g) {
+                super.paintComponent(g); // Gambar panel dasar dulu
+
+                // Gambar background melar memenuhi panel
+                g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
         jPanel2 = new javax.swing.JPanel();
         lblFoto1 = new javax.swing.JLabel();
         lblFoto2 = new javax.swing.JLabel();
@@ -41,56 +48,15 @@ public class tentangView extends javax.swing.JFrame {
         lblNama1 = new javax.swing.JLabel();
         lblNama2 = new javax.swing.JLabel();
         lblNama3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1000, 600));
         getContentPane().setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 600));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        navbarTentang.setBackground(new java.awt.Color(255, 153, 0));
-
-        lblJudul.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lblJudul.setForeground(new java.awt.Color(255, 255, 255));
-        lblJudul.setText("TENTANG KAMI");
-
-        btnKembali.setText("Kembali");
-        btnKembali.addActionListener(this::btnKembaliActionPerformed);
-
-        javax.swing.GroupLayout navbarTentangLayout = new javax.swing.GroupLayout(navbarTentang);
-        navbarTentang.setLayout(navbarTentangLayout);
-        navbarTentangLayout.setHorizontalGroup(
-            navbarTentangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(navbarTentangLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lblJudul)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 642, Short.MAX_VALUE)
-                .addComponent(btnKembali)
-                .addGap(26, 26, 26))
-        );
-        navbarTentangLayout.setVerticalGroup(
-            navbarTentangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(navbarTentangLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(navbarTentangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblJudul)
-                    .addComponent(btnKembali))
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(navbarTentang, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 60));
-
-        jTextArea1.setEditable(false);
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("FinCker (Financial Tracker) adalah aplikasi manajemen keuangan cerdas yang dirancang untuk membantu pengguna umum dalam mencatat arus kas harian. Dilengkapi dengan fitur pencatatan Pemasukan, Pengeluaran, serta Tabungan Impian (Wishlist), FinCker hadir sebagai solusi praktis untuk menciptakan kebiasaan finansial yang lebih sehat, transparan, dan terencana.");
-        jTextArea1.setWrapStyleWord(true);
-        jScrollPane1.setViewportView(jTextArea1);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 830, 60));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -123,20 +89,20 @@ public class tentangView extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 830, 280));
 
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("FinCker (Financial Tracker) adalah aplikasi manajemen keuangan cerdas yang dirancang untuk membantu pengguna umum dalam mencatat arus kas harian. Dilengkapi dengan fitur pencatatan Pemasukan, Pengeluaran, serta Tabungan Impian (Wishlist), FinCker hadir sebagai solusi praktis untuk menciptakan kebiasaan finansial yang lebih sehat, transparan, dan terencana.");
+        jTextArea1.setWrapStyleWord(true);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 830, 60));
+
         getContentPane().add(jPanel1, "card3");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnKembaliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKembaliActionPerformed
-        // TODO add your handling code here:
-        // Buka kembali Dashboard
-    dashboardView dash = new dashboardView();
-    dash.setVisible(true);
-
-    // Tutup halaman Tentang
-    this.dispose();
-    }//GEN-LAST:event_btnKembaliActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,7 +130,6 @@ public class tentangView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnKembali;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -172,10 +137,8 @@ public class tentangView extends javax.swing.JFrame {
     private javax.swing.JLabel lblFoto1;
     private javax.swing.JLabel lblFoto2;
     private javax.swing.JLabel lblFoto3;
-    private javax.swing.JLabel lblJudul;
     private javax.swing.JLabel lblNama1;
     private javax.swing.JLabel lblNama2;
     private javax.swing.JLabel lblNama3;
-    private javax.swing.JPanel navbarTentang;
     // End of variables declaration//GEN-END:variables
 }
