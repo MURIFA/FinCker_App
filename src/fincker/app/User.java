@@ -13,6 +13,7 @@ public class User {
     private String password = "";
     private String rtp = "";
     
+    
     public void setUsername (String username){
         this.username = username;
     }
@@ -46,9 +47,9 @@ public class User {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        registerView fu = new registerView();
-        fu.setLocationRelativeTo(null);
-        fu.setVisible(true);
+        registerView rv = new registerView();
+        rv.setLocationRelativeTo(null);
+        rv.setVisible(true);
     }
 
 
