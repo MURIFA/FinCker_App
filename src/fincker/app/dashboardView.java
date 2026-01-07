@@ -15,6 +15,32 @@ public class dashboardView extends javax.swing.JFrame {
      */
     public dashboardView() {
         initComponents();
+        
+        // 1. Settingan Layar
+    this.setSize(1280, 720);
+    this.setLocationRelativeTo(null);
+
+    // 2. KODE WAJIB: Paksa Navbar Melar Mengikuti jPanel1
+    // Karena jPanel1 pakai Custom Code/Absolute, kita harus update manual
+    jPanel1.addComponentListener(new java.awt.event.ComponentAdapter() {
+        @Override
+        public void componentResized(java.awt.event.ComponentEvent evt) {
+            // Logika: 
+            // Setiap kali jPanel1 berubah ukuran (di-maximize/restore),
+            // Kita paksa pnlNavbar punya lebar yang SAMA dengan jPanel1.
+            
+            int lebarLayar = jPanel1.getWidth();
+            int tinggiNavbar = 70; // Atur tinggi sesuai selera (misal 70px)
+            
+            // SetBounds(x, y, width, height)
+            pnlNavbar.setBounds(0, 0, lebarLayar, tinggiNavbar);
+            
+            // Validasi ulang biar tombol di dalamnya ikut geser
+            pnlNavbar.revalidate();
+            pnlNavbar.repaint();
+        }
+    });
+    
     }
 
     /**
@@ -39,28 +65,23 @@ public class dashboardView extends javax.swing.JFrame {
                 g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
             }
         };
-        btnLogout = new javax.swing.JButton();
+        pnlNavbar = new javax.swing.JPanel();
         btnBeranda = new javax.swing.JButton();
         btnTentang = new javax.swing.JButton();
-        btnLaporan = new javax.swing.JButton();
+        btnTentang1 = new javax.swing.JButton();
+        btnTentang2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
-        getContentPane().setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnLogout.setText("Logout");
-        btnLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLogoutActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(782, 24, -1, -1));
+        pnlNavbar.setBackground(new java.awt.Color(153, 255, 255));
+        pnlNavbar.setOpaque(false);
+        pnlNavbar.setPreferredSize(new java.awt.Dimension(1200, 70));
 
-        btnBeranda.setForeground(new java.awt.Color(255, 255, 255));
+        btnBeranda.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnBeranda.setText("Beranda");
         btnBeranda.setBorderPainted(false);
         btnBeranda.setContentAreaFilled(false);
@@ -70,9 +91,8 @@ public class dashboardView extends javax.swing.JFrame {
                 btnBerandaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBeranda, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 24, -1, -1));
 
-        btnTentang.setForeground(new java.awt.Color(255, 255, 255));
+        btnTentang.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnTentang.setText("Tentang");
         btnTentang.setBorderPainted(false);
         btnTentang.setContentAreaFilled(false);
@@ -82,17 +102,57 @@ public class dashboardView extends javax.swing.JFrame {
                 btnTentangActionPerformed(evt);
             }
         });
-        jPanel1.add(btnTentang, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 24, -1, -1));
 
-        btnLaporan.setText("Laporan");
-        btnLaporan.addActionListener(new java.awt.event.ActionListener() {
+        btnTentang1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnTentang1.setText("Tentang");
+        btnTentang1.setBorderPainted(false);
+        btnTentang1.setContentAreaFilled(false);
+        btnTentang1.setFocusPainted(false);
+        btnTentang1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLaporanActionPerformed(evt);
+                btnTentang1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnLaporan, new org.netbeans.lib.awtextra.AbsoluteConstraints(579, 24, -1, -1));
 
-        getContentPane().add(jPanel1, "card2");
+        javax.swing.GroupLayout pnlNavbarLayout = new javax.swing.GroupLayout(pnlNavbar);
+        pnlNavbar.setLayout(pnlNavbarLayout);
+        pnlNavbarLayout.setHorizontalGroup(
+            pnlNavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlNavbarLayout.createSequentialGroup()
+                .addGap(264, 264, 264)
+                .addComponent(btnBeranda)
+                .addGap(57, 57, 57)
+                .addComponent(btnTentang, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(btnTentang1)
+                .addContainerGap())
+        );
+        pnlNavbarLayout.setVerticalGroup(
+            pnlNavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlNavbarLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(pnlNavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBeranda, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTentang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTentang1))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(pnlNavbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 80));
+
+        btnTentang2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnTentang2.setText("Tentang");
+        btnTentang2.setBorderPainted(false);
+        btnTentang2.setContentAreaFilled(false);
+        btnTentang2.setFocusPainted(false);
+        btnTentang2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTentang2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnTentang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, -1, -1));
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -100,55 +160,32 @@ public class dashboardView extends javax.swing.JFrame {
     private void btnTentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTentangActionPerformed
         // TODO add your handling code here:
         // Buka halaman Tentang
-    tentangView aboutPage = new tentangView();
-    aboutPage.setVisible(true);
-    
-    // Tutup Dashboard sementara
-    this.dispose();
+        tentangView aboutPage = new tentangView();
+        aboutPage.setVisible(true);
+
+        // Tutup Dashboard sementara
+        this.dispose();
     }//GEN-LAST:event_btnTentangActionPerformed
 
     private void btnBerandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBerandaActionPerformed
         // TODO add your handling code here:
         // 1. Panggil method loadData() yang sudah kita buat sebelumnya
-    loadData(); 
-    
-    // 2. (Opsional) Refresh tabel riwayat mini jika ada
-    // loadTabelMini(); 
-    
-    // 3. Beri notifikasi kecil bahwa data sudah segar
-    javax.swing.JOptionPane.showMessageDialog(this, "Tampilan berhasil diperbarui!");
+        loadData();
+
+        // 2. (Opsional) Refresh tabel riwayat mini jika ada
+        // loadTabelMini();
+
+        // 3. Beri notifikasi kecil bahwa data sudah segar
+        javax.swing.JOptionPane.showMessageDialog(this, "Tampilan berhasil diperbarui!");
     }//GEN-LAST:event_btnBerandaActionPerformed
 
-    private void btnLaporanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaporanActionPerformed
+    private void btnTentang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTentang1ActionPerformed
         // TODO add your handling code here:
-        // 1. Buka jendela Laporan
-    laporanView reportPage = new laporanView();
-    reportPage.setVisible(true);
-    
-    // 2. Tutup Dashboard (agar user fokus di laporan)
-    this.dispose();
-    }//GEN-LAST:event_btnLaporanActionPerformed
+    }//GEN-LAST:event_btnTentang1ActionPerformed
 
-    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+    private void btnTentang2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTentang2ActionPerformed
         // TODO add your handling code here:
-        // 1. Konfirmasi dulu agar tidak kepencet tidak sengaja
-    int jawaban = javax.swing.JOptionPane.showConfirmDialog(
-            this, 
-            "Apakah Anda yakin ingin keluar?", 
-            "Konfirmasi Logout", 
-            javax.swing.JOptionPane.YES_NO_OPTION
-    );
-    
-    // 2. Jika user pilih YES
-    if (jawaban == javax.swing.JOptionPane.YES_OPTION) {
-        // Buka WelcomeView (Tampilan Awal)
-        welcomeView awal = new welcomeView();
-        awal.setVisible(true);
-        
-        // Tutup Dashboard
-        this.dispose();
-    }
-    }//GEN-LAST:event_btnLogoutActionPerformed
+    }//GEN-LAST:event_btnTentang2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,10 +224,11 @@ public class dashboardView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBeranda;
-    private javax.swing.JButton btnLaporan;
-    private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnTentang;
+    private javax.swing.JButton btnTentang1;
+    private javax.swing.JButton btnTentang2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel pnlNavbar;
     // End of variables declaration//GEN-END:variables
 
     private void loadData() {
