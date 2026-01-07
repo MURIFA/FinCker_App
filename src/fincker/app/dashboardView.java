@@ -10,37 +10,45 @@ package fincker.app;
  */
 public class dashboardView extends javax.swing.JFrame {
 
+    // --- COPY DARI SINI (VARIABEL GLOBAL) ---
+    int saldo = 0;
+    int pemasukan = 0;
+    int pengeluaran = 0;
+    int targetTabungan = 10000000; // Default target 10 Juta
+    
+    // Format mata uang Rupiah
+    java.text.NumberFormat kursIDR = java.text.NumberFormat.getCurrencyInstance(new java.util.Locale("id", "ID"));
+    // --- SAMPAI SINI ---
     /**
      * Creates new form dashboardView
      */
     public dashboardView() {
         initComponents();
         
-        // 1. Settingan Layar
-    this.setSize(1280, 720);
-    this.setLocationRelativeTo(null);
+        // 1. Settingan Layar (Resolusi & Posisi Tengah)
+        this.setSize(1280, 720);
+        this.setLocationRelativeTo(null); 
 
-    // 2. KODE WAJIB: Paksa Navbar Melar Mengikuti jPanel1
-    // Karena jPanel1 pakai Custom Code/Absolute, kita harus update manual
-    jPanel1.addComponentListener(new java.awt.event.ComponentAdapter() {
-        @Override
-        public void componentResized(java.awt.event.ComponentEvent evt) {
-            // Logika: 
-            // Setiap kali jPanel1 berubah ukuran (di-maximize/restore),
-            // Kita paksa pnlNavbar punya lebar yang SAMA dengan jPanel1.
-            
-            int lebarLayar = jPanel1.getWidth();
-            int tinggiNavbar = 70; // Atur tinggi sesuai selera (misal 70px)
-            
-            // SetBounds(x, y, width, height)
-            pnlNavbar.setBounds(0, 0, lebarLayar, tinggiNavbar);
-            
-            // Validasi ulang biar tombol di dalamnya ikut geser
-            pnlNavbar.revalidate();
-            pnlNavbar.repaint();
-        }
-    });
-    
+        // 2. KODE WAJIB: Paksa Navbar Melar Mengikuti jPanel1
+        // Karena jPanel1 pakai Custom Code/Absolute, kita harus update manual saat resize
+        jPanel1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                int lebarLayar = jPanel1.getWidth();
+                int tinggiNavbar = 70; // Tinggi navbar (sesuaikan dengan design)
+                
+                // SetBounds(x, y, width, height)
+                pnlNavbar.setBounds(0, 0, lebarLayar, tinggiNavbar);
+                
+                // Validasi ulang biar tombol di dalamnya ikut geser/update
+                pnlNavbar.revalidate();
+                pnlNavbar.repaint();
+            }
+        });
+
+        // 3. Panggil Helper Methods (Otak Aplikasi)
+        updateTampilan(); // Agar angka saldo/pemasukan muncul saat dibuka
+        initTanggal();    // CUKUP PANGGIL INI SAJA. (Kode manual tanggal dihapus biar rapi)
     }
 
     /**
@@ -68,8 +76,32 @@ public class dashboardView extends javax.swing.JFrame {
         pnlNavbar = new javax.swing.JPanel();
         btnBeranda = new javax.swing.JButton();
         btnTentang = new javax.swing.JButton();
-        btnTentang1 = new javax.swing.JButton();
-        btnTentang2 = new javax.swing.JButton();
+        btnLaporan = new javax.swing.JButton();
+        btnTabungan = new javax.swing.JButton();
+        btnProfile = new javax.swing.JButton();
+        pnlBeranda = new javax.swing.JPanel();
+        pnlKiri = new javax.swing.JPanel();
+        pnlSaldo = new javax.swing.JPanel();
+        lblSaldo = new javax.swing.JLabel();
+        pnlPemasukan = new javax.swing.JPanel();
+        lblPemasukan = new javax.swing.JLabel();
+        pnlPengeluaran = new javax.swing.JPanel();
+        lblPengeluaran = new javax.swing.JLabel();
+        txtSaldo = new javax.swing.JTextField();
+        txtPemasukan = new javax.swing.JTextField();
+        txtPengeluaran = new javax.swing.JTextField();
+        btnPS = new javax.swing.JButton();
+        btnPM = new javax.swing.JButton();
+        btnPK = new javax.swing.JButton();
+        pnlKanan = new javax.swing.JPanel();
+        txtKalender = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        pnlBawah = new javax.swing.JPanel();
+        txtRiwayat = new javax.swing.JTextField();
+        financeHealth = new javax.swing.JProgressBar();
+        txtProgres = new javax.swing.JTextField();
+        lblRiwayat = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,14 +135,36 @@ public class dashboardView extends javax.swing.JFrame {
             }
         });
 
-        btnTentang1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnTentang1.setText("Tentang");
-        btnTentang1.setBorderPainted(false);
-        btnTentang1.setContentAreaFilled(false);
-        btnTentang1.setFocusPainted(false);
-        btnTentang1.addActionListener(new java.awt.event.ActionListener() {
+        btnLaporan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnLaporan.setText("Laporan");
+        btnLaporan.setBorderPainted(false);
+        btnLaporan.setContentAreaFilled(false);
+        btnLaporan.setFocusPainted(false);
+        btnLaporan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTentang1ActionPerformed(evt);
+                btnLaporanActionPerformed(evt);
+            }
+        });
+
+        btnTabungan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnTabungan.setText("Tabungan");
+        btnTabungan.setBorderPainted(false);
+        btnTabungan.setContentAreaFilled(false);
+        btnTabungan.setFocusPainted(false);
+        btnTabungan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTabunganActionPerformed(evt);
+            }
+        });
+
+        btnProfile.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnProfile.setText("Profile");
+        btnProfile.setBorderPainted(false);
+        btnProfile.setContentAreaFilled(false);
+        btnProfile.setFocusPainted(false);
+        btnProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfileActionPerformed(evt);
             }
         });
 
@@ -119,38 +173,212 @@ public class dashboardView extends javax.swing.JFrame {
         pnlNavbarLayout.setHorizontalGroup(
             pnlNavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlNavbarLayout.createSequentialGroup()
-                .addGap(264, 264, 264)
+                .addContainerGap(318, Short.MAX_VALUE)
                 .addComponent(btnBeranda)
-                .addGap(57, 57, 57)
+                .addGap(97, 97, 97)
                 .addComponent(btnTentang, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(btnTentang1)
-                .addContainerGap())
+                .addGap(104, 104, 104)
+                .addComponent(btnLaporan)
+                .addGap(110, 110, 110)
+                .addComponent(btnTabungan)
+                .addGap(91, 91, 91)
+                .addComponent(btnProfile)
+                .addGap(81, 81, 81))
         );
         pnlNavbarLayout.setVerticalGroup(
             pnlNavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlNavbarLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(16, 16, 16)
                 .addGroup(pnlNavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBeranda, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTentang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTentang1))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(btnLaporan)
+                    .addComponent(btnTabungan)
+                    .addComponent(btnProfile))
+                .addGap(32, 32, 32))
         );
 
-        jPanel1.add(pnlNavbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 80));
+        jPanel1.add(pnlNavbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 80));
 
-        btnTentang2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnTentang2.setText("Tentang");
-        btnTentang2.setBorderPainted(false);
-        btnTentang2.setContentAreaFilled(false);
-        btnTentang2.setFocusPainted(false);
-        btnTentang2.addActionListener(new java.awt.event.ActionListener() {
+        pnlBeranda.setOpaque(false);
+
+        pnlKiri.setBackground(new java.awt.Color(255, 153, 0));
+
+        pnlSaldo.setBackground(new java.awt.Color(255, 255, 255));
+        pnlSaldo.setLayout(new java.awt.GridBagLayout());
+
+        lblSaldo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblSaldo.setText("S");
+        pnlSaldo.add(lblSaldo, new java.awt.GridBagConstraints());
+
+        pnlPemasukan.setLayout(new java.awt.GridBagLayout());
+
+        lblPemasukan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblPemasukan.setText("M");
+        pnlPemasukan.add(lblPemasukan, new java.awt.GridBagConstraints());
+
+        pnlPengeluaran.setLayout(new java.awt.GridBagLayout());
+
+        lblPengeluaran.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblPengeluaran.setText("K");
+        pnlPengeluaran.add(lblPengeluaran, new java.awt.GridBagConstraints());
+
+        txtSaldo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtSaldo.setText("SALDO");
+
+        txtPemasukan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtPemasukan.setText("PEMASUKAN");
+
+        txtPengeluaran.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtPengeluaran.setText("PENGELUARAN");
+        txtPengeluaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTentang2ActionPerformed(evt);
+                txtPengeluaranActionPerformed(evt);
             }
         });
-        jPanel1.add(btnTentang2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, -1, -1));
+
+        btnPS.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnPS.setText("+");
+        btnPS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPSActionPerformed(evt);
+            }
+        });
+
+        btnPM.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnPM.setText("+");
+        btnPM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPMActionPerformed(evt);
+            }
+        });
+
+        btnPK.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnPK.setText("+");
+        btnPK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPKActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlKiriLayout = new javax.swing.GroupLayout(pnlKiri);
+        pnlKiri.setLayout(pnlKiriLayout);
+        pnlKiriLayout.setHorizontalGroup(
+            pnlKiriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlKiriLayout.createSequentialGroup()
+                .addGap(118, 118, 118)
+                .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(169, 169, 169)
+                .addComponent(txtPemasukan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(89, 89, 89))
+            .addGroup(pnlKiriLayout.createSequentialGroup()
+                .addGap(53, 53, 53)
+                .addComponent(pnlSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addComponent(pnlPemasukan, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
+                .addComponent(pnlPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51))
+            .addGroup(pnlKiriLayout.createSequentialGroup()
+                .addGap(132, 132, 132)
+                .addComponent(btnPS, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(219, 219, 219)
+                .addComponent(btnPM, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnPK, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(118, 118, 118))
+        );
+        pnlKiriLayout.setVerticalGroup(
+            pnlKiriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlKiriLayout.createSequentialGroup()
+                .addGap(84, 84, 84)
+                .addGroup(pnlKiriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPemasukan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlKiriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlSaldo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlPemasukan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlPengeluaran, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE))
+                .addGap(50, 50, 50)
+                .addGroup(pnlKiriLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnPS, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPM, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPK, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(81, Short.MAX_VALUE))
+        );
+
+        pnlKanan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtKalender.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtKalender.setText("KALENDER");
+        txtKalender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtKalenderActionPerformed(evt);
+            }
+        });
+        pnlKanan.add(txtKalender, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
+
+        jPanel2.setBackground(new java.awt.Color(153, 204, 255));
+        pnlKanan.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 340, 340));
+
+        pnlBawah.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txtRiwayat.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtRiwayat.setText("RIWAYAT");
+        txtRiwayat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRiwayatActionPerformed(evt);
+            }
+        });
+        pnlBawah.add(txtRiwayat, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
+        pnlBawah.add(financeHealth, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 310, 20));
+
+        txtProgres.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtProgres.setText("KESEHATAN KEUANGAN");
+        txtProgres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProgresActionPerformed(evt);
+            }
+        });
+        pnlBawah.add(txtProgres, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, -1, -1));
+
+        lblRiwayat.setText("Beli makan 20.000");
+        pnlBawah.add(lblRiwayat, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 153));
+        pnlBawah.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 20, 140));
+
+        javax.swing.GroupLayout pnlBerandaLayout = new javax.swing.GroupLayout(pnlBeranda);
+        pnlBeranda.setLayout(pnlBerandaLayout);
+        pnlBerandaLayout.setHorizontalGroup(
+            pnlBerandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBerandaLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(pnlBerandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlKiri, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlBawah, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addComponent(pnlKanan, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+        pnlBerandaLayout.setVerticalGroup(
+            pnlBerandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBerandaLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(pnlBerandaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlKanan, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlBerandaLayout.createSequentialGroup()
+                        .addComponent(pnlKiri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pnlBawah, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(104, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(pnlBeranda, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1280, 640));
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -159,33 +387,102 @@ public class dashboardView extends javax.swing.JFrame {
 
     private void btnTentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTentangActionPerformed
         // TODO add your handling code here:
-        // Buka halaman Tentang
-        tentangView aboutPage = new tentangView();
-        aboutPage.setVisible(true);
-
-        // Tutup Dashboard sementara
-        this.dispose();
+        // 1. Buka View Tujuan
+    new tentangView().setVisible(true);
+    
+    // 2. Tutup View Saat Ini (Dashboard)
+    this.dispose();
     }//GEN-LAST:event_btnTentangActionPerformed
 
     private void btnBerandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBerandaActionPerformed
         // TODO add your handling code here:
         // 1. Panggil method loadData() yang sudah kita buat sebelumnya
-        loadData();
-
-        // 2. (Opsional) Refresh tabel riwayat mini jika ada
-        // loadTabelMini();
-
-        // 3. Beri notifikasi kecil bahwa data sudah segar
+        // Karena kita sudah ada di Beranda, cukup refresh data saja
+        updateTampilan(); 
+        initTanggal();
         javax.swing.JOptionPane.showMessageDialog(this, "Tampilan berhasil diperbarui!");
     }//GEN-LAST:event_btnBerandaActionPerformed
 
-    private void btnTentang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTentang1ActionPerformed
+    private void btnLaporanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaporanActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTentang1ActionPerformed
+        new laporanView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnLaporanActionPerformed
 
-    private void btnTentang2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTentang2ActionPerformed
+    private void btnTabunganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTabunganActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnTentang2ActionPerformed
+        new wishlistView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnTabunganActionPerformed
+
+    private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
+        // TODO add your handling code here:
+        new profileView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnProfileActionPerformed
+
+    private void txtPengeluaranActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPengeluaranActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPengeluaranActionPerformed
+
+    private void txtKalenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKalenderActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtKalenderActionPerformed
+
+    private void txtProgresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProgresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProgresActionPerformed
+
+    private void txtRiwayatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRiwayatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRiwayatActionPerformed
+
+    private void btnPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPMActionPerformed
+        // TODO add your handling code here:
+        String input = javax.swing.JOptionPane.showInputDialog(this, "Masukkan Nominal Pemasukan:");
+        if (input != null && !input.isEmpty()) {
+            try {
+                int nominal = Integer.parseInt(input);
+                pemasukan += nominal; 
+                saldo += nominal;     
+                updateTampilan();     // Refresh angka
+                tambahRiwayat("Masuk: " + kursIDR.format(nominal));
+            } catch (NumberFormatException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Harap masukkan angka saja!");
+            }
+        }
+    }//GEN-LAST:event_btnPMActionPerformed
+
+    private void btnPKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPKActionPerformed
+        // TODO add your handling code here:
+        String input = javax.swing.JOptionPane.showInputDialog(this, "Masukkan Nominal Pengeluaran:");
+        if (input != null && !input.isEmpty()) {
+            try {
+                int nominal = Integer.parseInt(input);
+                pengeluaran += nominal; 
+                saldo -= nominal;       
+                updateTampilan();       // Refresh angka
+                tambahRiwayat("Keluar: " + kursIDR.format(nominal));
+            } catch (NumberFormatException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Harap masukkan angka saja!");
+            }
+        }
+    }//GEN-LAST:event_btnPKActionPerformed
+
+    private void btnPSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPSActionPerformed
+        // TODO add your handling code here:                                  
+         // Kita fungsikan ini untuk koreksi saldo manual jika perlu
+        String input = javax.swing.JOptionPane.showInputDialog(this, "Atur Saldo Manual (Koreksi):");
+        if (input != null && !input.isEmpty()) {
+            try {
+                saldo = Integer.parseInt(input);
+                updateTampilan();
+                tambahRiwayat("Koreksi Saldo: " + kursIDR.format(saldo));
+            } catch (NumberFormatException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Harap masukkan angka saja!");
+            }
+        }
+    }//GEN-LAST:event_btnPSActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,14 +521,97 @@ public class dashboardView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBeranda;
+    private javax.swing.JButton btnLaporan;
+    private javax.swing.JButton btnPK;
+    private javax.swing.JButton btnPM;
+    private javax.swing.JButton btnPS;
+    private javax.swing.JButton btnProfile;
+    private javax.swing.JButton btnTabungan;
     private javax.swing.JButton btnTentang;
-    private javax.swing.JButton btnTentang1;
-    private javax.swing.JButton btnTentang2;
+    private javax.swing.JProgressBar financeHealth;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblPemasukan;
+    private javax.swing.JLabel lblPengeluaran;
+    private javax.swing.JLabel lblRiwayat;
+    private javax.swing.JLabel lblSaldo;
+    private javax.swing.JPanel pnlBawah;
+    private javax.swing.JPanel pnlBeranda;
+    private javax.swing.JPanel pnlKanan;
+    private javax.swing.JPanel pnlKiri;
     private javax.swing.JPanel pnlNavbar;
+    private javax.swing.JPanel pnlPemasukan;
+    private javax.swing.JPanel pnlPengeluaran;
+    private javax.swing.JPanel pnlSaldo;
+    private javax.swing.JTextField txtKalender;
+    private javax.swing.JTextField txtPemasukan;
+    private javax.swing.JTextField txtPengeluaran;
+    private javax.swing.JTextField txtProgres;
+    private javax.swing.JTextField txtRiwayat;
+    private javax.swing.JTextField txtSaldo;
     // End of variables declaration//GEN-END:variables
 
-    private void loadData() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    // 1. METHOD UPDATE TAMPILAN
+    private void updateTampilan() {
+        // 1. UPDATE ANGKA KE LABEL (Bukan TextField lagi)
+        // Ini akan mengganti huruf "S", "M", "K" dengan angka Rupiah
+        lblSaldo.setText(kursIDR.format(saldo));
+        lblPemasukan.setText(kursIDR.format(pemasukan));
+        lblPengeluaran.setText(kursIDR.format(pengeluaran));
+
+        // 2. LOGIKA KESEHATAN KEUANGAN (Tetap Sama)
+        if (pemasukan > 0) {
+            int sisa = pemasukan - pengeluaran;
+            // Hitung persentase
+            int skor = (int) (((double) sisa / pemasukan) * 100);
+
+            // Batas aman (0 - 100)
+            if (skor < 0) skor = 0;
+            if (skor > 100) skor = 100;
+
+            financeHealth.setValue(skor);
+            financeHealth.setStringPainted(true);
+
+            // Warna Warni Bar
+            if (skor >= 50) {
+                financeHealth.setForeground(new java.awt.Color(46, 204, 113)); // Hijau
+                financeHealth.setString("Sehat (" + skor + "%)");
+            } else if (skor >= 20) {
+                financeHealth.setForeground(new java.awt.Color(243, 156, 18)); // Kuning
+                financeHealth.setString("Waspada (" + skor + "%)");
+            } else {
+                financeHealth.setForeground(new java.awt.Color(231, 76, 60)); // Merah
+                financeHealth.setString("Kritis (" + skor + "%)");
+            }
+        } else {
+            // Jika belum ada data
+            financeHealth.setValue(0);
+            financeHealth.setString("Belum ada data");
+            financeHealth.setForeground(java.awt.Color.GRAY);
+        }
+    } // <--- Jangan lupa kurung tutup ini!
+
+    // 2. METHOD RIWAYAT (Dibuat sejajar, bukan di dalam)
+    private void tambahRiwayat(String pesan) {
+        // Kita hanya update lblRiwayat (Isi Transaksi)
+        // txtRiwayat (Judul) kita biarkan saja, tidak perlu dicek atau diubah
+        
+        if (lblRiwayat != null) {
+            lblRiwayat.setText(pesan);
+        }
     }
+
+    // 3. METHOD TANGGAL (Logika yang benar)
+    private void initTanggal() {
+        // Mengambil tanggal hari ini dari sistem
+        java.time.LocalDate today = java.time.LocalDate.now();
+        java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd MMMM yyyy");
+        
+        // Menampilkan ke txtKalender jika komponennya ada
+        if (txtKalender != null) {
+            txtKalender.setText(today.format(formatter));
+        }
+    }
+
 }
