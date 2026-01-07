@@ -3,20 +3,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package fincker.app;
-
+import javax.swing.JOptionPane;
 /**
  *
  * @author USER
  */
 public class wishlistView extends javax.swing.JFrame {
-
+    private String namaBarang = "";
+    private int targetUang = 0;
+    private int totalTabungan = 0;
     /**
      * Creates new form wishlistView
      */
+   
     public wishlistView() {
-        initComponents();
-}
-
+    initComponents();
+    }
+    private void updateProgress() {
+    lblProgressValue.setText("Rp " + totalTabungan + " / Rp " + targetUang);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -39,18 +44,136 @@ public class wishlistView extends javax.swing.JFrame {
                 g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
             }
         };
+        jLabel1 = new javax.swing.JLabel();
+        txtBarang = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtTarget = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtTabungan = new javax.swing.JTextField();
+        btnSimpan = new javax.swing.JButton();
+        lblProgress = new javax.swing.JLabel();
+        lblProgressValue = new javax.swing.JLabel();
+        lblStatus = new javax.swing.JLabel();
+        lblStatusValue = new javax.swing.JLabel();
+        btnMenabung = new javax.swing.JButton();
+        btnKembali = new javax.swing.JButton();
+        lblHeader = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setText("Nama Barang :");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, -1, -1));
+        jPanel1.add(txtBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 140, -1));
+
+        jLabel2.setText("Target (Rp) :");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, -1, -1));
+        jPanel1.add(txtTarget, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 140, -1));
+
+        jLabel3.setText("Masukkan Jumlah Tabungan (Rp) : ");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, -1, -1));
+        jPanel1.add(txtTabungan, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 140, -1));
+
+        btnSimpan.setText("Simpan");
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, -1, -1));
+
+        lblProgress.setText("Progress : ");
+        jPanel1.add(lblProgress, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, -1, -1));
+
+        lblProgressValue.setText("jLabel4");
+        jPanel1.add(lblProgressValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, -1, -1));
+
+        lblStatus.setText("Status :");
+        jPanel1.add(lblStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, -1, -1));
+
+        lblStatusValue.setText("jLabel4");
+        jPanel1.add(lblStatusValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, -1, -1));
+
+        btnMenabung.setText("Menabung");
+        btnMenabung.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnMenabung.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenabungActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnMenabung, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, -1, -1));
+
+        btnKembali.setText("Exit");
+        jPanel1.add(btnKembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 270, -1, -1));
+
+        lblHeader.setText("Wishlist - Manage Kuangan");
+        jPanel1.add(lblHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, -1, -1));
+
         getContentPane().add(jPanel1, "card2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+       try {
+        namaBarang = txtBarang.getText().trim();
+        if (namaBarang.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nama barang tidak boleh kosong!");
+            return;
+        }
+
+        targetUang = Integer.parseInt(txtTarget.getText().trim());
+        if (targetUang <= 0) {
+            JOptionPane.showMessageDialog(this, "Target harus lebih dari 0!");
+            return;
+        }
+
+        totalTabungan = 0;
+        updateProgress();
+        btnMenabung.setEnabled(true); // Aktifkan tombol menabung
+        lblStatusValue.setText("Siap menabung untuk: " + namaBarang);
+
+        JOptionPane.showMessageDialog(this,
+            "Target disimpan!\nBarang: " + namaBarang + "\nTarget: Rp " + targetUang);
+
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Target harus angka!");
+    }
+ // TODO add your handling code here:
+    }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void btnMenabungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenabungActionPerformed
+      try {
+            int jumlah = Integer.parseInt(txtTabungan.getText().trim());
+            if (jumlah <= 0) {
+                JOptionPane.showMessageDialog(this, "Jumlah tabungan harus lebih dari 0!");
+                return;
+            }
+
+            totalTabungan += jumlah;
+            updateProgress();
+
+            if (totalTabungan >= targetUang) {
+                JOptionPane.showMessageDialog(this,
+                    "🎉 Selamat! Target tercapai!\n" +
+                    "Barang: " + namaBarang + "\n" +
+                    "Target: Rp " + targetUang + "\n" +
+                    "Total Tabungan: Rp " + totalTabungan);
+            } else {
+                JOptionPane.showMessageDialog(this,
+                    "Kembali menabung, karena menabung pangkal kaya 😊\n" +
+                    "Masih kurang: Rp " + (targetUang - totalTabungan));
+            }
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Masukkan jumlah tabungan yang valid!");
+        }
+                                          // TODO add your handling code here:
+    }//GEN-LAST:event_btnMenabungActionPerformed
 
     /**
      * @param args the command line arguments
@@ -88,6 +211,20 @@ public class wishlistView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnKembali;
+    private javax.swing.JButton btnMenabung;
+    private javax.swing.JButton btnSimpan;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblHeader;
+    private javax.swing.JLabel lblProgress;
+    private javax.swing.JLabel lblProgressValue;
+    private javax.swing.JLabel lblStatus;
+    private javax.swing.JLabel lblStatusValue;
+    private javax.swing.JTextField txtBarang;
+    private javax.swing.JTextField txtTabungan;
+    private javax.swing.JTextField txtTarget;
     // End of variables declaration//GEN-END:variables
 }
