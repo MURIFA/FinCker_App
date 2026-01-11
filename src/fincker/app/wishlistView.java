@@ -2,25 +2,64 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+/**
+ * Author : Rahmania
+*/
 package fincker.app;
 import javax.swing.JOptionPane;
-/**
- *
- * @author USER
- */
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultListModel;
+
 public class wishlistView extends javax.swing.JFrame {
+
     private String namaBarang = "";
     private int targetUang = 0;
     private int totalTabungan = 0;
-    /**
-     * Creates new form wishlistView
-     */
-   
-    public wishlistView() {
-    initComponents();
+
+ private static class WishlistItem {
+        private String namaBarang;
+        private int targetUang;
+        private int totalTabungan;   
+ 
+public WishlistItem(String namaBarang, int targetUang, int totalTabungan) {
+            this.namaBarang = namaBarang;
+            this.targetUang = targetUang;
+            this.totalTabungan = totalTabungan;
+        }        
+public String getNamaBarang() { return namaBarang; }
+        public int getTargetUang() { return targetUang; }
+        public int getTotalTabungan() { return totalTabungan; }
+        public void setTotalTabungan(int totalTabungan) { this.totalTabungan = totalTabungan; }
+ 
+ @Override
+        public String toString() {
+            return namaBarang + " - Rp " + targetUang + " (Tabungan: Rp " + totalTabungan + ")";
+        }
     }
+  
+    private List<WishlistItem> wishlistItems = new ArrayList<>();
+    private DefaultListModel<String> listModel = new DefaultListModel<>();
+
+    private void updateWishlistList() {
+        listModel.clear();
+        for (WishlistItem item : wishlistItems) {
+            listModel.addElement(item.toString());
+        }
+        lstWishlist.setModel(listModel);
+    }
+
     private void updateProgress() {
-    lblProgressValue.setText("Rp " + totalTabungan + " / Rp " + targetUang);
+        lblProgressValue.setText("Rp " + totalTabungan + " / Rp " + targetUang);
+    }
+ 
+    public wishlistView() {
+        initComponents();
+        
+        wishlistItems.add(new WishlistItem("iPhone 17", 25000000, 0));
+        wishlistItems.add(new WishlistItem("Laptop Gaming", 15000000, 5000000));
+        wishlistItems.add(new WishlistItem("Kamera DSLR", 10000000, 2000000));
+    updateWishlistList();   
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,74 +83,147 @@ public class wishlistView extends javax.swing.JFrame {
                 g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
             }
         };
-        jLabel1 = new javax.swing.JLabel();
-        txtBarang = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        txtTarget = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtTabungan = new javax.swing.JTextField();
         btnSimpan = new javax.swing.JButton();
-        lblProgress = new javax.swing.JLabel();
-        lblProgressValue = new javax.swing.JLabel();
-        lblStatus = new javax.swing.JLabel();
-        lblStatusValue = new javax.swing.JLabel();
         btnMenabung = new javax.swing.JButton();
-        btnKembali = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtBarang = new javax.swing.JTextField();
+        txtTarget = new javax.swing.JTextField();
+        txtMenabung = new javax.swing.JTextField();
+        lblProgressValue = new javax.swing.JLabel();
+        lblStatusValue = new javax.swing.JLabel();
         lblHeader = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        btnHapus = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        scpWishlist = new javax.swing.JScrollPane();
+        lstWishlist = new javax.swing.JList<>();
+        btnKemballi = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        lblProgress = new javax.swing.JLabel();
+        lblStatus = new javax.swing.JLabel();
+        lblDaftarWishlist = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.gray, java.awt.Color.lightGray, java.awt.Color.gray));
         jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Nama Barang :");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, -1, -1));
-        jPanel1.add(txtBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 140, -1));
-
-        jLabel2.setText("Target (Rp) :");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, -1, -1));
-        jPanel1.add(txtTarget, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 140, -1));
-
-        jLabel3.setText("Masukkan Jumlah Tabungan (Rp) : ");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, -1, -1));
-        jPanel1.add(txtTabungan, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 140, -1));
-
         btnSimpan.setText("Simpan");
+        btnSimpan.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(204, 204, 204)));
         btnSimpan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSimpanActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, -1, -1));
-
-        lblProgress.setText("Progress : ");
-        jPanel1.add(lblProgress, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, -1, -1));
-
-        lblProgressValue.setText("jLabel4");
-        jPanel1.add(lblProgressValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 170, -1, -1));
-
-        lblStatus.setText("Status :");
-        jPanel1.add(lblStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 200, -1, -1));
-
-        lblStatusValue.setText("jLabel4");
-        jPanel1.add(lblStatusValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, -1, -1));
+        jPanel1.add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 270, 60, -1));
 
         btnMenabung.setText("Menabung");
-        btnMenabung.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnMenabung.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(204, 204, 204)));
+        btnMenabung.setEnabled(false);
         btnMenabung.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenabungActionPerformed(evt);
             }
         });
-        jPanel1.add(btnMenabung, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, -1, -1));
+        jPanel1.add(btnMenabung, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, 70, -1));
 
-        btnKembali.setText("Exit");
-        jPanel1.add(btnKembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 270, -1, -1));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Nama Barang  ");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, -1, -1));
 
-        lblHeader.setText("Wishlist - Manage Kuangan");
-        jPanel1.add(lblHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, -1, -1));
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Target (Rp) ");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 180, -1, -1));
+
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Masukkan Jumlah Tabungan (Rp)");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, -1, -1));
+
+        txtBarang.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(204, 204, 204)));
+        jPanel1.add(txtBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 170, -1));
+
+        txtTarget.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(204, 204, 204)));
+        jPanel1.add(txtTarget, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 170, -1));
+
+        txtMenabung.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(204, 204, 204)));
+        jPanel1.add(txtMenabung, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 170, -1));
+        jPanel1.add(lblProgressValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 160, -1));
+        jPanel1.add(lblStatusValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 220, -1));
+
+        lblHeader.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblHeader.setForeground(new java.awt.Color(51, 51, 51));
+        lblHeader.setText("Wishlist - Manage Keuangan");
+        jPanel1.add(lblHeader, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, 300, 30));
+
+        jPanel2.setBackground(new java.awt.Color(4, 116, 185));
+        jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 2, 1, 2, new java.awt.Color(204, 204, 204)));
+        jPanel2.add(jLabel1);
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("\"© 2026 - Aplikasi Pengatur Keuangan\"");
+        jPanel2.add(jLabel2);
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 470, 310, 30));
+
+        btnHapus.setText("Remove");
+        btnHapus.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(204, 204, 204)));
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnHapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 380, 60, -1));
+
+        jPanel3.setBackground(new java.awt.Color(4, 116, 185));
+        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.darkGray, java.awt.Color.lightGray, java.awt.Color.darkGray));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lstWishlist.setBackground(new java.awt.Color(4, 116, 185));
+        lstWishlist.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        scpWishlist.setViewportView(lstWishlist);
+
+        jPanel3.add(scpWishlist, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 260));
+
+        btnKemballi.setText("Exit");
+        btnKemballi.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(204, 204, 204)));
+        btnKemballi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKemballiActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnKemballi, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 50, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, 390, 310));
+
+        jPanel4.setBackground(new java.awt.Color(4, 116, 185));
+        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.darkGray, java.awt.Color.lightGray, java.awt.Color.darkGray));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblProgress.setForeground(new java.awt.Color(255, 255, 255));
+        lblProgress.setText("Progress : ");
+        jPanel4.add(lblProgress, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, -1, -1));
+
+        lblStatus.setForeground(new java.awt.Color(255, 255, 255));
+        lblStatus.setText("Status :");
+        jPanel4.add(lblStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, -1, -1));
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 400, 310));
+
+        lblDaftarWishlist.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblDaftarWishlist.setForeground(new java.awt.Color(255, 255, 255));
+        lblDaftarWishlist.setText("Dafatr Wishlist");
+        jPanel1.add(lblDaftarWishlist, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, -1, -1));
 
         getContentPane().add(jPanel1, "card2");
 
@@ -119,43 +231,43 @@ public class wishlistView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-       try {
-        namaBarang = txtBarang.getText().trim();
-        if (namaBarang.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Nama barang tidak boleh kosong!");
-            return;
-        }
-
-        targetUang = Integer.parseInt(txtTarget.getText().trim());
-        if (targetUang <= 0) {
-            JOptionPane.showMessageDialog(this, "Target harus lebih dari 0!");
-            return;
-        }
-
-        totalTabungan = 0;
-        updateProgress();
-        btnMenabung.setEnabled(true); // Aktifkan tombol menabung
-        lblStatusValue.setText("Siap menabung untuk: " + namaBarang);
-
-        JOptionPane.showMessageDialog(this,
-            "Target disimpan!\nBarang: " + namaBarang + "\nTarget: Rp " + targetUang);
+    try{
+    namaBarang = txtBarang.getText().trim();
+     if (namaBarang.isEmpty()) {
+         JOptionPane.showMessageDialog(this, "Nama barang tidak boleh kosong!");
+         return;// TODO add your handling code here:
+    }//GEN-LAST:event_btnSimpanActionPerformed
+    targetUang = Integer.parseInt(txtTarget.getText().trim());
+            if (targetUang <= 0) {
+                JOptionPane.showMessageDialog(this, "Target harus lebih dari 0!");
+                return;
+    }
+    totalTabungan = 0;
+    updateProgress();
+    btnMenabung.setEnabled(true);
+    lblStatusValue.setText("Siap menabung untuk: " + namaBarang);
+    
+    WishlistItem newItem = new WishlistItem(namaBarang, targetUang, 0);
+    wishlistItems.add(newItem);
+    updateWishlistList();
+    
+    JOptionPane.showMessageDialog(this,
+      "Target disimpan!\nBarang: " + namaBarang + "\nTarget: Rp " + targetUang);
 
     } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "Target harus angka!");
+      JOptionPane.showMessageDialog(this, "Target harus angka!");
     }
- // TODO add your handling code here:
-    }//GEN-LAST:event_btnSimpanActionPerformed
-
+  }           
+     
     private void btnMenabungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenabungActionPerformed
-      try {
-            int jumlah = Integer.parseInt(txtTabungan.getText().trim());
+     try {
+            int jumlah = Integer.parseInt(txtMenabung.getText().trim());
             if (jumlah <= 0) {
                 JOptionPane.showMessageDialog(this, "Jumlah tabungan harus lebih dari 0!");
                 return;
             }
-
-            totalTabungan += jumlah;
-            updateProgress();
+             totalTabungan += jumlah;
+             updateProgress();
 
             if (totalTabungan >= targetUang) {
                 JOptionPane.showMessageDialog(this,
@@ -163,68 +275,94 @@ public class wishlistView extends javax.swing.JFrame {
                     "Barang: " + namaBarang + "\n" +
                     "Target: Rp " + targetUang + "\n" +
                     "Total Tabungan: Rp " + totalTabungan);
-            } else {
+             } else {
                 JOptionPane.showMessageDialog(this,
                     "Kembali menabung, karena menabung pangkal kaya 😊\n" +
                     "Masih kurang: Rp " + (targetUang - totalTabungan));
             }
-
-        } catch (NumberFormatException ex) {
+     } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Masukkan jumlah tabungan yang valid!");
-        }
-                                          // TODO add your handling code here:
+        }       // TODO add your handling code here:
     }//GEN-LAST:event_btnMenabungActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(wishlistView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(wishlistView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(wishlistView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(wishlistView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void btnKemballiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKemballiActionPerformed
+ JOptionPane.showMessageDialog(this, "Kembali ke dashboard utama...");
+        this.dispose();      // TODO add your handling code here:
+    }//GEN-LAST:event_btnKemballiActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new wishlistView().setVisible(true);
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+ int selectedIndex = lstWishlist.getSelectedIndex();
+        if (selectedIndex == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih wishlist yang ingin dihapus!");
+            return;
+        }
+
+        wishlistItems.remove(selectedIndex);
+        updateWishlistList();
+        JOptionPane.showMessageDialog(this, "Wishlist dihapus!");
+    }//GEN-LAST:event_btnHapusActionPerformed
+
+            /**
+             * @param args the command line arguments
+             */
+            public static void main(String args[]) {
+                /* Set the Nimbus look and feel */
+                //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+                /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+                 */
+                try {
+                    for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                        if ("Nimbus".equals(info.getName())) {
+                            javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                            break;
+                        }
+                    }
+                } catch (ClassNotFoundException ex) {
+                    java.util.logging.Logger.getLogger(wishlistView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    java.util.logging.Logger.getLogger(wishlistView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    java.util.logging.Logger.getLogger(wishlistView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+                    java.util.logging.Logger.getLogger(wishlistView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                }
+                //</editor-fold>
+
+                /* Create and display the form */
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        new wishlistView().setVisible(true);
+                    }
+                });
             }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnKembali;
+    private javax.swing.JButton btnHapus;
+    private javax.swing.JButton btnKemballi;
     private javax.swing.JButton btnMenabung;
     private javax.swing.JButton btnSimpan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel lblDaftarWishlist;
     private javax.swing.JLabel lblHeader;
     private javax.swing.JLabel lblProgress;
     private javax.swing.JLabel lblProgressValue;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblStatusValue;
+    private javax.swing.JList<String> lstWishlist;
+    private javax.swing.JScrollPane scpWishlist;
     private javax.swing.JTextField txtBarang;
-    private javax.swing.JTextField txtTabungan;
+    private javax.swing.JTextField txtMenabung;
     private javax.swing.JTextField txtTarget;
     // End of variables declaration//GEN-END:variables
+
 }
+
