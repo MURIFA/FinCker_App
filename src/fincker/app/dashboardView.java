@@ -117,6 +117,7 @@ public class dashboardView extends javax.swing.JFrame {
         btnBeranda.setText("Beranda");
         btnBeranda.setBorderPainted(false);
         btnBeranda.setContentAreaFilled(false);
+        btnBeranda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBeranda.setFocusPainted(false);
         btnBeranda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +129,7 @@ public class dashboardView extends javax.swing.JFrame {
         btnTentang.setText("Tentang");
         btnTentang.setBorderPainted(false);
         btnTentang.setContentAreaFilled(false);
+        btnTentang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTentang.setFocusPainted(false);
         btnTentang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,6 +141,7 @@ public class dashboardView extends javax.swing.JFrame {
         btnLaporan.setText("Laporan");
         btnLaporan.setBorderPainted(false);
         btnLaporan.setContentAreaFilled(false);
+        btnLaporan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLaporan.setFocusPainted(false);
         btnLaporan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +153,7 @@ public class dashboardView extends javax.swing.JFrame {
         btnTabungan.setText("Tabungan");
         btnTabungan.setBorderPainted(false);
         btnTabungan.setContentAreaFilled(false);
+        btnTabungan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTabungan.setFocusPainted(false);
         btnTabungan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,6 +165,7 @@ public class dashboardView extends javax.swing.JFrame {
         btnProfile.setText("Profile");
         btnProfile.setBorderPainted(false);
         btnProfile.setContentAreaFilled(false);
+        btnProfile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnProfile.setFocusPainted(false);
         btnProfile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

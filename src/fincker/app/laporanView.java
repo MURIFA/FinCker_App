@@ -15,6 +15,12 @@ public class laporanView extends javax.swing.JFrame {
      */
     public laporanView() {
         initComponents();
+        
+        // 1. Atur Ukuran Layar dulu (Wajib)
+        this.setSize(1280, 720);
+        
+        // 2. MANTRA AGAR MUNCUL DI TENGAH
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -26,7 +32,7 @@ public class laporanView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel() {
+        bg = new javax.swing.JPanel() {
             // 1. Muat Gambar (Ganti nama file sesuai punyamu)
             java.awt.Image backgroundImage = new javax.swing.ImageIcon(getClass().getResource("/fincker/app/gambar/bg-laporan.gif")).getImage();
 
@@ -39,18 +45,155 @@ public class laporanView extends javax.swing.JFrame {
                 g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
             }
         };
+        pnlNavbar = new javax.swing.JPanel();
+        btnBeranda = new javax.swing.JButton();
+        btnTentang = new javax.swing.JButton();
+        btnLaporan = new javax.swing.JButton();
+        btnTabungan = new javax.swing.JButton();
+        btnProfile = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(new java.awt.CardLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel1, "card2");
+        bg.setBackground(new java.awt.Color(0, 102, 102));
+        bg.setPreferredSize(new java.awt.Dimension(1280, 720));
+        bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnlNavbar.setBackground(new java.awt.Color(153, 255, 255));
+        pnlNavbar.setOpaque(false);
+        pnlNavbar.setPreferredSize(new java.awt.Dimension(1200, 70));
+
+        btnBeranda.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnBeranda.setText("Beranda");
+        btnBeranda.setBorderPainted(false);
+        btnBeranda.setContentAreaFilled(false);
+        btnBeranda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBeranda.setFocusPainted(false);
+        btnBeranda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBerandaActionPerformed(evt);
+            }
+        });
+
+        btnTentang.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnTentang.setText("Tentang");
+        btnTentang.setBorderPainted(false);
+        btnTentang.setContentAreaFilled(false);
+        btnTentang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTentang.setFocusPainted(false);
+        btnTentang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTentangActionPerformed(evt);
+            }
+        });
+
+        btnLaporan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnLaporan.setText("Laporan");
+        btnLaporan.setBorderPainted(false);
+        btnLaporan.setContentAreaFilled(false);
+        btnLaporan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLaporan.setFocusPainted(false);
+        btnLaporan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLaporanActionPerformed(evt);
+            }
+        });
+
+        btnTabungan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnTabungan.setText("Tabungan");
+        btnTabungan.setBorderPainted(false);
+        btnTabungan.setContentAreaFilled(false);
+        btnTabungan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTabungan.setFocusPainted(false);
+        btnTabungan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTabunganActionPerformed(evt);
+            }
+        });
+
+        btnProfile.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnProfile.setText("Profile");
+        btnProfile.setBorderPainted(false);
+        btnProfile.setContentAreaFilled(false);
+        btnProfile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProfile.setFocusPainted(false);
+        btnProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProfileActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlNavbarLayout = new javax.swing.GroupLayout(pnlNavbar);
+        pnlNavbar.setLayout(pnlNavbarLayout);
+        pnlNavbarLayout.setHorizontalGroup(
+            pnlNavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlNavbarLayout.createSequentialGroup()
+                .addContainerGap(318, Short.MAX_VALUE)
+                .addComponent(btnBeranda)
+                .addGap(97, 97, 97)
+                .addComponent(btnTentang, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(104, 104, 104)
+                .addComponent(btnLaporan)
+                .addGap(110, 110, 110)
+                .addComponent(btnTabungan)
+                .addGap(91, 91, 91)
+                .addComponent(btnProfile)
+                .addGap(81, 81, 81))
+        );
+        pnlNavbarLayout.setVerticalGroup(
+            pnlNavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlNavbarLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(pnlNavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBeranda, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTentang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLaporan)
+                    .addComponent(btnTabungan)
+                    .addComponent(btnProfile))
+                .addGap(32, 32, 32))
+        );
+
+        bg.add(pnlNavbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 80));
+
+        getContentPane().add(bg, "card2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBerandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBerandaActionPerformed
+        // TODO add your handling code here:
+        // 1. Panggil method loadData() yang sudah kita buat sebelumnya
+        // Karena kita sudah ada di Beranda, cukup refresh data saja
+        new dashboardView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBerandaActionPerformed
+
+    private void btnTentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTentangActionPerformed
+        // TODO add your handling code here:
+        // 1. Buka View Tujuan
+        new tentangView().setVisible(true);
+
+        this.dispose();
+    }//GEN-LAST:event_btnTentangActionPerformed
+
+    private void btnLaporanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaporanActionPerformed
+        // TODO add your handling code here:
+        updateTampilan();
+        initTanggal();
+        javax.swing.JOptionPane.showMessageDialog(this, "Tampilan berhasil diperbarui!");
+    }//GEN-LAST:event_btnLaporanActionPerformed
+
+    private void btnTabunganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTabunganActionPerformed
+        // TODO add your handling code here:
+        new wishlistView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnTabunganActionPerformed
+
+    private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
+        // TODO add your handling code here:
+        new profileView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnProfileActionPerformed
 
     /**
      * @param args the command line arguments
@@ -88,6 +231,20 @@ public class laporanView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel bg;
+    private javax.swing.JButton btnBeranda;
+    private javax.swing.JButton btnLaporan;
+    private javax.swing.JButton btnProfile;
+    private javax.swing.JButton btnTabungan;
+    private javax.swing.JButton btnTentang;
+    private javax.swing.JPanel pnlNavbar;
     // End of variables declaration//GEN-END:variables
+
+    private void updateTampilan() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void initTanggal() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

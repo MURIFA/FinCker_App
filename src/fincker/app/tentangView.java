@@ -24,10 +24,10 @@ public class tentangView extends javax.swing.JFrame {
 
         // 2. KODE WAJIB: Paksa Navbar Melar Mengikuti jPanel1
         // Karena jPanel1 pakai Custom Code/Absolute, kita harus update manual saat resize
-        jPanel1.addComponentListener(new java.awt.event.ComponentAdapter() {
+        bg.addComponentListener(new java.awt.event.ComponentAdapter() {
             @Override
             public void componentResized(java.awt.event.ComponentEvent evt) {
-                int lebarLayar = jPanel1.getWidth();
+                int lebarLayar = bg.getWidth();
                 int tinggiNavbar = 70; // Tinggi navbar (sesuaikan dengan design)
                 
                 // SetBounds(x, y, width, height)
@@ -49,7 +49,7 @@ public class tentangView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel() {
+        bg = new javax.swing.JPanel() {
             // 1. Muat Gambar (Ganti nama file sesuai punyamu)
             java.awt.Image backgroundImage = new javax.swing.ImageIcon(getClass().getResource("/fincker/app/gambar/bg-tentang-profile.gif")).getImage();
 
@@ -68,22 +68,33 @@ public class tentangView extends javax.swing.JFrame {
         btnLaporan = new javax.swing.JButton();
         btnTabungan = new javax.swing.JButton();
         btnProfile = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        pnlTentang = new javax.swing.JPanel();
+        pnlCreator = new javax.swing.JPanel();
         lblFoto1 = new javax.swing.JLabel();
         lblFoto2 = new javax.swing.JLabel();
         lblFoto3 = new javax.swing.JLabel();
         lblNama1 = new javax.swing.JLabel();
+        lblNIM1 = new javax.swing.JLabel();
         lblNama2 = new javax.swing.JLabel();
+        lblNIM2 = new javax.swing.JLabel();
         lblNama3 = new javax.swing.JLabel();
+        lblNIM3 = new javax.swing.JLabel();
+        pnlAbout = new javax.swing.JPanel();
+        lblAbout = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        pnlFitur = new javax.swing.JPanel();
+        lblFitur = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        bg.setBackground(new java.awt.Color(0, 102, 102));
+        bg.setBorder(new javax.swing.border.MatteBorder(null));
+        bg.setPreferredSize(new java.awt.Dimension(1280, 720));
+        bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlNavbar.setBackground(new java.awt.Color(153, 255, 255));
         pnlNavbar.setOpaque(false);
@@ -93,6 +104,7 @@ public class tentangView extends javax.swing.JFrame {
         btnBeranda.setText("Beranda");
         btnBeranda.setBorderPainted(false);
         btnBeranda.setContentAreaFilled(false);
+        btnBeranda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBeranda.setFocusPainted(false);
         btnBeranda.addActionListener(this::btnBerandaActionPerformed);
 
@@ -100,6 +112,7 @@ public class tentangView extends javax.swing.JFrame {
         btnTentang.setText("Tentang");
         btnTentang.setBorderPainted(false);
         btnTentang.setContentAreaFilled(false);
+        btnTentang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTentang.setFocusPainted(false);
         btnTentang.addActionListener(this::btnTentangActionPerformed);
 
@@ -107,6 +120,7 @@ public class tentangView extends javax.swing.JFrame {
         btnLaporan.setText("Laporan");
         btnLaporan.setBorderPainted(false);
         btnLaporan.setContentAreaFilled(false);
+        btnLaporan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLaporan.setFocusPainted(false);
         btnLaporan.addActionListener(this::btnLaporanActionPerformed);
 
@@ -114,6 +128,7 @@ public class tentangView extends javax.swing.JFrame {
         btnTabungan.setText("Tabungan");
         btnTabungan.setBorderPainted(false);
         btnTabungan.setContentAreaFilled(false);
+        btnTabungan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTabungan.setFocusPainted(false);
         btnTabungan.addActionListener(this::btnTabunganActionPerformed);
 
@@ -121,6 +136,7 @@ public class tentangView extends javax.swing.JFrame {
         btnProfile.setText("Profile");
         btnProfile.setBorderPainted(false);
         btnProfile.setContentAreaFilled(false);
+        btnProfile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnProfile.setFocusPainted(false);
         btnProfile.addActionListener(this::btnProfileActionPerformed);
 
@@ -154,50 +170,186 @@ public class tentangView extends javax.swing.JFrame {
                 .addGap(32, 32, 32))
         );
 
-        jPanel1.add(pnlNavbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 80));
+        bg.add(pnlNavbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 80));
 
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlTentang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnlCreator.setBackground(new java.awt.Color(230, 255, 240));
+        pnlCreator.setBorder(new javax.swing.border.MatteBorder(null));
 
         lblFoto1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fincker/app/gambar/1.jpg"))); // NOI18N
         lblFoto1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblFoto1.setPreferredSize(new java.awt.Dimension(650, 650));
-        jPanel2.add(lblFoto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 140, 140));
 
         lblFoto2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fincker/app/gambar/3.jpg"))); // NOI18N
         lblFoto2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblFoto2.setPreferredSize(new java.awt.Dimension(650, 650));
-        jPanel2.add(lblFoto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 140, 140));
 
         lblFoto3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fincker/app/gambar/2.jpg"))); // NOI18N
         lblFoto3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblFoto3.setPreferredSize(new java.awt.Dimension(650, 650));
-        jPanel2.add(lblFoto3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, 140, 140));
 
-        lblNama1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblNama1.setText("Rizky");
-        jPanel2.add(lblNama1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, -1));
+        lblNama1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblNama1.setText("Muhammad Rizky Fadillah");
 
-        lblNama2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblNama2.setText("Rahma");
-        jPanel2.add(lblNama2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, -1, -1));
+        lblNIM1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblNIM1.setText("NIM: 2510130013");
 
-        lblNama3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        lblNama3.setText("Aziz");
-        jPanel2.add(lblNama3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, -1, -1));
+        lblNama2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblNama2.setText("Rahmania");
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 830, 280));
+        lblNIM2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblNIM2.setText("NIM: 2510130013");
+
+        lblNama3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblNama3.setText("Muhammad Fathul Aziz");
+
+        lblNIM3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblNIM3.setText("NIM: 2510130013");
+
+        javax.swing.GroupLayout pnlCreatorLayout = new javax.swing.GroupLayout(pnlCreator);
+        pnlCreator.setLayout(pnlCreatorLayout);
+        pnlCreatorLayout.setHorizontalGroup(
+            pnlCreatorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCreatorLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(pnlCreatorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblFoto3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFoto2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFoto1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlCreatorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNama1)
+                    .addComponent(lblNama3)
+                    .addGroup(pnlCreatorLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lblNIM3))
+                    .addComponent(lblNIM1)
+                    .addComponent(lblNama2)
+                    .addComponent(lblNIM2))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        pnlCreatorLayout.setVerticalGroup(
+            pnlCreatorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCreatorLayout.createSequentialGroup()
+                .addGroup(pnlCreatorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCreatorLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(lblFoto1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlCreatorLayout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(lblNama1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNIM1)))
+                .addGroup(pnlCreatorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCreatorLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(lblFoto2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlCreatorLayout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(lblNama2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNIM2)))
+                .addGroup(pnlCreatorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCreatorLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(lblFoto3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(33, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCreatorLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblNama3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblNIM3)
+                        .addGap(80, 80, 80))))
+        );
+
+        pnlTentang.add(pnlCreator, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 370, 520));
+
+        pnlAbout.setBackground(new java.awt.Color(255, 255, 255));
+
+        lblAbout.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblAbout.setText("About FinCker");
+
+        jScrollPane1.setBorder(null);
 
         jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
         jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
-        jTextArea1.setText("FinCker (Financial Tracker) adalah aplikasi manajemen keuangan cerdas yang dirancang untuk membantu pengguna umum dalam mencatat arus kas harian. Dilengkapi dengan fitur pencatatan Pemasukan, Pengeluaran, serta Tabungan Impian (Wishlist), FinCker hadir sebagai solusi praktis untuk menciptakan kebiasaan finansial yang lebih sehat, transparan, dan terencana.");
+        jTextArea1.setText("FinCker (Financial Tracker) adalah sistem aplikasi berbasis desktop yang dirancang untuk menyederhanakan proses pencatatan keuangan harian.\n\nSistem ini berfungsi menggantikan metode pencatatan manual dengan menyediakan platform digital yang terstruktur. Tujuannya adalah membantu pengguna memonitor arus kas (Cash Flow) secara akurat dan menjaga stabilitas anggaran pribadi.");
         jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setBorder(null);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 830, 60));
+        javax.swing.GroupLayout pnlAboutLayout = new javax.swing.GroupLayout(pnlAbout);
+        pnlAbout.setLayout(pnlAboutLayout);
+        pnlAboutLayout.setHorizontalGroup(
+            pnlAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAboutLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(pnlAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAbout)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(23, Short.MAX_VALUE))
+        );
+        pnlAboutLayout.setVerticalGroup(
+            pnlAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAboutLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(lblAbout)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
 
-        getContentPane().add(jPanel1, "card3");
+        pnlTentang.add(pnlAbout, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 770, 220));
+
+        pnlFitur.setBackground(new java.awt.Color(255, 204, 204));
+
+        lblFitur.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblFitur.setText("Kenapa Memilih FinCker?");
+
+        jScrollPane2.setBorder(null);
+        jScrollPane2.setOpaque(false);
+
+        jTextArea2.setEditable(false);
+        jTextArea2.setBackground(new java.awt.Color(255, 204, 204));
+        jTextArea2.setColumns(20);
+        jTextArea2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTextArea2.setLineWrap(true);
+        jTextArea2.setRows(5);
+        jTextArea2.setText("1. DASHBOARD TERINTEGRASI\n   Menampilkan ringkasan Saldo, Pemasukan, dan Pengeluaran dalam satu tampilan real-time.\n2. LOGIKA KESEHATAN KEUANGAN\n   Sistem otomatis menghitung rasio pengeluaran dan memberikan status (Sehat / Waspada / Kritis).\n3. INPUT TRANSAKSI CEPAT\n   Antarmuka sederhana yang memudahkan pengguna menambah data transaksi tanpa langkah yang rumit.");
+        jTextArea2.setBorder(null);
+        jScrollPane2.setViewportView(jTextArea2);
+
+        javax.swing.GroupLayout pnlFiturLayout = new javax.swing.GroupLayout(pnlFitur);
+        pnlFitur.setLayout(pnlFiturLayout);
+        pnlFiturLayout.setHorizontalGroup(
+            pnlFiturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFiturLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(pnlFiturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblFitur)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+        pnlFiturLayout.setVerticalGroup(
+            pnlFiturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlFiturLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(lblFitur)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+        pnlTentang.add(pnlFitur, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 770, 200));
+
+        bg.add(pnlTentang, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 1200, 520));
+
+        getContentPane().add(bg, "card3");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -261,22 +413,32 @@ public class tentangView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel bg;
     private javax.swing.JButton btnBeranda;
     private javax.swing.JButton btnLaporan;
     private javax.swing.JButton btnProfile;
     private javax.swing.JButton btnTabungan;
     private javax.swing.JButton btnTentang;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JLabel lblAbout;
+    private javax.swing.JLabel lblFitur;
     private javax.swing.JLabel lblFoto1;
     private javax.swing.JLabel lblFoto2;
     private javax.swing.JLabel lblFoto3;
+    private javax.swing.JLabel lblNIM1;
+    private javax.swing.JLabel lblNIM2;
+    private javax.swing.JLabel lblNIM3;
     private javax.swing.JLabel lblNama1;
     private javax.swing.JLabel lblNama2;
     private javax.swing.JLabel lblNama3;
+    private javax.swing.JPanel pnlAbout;
+    private javax.swing.JPanel pnlCreator;
+    private javax.swing.JPanel pnlFitur;
     private javax.swing.JPanel pnlNavbar;
+    private javax.swing.JPanel pnlTentang;
     // End of variables declaration//GEN-END:variables
 
     private void updateTampilan() {
