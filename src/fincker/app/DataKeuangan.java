@@ -8,6 +8,8 @@ package fincker.app;
  *
  * @author Muham
  */
-class jPanel1 {
-    
+public class DataKeuangan {
+    // KATA KUNCI "static" ADALAH KUNCINYA.
+    // Artinya variabel ini milik bersama (Global), bukan milik satu file saja.
+    public static long saldoUtama = 0;
 }

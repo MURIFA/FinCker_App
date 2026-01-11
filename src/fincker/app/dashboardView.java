@@ -11,7 +11,6 @@ package fincker.app;
 public class dashboardView extends javax.swing.JFrame {
 
     // --- COPY DARI SINI (VARIABEL GLOBAL) ---
-    int saldo = 0;
     int pemasukan = 0;
     int pengeluaran = 0;
     int targetTabungan = 10000000; // Default target 10 Juta
@@ -449,7 +448,7 @@ public class dashboardView extends javax.swing.JFrame {
             try {
                 int nominal = Integer.parseInt(input);
                 pemasukan += nominal; 
-                saldo += nominal;     
+                DataKeuangan.saldoUtama += nominal;     
                 updateTampilan();     // Refresh angka
                 tambahRiwayat("Masuk: " + kursIDR.format(nominal));
             } catch (NumberFormatException e) {
@@ -465,7 +464,7 @@ public class dashboardView extends javax.swing.JFrame {
             try {
                 int nominal = Integer.parseInt(input);
                 pengeluaran += nominal; 
-                saldo -= nominal;       
+                DataKeuangan.saldoUtama -= nominal;      
                 updateTampilan();       // Refresh angka
                 tambahRiwayat("Keluar: " + kursIDR.format(nominal));
             } catch (NumberFormatException e) {
@@ -480,9 +479,9 @@ public class dashboardView extends javax.swing.JFrame {
         String input = javax.swing.JOptionPane.showInputDialog(this, "Atur Saldo Manual (Koreksi):");
         if (input != null && !input.isEmpty()) {
             try {
-                saldo = Integer.parseInt(input);
+                DataKeuangan.saldoUtama = Integer.parseInt(input);
                 updateTampilan();
-                tambahRiwayat("Koreksi Saldo: " + kursIDR.format(saldo));
+                tambahRiwayat("Koreksi Saldo: " + kursIDR.format(DataKeuangan.saldoUtama));
             } catch (NumberFormatException e) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Harap masukkan angka saja!");
             }
@@ -561,7 +560,7 @@ public class dashboardView extends javax.swing.JFrame {
     private void updateTampilan() {
         // 1. UPDATE ANGKA KE LABEL (Bukan TextField lagi)
         // Ini akan mengganti huruf "S", "M", "K" dengan angka Rupiah
-        lblSaldo.setText(kursIDR.format(saldo));
+        lblSaldo.setText(kursIDR.format(DataKeuangan.saldoUtama));
         lblPemasukan.setText(kursIDR.format(pemasukan));
         lblPengeluaran.setText(kursIDR.format(pengeluaran));
 

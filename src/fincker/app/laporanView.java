@@ -16,10 +16,7 @@ public class laporanView extends javax.swing.JFrame {
     public laporanView() {
         initComponents();
         
-        // 1. Atur Ukuran Layar dulu (Wajib)
         this.setSize(1280, 720);
-        
-        // 2. MANTRA AGAR MUNCUL DI TENGAH
         this.setLocationRelativeTo(null);
     }
 
