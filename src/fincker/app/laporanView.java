@@ -28,6 +28,7 @@ public class laporanView extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         bg = new javax.swing.JPanel() {
             // 1. Muat Gambar (Ganti nama file sesuai punyamu)
@@ -48,6 +49,17 @@ public class laporanView extends javax.swing.JFrame {
         btnLaporan = new javax.swing.JButton();
         btnTabungan = new javax.swing.JButton();
         btnProfile = new javax.swing.JButton();
+        pnlLaporan = new javax.swing.JPanel();
+        pnlStatistik = new javax.swing.JPanel();
+        pnlMasuk = new javax.swing.JPanel();
+        lblTotalMasuk = new javax.swing.JLabel();
+        pnlKeluar = new javax.swing.JPanel();
+        lblTotalKeluar = new javax.swing.JLabel();
+        pnlSaldo = new javax.swing.JPanel();
+        lblSisaSaldo = new javax.swing.JLabel();
+        pnlGrafik = new javax.swing.JPanel();
+        scpTabel = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -152,6 +164,64 @@ public class laporanView extends javax.swing.JFrame {
 
         bg.add(pnlNavbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 80));
 
+        pnlLaporan.setOpaque(false);
+        pnlLaporan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnlStatistik.setLayout(new java.awt.GridBagLayout());
+
+        pnlMasuk.setBackground(new java.awt.Color(255, 51, 51));
+
+        lblTotalMasuk.setText("Pemasukan");
+        pnlMasuk.add(lblTotalMasuk);
+
+        pnlStatistik.add(pnlMasuk, new java.awt.GridBagConstraints());
+
+        pnlKeluar.setBackground(new java.awt.Color(51, 51, 255));
+
+        lblTotalKeluar.setText("Pengeluaran");
+        pnlKeluar.add(lblTotalKeluar);
+
+        pnlStatistik.add(pnlKeluar, new java.awt.GridBagConstraints());
+
+        pnlSaldo.setBackground(new java.awt.Color(51, 255, 102));
+
+        lblSisaSaldo.setText("Saldo Akhir");
+        pnlSaldo.add(lblSisaSaldo);
+
+        pnlStatistik.add(pnlSaldo, new java.awt.GridBagConstraints());
+
+        pnlLaporan.add(pnlStatistik, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 590, 270));
+
+        javax.swing.GroupLayout pnlGrafikLayout = new javax.swing.GroupLayout(pnlGrafik);
+        pnlGrafik.setLayout(pnlGrafikLayout);
+        pnlGrafikLayout.setHorizontalGroup(
+            pnlGrafikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnlGrafikLayout.setVerticalGroup(
+            pnlGrafikLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        pnlLaporan.add(pnlGrafik, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 40, 590, 270));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        scpTabel.setViewportView(jTable1);
+
+        pnlLaporan.add(scpTabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 1180, 190));
+
+        bg.add(pnlLaporan, new org.netbeans.lib.awtextra.AbsoluteConstraints(-60, 80, 1280, 640));
+
         getContentPane().add(bg, "card2");
 
         pack();
@@ -234,7 +304,18 @@ public class laporanView extends javax.swing.JFrame {
     private javax.swing.JButton btnProfile;
     private javax.swing.JButton btnTabungan;
     private javax.swing.JButton btnTentang;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblSisaSaldo;
+    private javax.swing.JLabel lblTotalKeluar;
+    private javax.swing.JLabel lblTotalMasuk;
+    private javax.swing.JPanel pnlGrafik;
+    private javax.swing.JPanel pnlKeluar;
+    private javax.swing.JPanel pnlLaporan;
+    private javax.swing.JPanel pnlMasuk;
     private javax.swing.JPanel pnlNavbar;
+    private javax.swing.JPanel pnlSaldo;
+    private javax.swing.JPanel pnlStatistik;
+    private javax.swing.JScrollPane scpTabel;
     // End of variables declaration//GEN-END:variables
 
     private void updateTampilan() {
