@@ -66,6 +66,7 @@ public class registerView extends javax.swing.JFrame {
         lblPassword = new javax.swing.JLabel();
         dcLahir = new com.toedter.calendar.JDateChooser();
         lblRegister = new javax.swing.JLabel();
+        cbShowPass = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -120,6 +121,9 @@ public class registerView extends javax.swing.JFrame {
         lblRegister.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblRegister.setText("REGISTRASI");
 
+        cbShowPass.setText("Lihat");
+        cbShowPass.addActionListener(this::cbShowPassActionPerformed);
+
         javax.swing.GroupLayout pnlRegisterLayout = new javax.swing.GroupLayout(pnlRegister);
         pnlRegister.setLayout(pnlRegisterLayout);
         pnlRegisterLayout.setHorizontalGroup(
@@ -127,11 +131,6 @@ public class registerView extends javax.swing.JFrame {
             .addGroup(pnlRegisterLayout.createSequentialGroup()
                 .addContainerGap(59, Short.MAX_VALUE)
                 .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegisterLayout.createSequentialGroup()
-                        .addComponent(btnCancel)
-                        .addGap(60, 60, 60)
-                        .addComponent(btnRegister)
-                        .addGap(134, 134, 134))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegisterLayout.createSequentialGroup()
                         .addComponent(lblRegister)
                         .addGap(176, 176, 176))
@@ -160,8 +159,15 @@ public class registerView extends javax.swing.JFrame {
                                 .addComponent(txtKonfirmasi)
                                 .addComponent(dcLahir, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtNama, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTelp, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTelp, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbShowPass, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(40, 40, 40))))
+            .addGroup(pnlRegisterLayout.createSequentialGroup()
+                .addGap(129, 129, 129)
+                .addComponent(btnCancel)
+                .addGap(60, 60, 60)
+                .addComponent(btnRegister)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pnlRegisterLayout.setVerticalGroup(
             pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,11 +204,13 @@ public class registerView extends javax.swing.JFrame {
                 .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtKonfirmasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblKonfirmasi))
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbShowPass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegister)
                     .addComponent(btnCancel))
-                .addContainerGap())
+                .addGap(49, 49, 49))
         );
 
         jPanel1.add(pnlRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 490, 570));
@@ -261,6 +269,20 @@ public class registerView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnRegisterActionPerformed
 
+    private void cbShowPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbShowPassActionPerformed
+        // TODO add your handling code here:
+        // Cek: Apakah kotak dicentang?
+        if (cbShowPass.isSelected()) {
+            // Jika dicentang, BUKA dua-duanya
+            txtPassword.setEchoChar((char) 0); 
+            txtKonfirmasi.setEchoChar((char) 0); // Pastikan nama variabelnya benar (txtKonfirmasi atau txtRetype)
+        } else {
+            // Jika tidak dicentang, TUTUP dua-duanya
+            txtPassword.setEchoChar('*'); 
+            txtKonfirmasi.setEchoChar('*'); 
+        }
+    }//GEN-LAST:event_cbShowPassActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -289,6 +311,7 @@ public class registerView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnRegister;
+    private javax.swing.JCheckBox cbShowPass;
     private com.toedter.calendar.JDateChooser dcLahir;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblEmail;

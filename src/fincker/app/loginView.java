@@ -20,7 +20,7 @@ public class loginView extends javax.swing.JFrame {
      * Creates new form loginView
      */
     
-    private User currentUser;
+    public static User currentUser;
     
     public loginView() {
         initComponents();
@@ -59,6 +59,7 @@ public class loginView extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         registLabel3 = new javax.swing.JLabel();
         lblLogin = new javax.swing.JLabel();
+        cbShowPass = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -96,8 +97,11 @@ public class loginView extends javax.swing.JFrame {
             }
         });
 
-        lblLogin.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblLogin.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblLogin.setText("LOGIN");
+
+        cbShowPass.setText("Lihat");
+        cbShowPass.addActionListener(this::cbShowPassActionPerformed);
 
         javax.swing.GroupLayout pnlLoginLayout = new javax.swing.GroupLayout(pnlLogin);
         pnlLogin.setLayout(pnlLoginLayout);
@@ -109,9 +113,12 @@ public class loginView extends javax.swing.JFrame {
                     .addGroup(pnlLoginLayout.createSequentialGroup()
                         .addComponent(lblPassword)
                         .addGap(37, 37, 37)
-                        .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                            .addComponent(txtEmail))
+                        .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlLoginLayout.createSequentialGroup()
+                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbShowPass)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createSequentialGroup()
                         .addComponent(lblEmail)
@@ -126,22 +133,23 @@ public class loginView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblLogin)
-                .addGap(177, 177, 177))
+                .addGap(172, 172, 172))
         );
         pnlLoginLayout.setVerticalGroup(
             pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLoginLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(27, 27, 27)
                 .addComponent(lblLogin)
-                .addGap(40, 40, 40)
+                .addGap(41, 41, 41)
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEmail))
-                .addGap(36, 36, 36)
+                .addGap(35, 35, 35)
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPassword))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                    .addComponent(lblPassword)
+                    .addComponent(cbShowPass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
                     .addComponent(btnLogin))
@@ -184,17 +192,20 @@ public class loginView extends javax.swing.JFrame {
 
         // Loop cek data user di list
         for (User u : registerView.listUser) {
-            // [PENTING] Cek getEmail(), bukan getUsername()
+            // Cek Email & Password
             if (u.getEmail().equalsIgnoreCase(email) && u.getPassword().equals(password)) {
                 loginBerhasil = true;
-                currentUser = u; // Simpan siapa yang login (untuk Profile nanti)
+                
+                // --- TAMBAHKAN BARIS INI ---
+                currentUser = u; // Simpan user yang berhasil login!
+                // ---------------------------
+                
                 break;
             }
         }
 
         if (loginBerhasil) {
             JOptionPane.showMessageDialog(this, "Login Berhasil!");
-            // Masuk Dashboard
             new dashboardView().setVisible(true);
             this.dispose();
         } else {
@@ -209,6 +220,18 @@ public class loginView extends javax.swing.JFrame {
         wv.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void cbShowPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbShowPassActionPerformed
+        // TODO add your handling code here:
+        // Cek: Apakah kotak dicentang?
+        if (cbShowPass.isSelected()) {
+            // Jika Dicentang: Tampilkan karakter asli (char 0 artinya null/tanpa topeng)
+            txtPassword.setEchoChar((char) 0);
+        } else {
+            // Jika Tidak Dicentang: Tutup dengan bintang/titik
+            txtPassword.setEchoChar('*');
+        }
+    }//GEN-LAST:event_cbShowPassActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,6 +261,7 @@ public class loginView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnLogin;
+    private javax.swing.JCheckBox cbShowPass;
     private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblPassword;

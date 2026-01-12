@@ -4,9 +4,10 @@
  */
 package fincker.app;
 
+import javax.swing.JOptionPane;
 /**
  *
- * @author Muham
+ * @author Aziz
  */
 public class profileView extends javax.swing.JFrame {
     
@@ -17,6 +18,12 @@ public class profileView extends javax.swing.JFrame {
      */
     public profileView() {
         initComponents();
+        // 1. Settingan Layar (Resolusi & Posisi Tengah)
+        this.setSize(1280, 720);
+        this.setLocationRelativeTo(null); 
+        
+        // 2. Panggil Data User saat aplikasi dibuka
+        loadProfile();
     }
 
     /**
@@ -28,7 +35,7 @@ public class profileView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel() {
+        pnlBg = new javax.swing.JPanel() {
             // 1. Muat Gambar (Ganti nama file sesuai punyamu)
             java.awt.Image backgroundImage = new javax.swing.ImageIcon(getClass().getResource("/fincker/app/gambar/bg-tentang-profile.gif")).getImage();
 
@@ -41,17 +48,280 @@ public class profileView extends javax.swing.JFrame {
                 g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
             }
         };
+        pnlNavbar = new javax.swing.JPanel();
+        btnBeranda = new javax.swing.JButton();
+        btnTentang = new javax.swing.JButton();
+        btnLaporan = new javax.swing.JButton();
+        btnTabungan = new javax.swing.JButton();
+        btnProfile = new javax.swing.JButton();
+        pnlProfile = new javax.swing.JPanel();
+        isiProfile = new javax.swing.JPanel();
+        lblFoto = new javax.swing.JLabel();
+        txtNama = new javax.swing.JTextField();
+        cbShowPass = new javax.swing.JCheckBox();
+        txtPassword = new javax.swing.JPasswordField();
+        btnSimpan = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
+        txtTelp = new javax.swing.JTextField();
+        txtLahir = new javax.swing.JTextField();
+        lblTelpon = new javax.swing.JLabel();
+        lblNama = new javax.swing.JLabel();
+        lblPekerjaan = new javax.swing.JLabel();
+        lblLahir = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        lblPassword = new javax.swing.JLabel();
+        txtPekerjaan = new javax.swing.JTextField();
+        lblRegister = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
 
-        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel2.setPreferredSize(new java.awt.Dimension(1280, 720));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel2, "card2");
+        pnlBg.setBackground(new java.awt.Color(0, 102, 102));
+        pnlBg.setPreferredSize(new java.awt.Dimension(1280, 720));
+        pnlBg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnlNavbar.setBackground(new java.awt.Color(153, 255, 255));
+        pnlNavbar.setOpaque(false);
+        pnlNavbar.setPreferredSize(new java.awt.Dimension(1200, 70));
+
+        btnBeranda.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnBeranda.setText("Beranda");
+        btnBeranda.setBorderPainted(false);
+        btnBeranda.setContentAreaFilled(false);
+        btnBeranda.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBeranda.setFocusPainted(false);
+        btnBeranda.addActionListener(this::btnBerandaActionPerformed);
+
+        btnTentang.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnTentang.setText("Tentang");
+        btnTentang.setBorderPainted(false);
+        btnTentang.setContentAreaFilled(false);
+        btnTentang.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTentang.setFocusPainted(false);
+        btnTentang.addActionListener(this::btnTentangActionPerformed);
+
+        btnLaporan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnLaporan.setText("Laporan");
+        btnLaporan.setBorderPainted(false);
+        btnLaporan.setContentAreaFilled(false);
+        btnLaporan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLaporan.setFocusPainted(false);
+        btnLaporan.addActionListener(this::btnLaporanActionPerformed);
+
+        btnTabungan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnTabungan.setText("Tabungan");
+        btnTabungan.setBorderPainted(false);
+        btnTabungan.setContentAreaFilled(false);
+        btnTabungan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTabungan.setFocusPainted(false);
+        btnTabungan.addActionListener(this::btnTabunganActionPerformed);
+
+        btnProfile.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnProfile.setText("Akun");
+        btnProfile.setBorderPainted(false);
+        btnProfile.setContentAreaFilled(false);
+        btnProfile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProfile.setFocusPainted(false);
+        btnProfile.addActionListener(this::btnProfileActionPerformed);
+
+        javax.swing.GroupLayout pnlNavbarLayout = new javax.swing.GroupLayout(pnlNavbar);
+        pnlNavbar.setLayout(pnlNavbarLayout);
+        pnlNavbarLayout.setHorizontalGroup(
+            pnlNavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlNavbarLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnBeranda)
+                .addGap(97, 97, 97)
+                .addComponent(btnTentang, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(104, 104, 104)
+                .addComponent(btnLaporan)
+                .addGap(110, 110, 110)
+                .addComponent(btnTabungan)
+                .addGap(91, 91, 91)
+                .addComponent(btnProfile)
+                .addGap(81, 81, 81))
+        );
+        pnlNavbarLayout.setVerticalGroup(
+            pnlNavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlNavbarLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(pnlNavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBeranda, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTentang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLaporan)
+                    .addComponent(btnTabungan)
+                    .addComponent(btnProfile))
+                .addGap(32, 32, 32))
+        );
+
+        pnlBg.add(pnlNavbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 80));
+
+        pnlProfile.setOpaque(false);
+        pnlProfile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        isiProfile.setBackground(new java.awt.Color(153, 204, 255));
+        isiProfile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblFoto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fincker/app/gambar/foto-profile.png"))); // NOI18N
+        isiProfile.add(lblFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 120, 120));
+
+        txtNama.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        isiProfile.add(txtNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 340, -1));
+
+        cbShowPass.setText("Lihat");
+        cbShowPass.addActionListener(this::cbShowPassActionPerformed);
+        isiProfile.add(cbShowPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 330, -1, 30));
+
+        txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        isiProfile.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, 300, -1));
+
+        btnSimpan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnSimpan.setText("SIMPAN");
+        btnSimpan.addActionListener(this::btnSimpanActionPerformed);
+        isiProfile.add(btnSimpan, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
+
+        btnLogout.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnLogout.setText("LOGOUT");
+        btnLogout.addActionListener(this::btnLogoutActionPerformed);
+        isiProfile.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, -1, -1));
+
+        txtTelp.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        isiProfile.add(txtTelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 340, -1));
+
+        txtLahir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        isiProfile.add(txtLahir, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 270, 340, -1));
+
+        lblTelpon.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblTelpon.setText("No. Telpon");
+        isiProfile.add(lblTelpon, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, -1, -1));
+
+        lblNama.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblNama.setText("Nama Lengkap");
+        isiProfile.add(lblNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, -1, -1));
+
+        lblPekerjaan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblPekerjaan.setText("Pekerjaan");
+        isiProfile.add(lblPekerjaan, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, -1, -1));
+
+        lblLahir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblLahir.setText("Tanggal Lahir");
+        isiProfile.add(lblLahir, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, -1, -1));
+
+        lblEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblEmail.setText("Email");
+        isiProfile.add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, -1, -1));
+
+        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        isiProfile.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 340, -1));
+
+        lblPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblPassword.setText("Password");
+        isiProfile.add(lblPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, -1, -1));
+
+        txtPekerjaan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        isiProfile.add(txtPekerjaan, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 340, -1));
+
+        pnlProfile.add(isiProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 780, 440));
+
+        lblRegister.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblRegister.setText("PROFILE");
+        pnlProfile.add(lblRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, -1, -1));
+
+        pnlBg.add(pnlProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1280, 640));
+
+        getContentPane().add(pnlBg, "card2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBerandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBerandaActionPerformed
+        // TODO add your handling code here:
+        // 1. Panggil method loadData() yang sudah kita buat sebelumnya
+        // Karena kita sudah ada di Beranda, cukup refresh data saja
+        new dashboardView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBerandaActionPerformed
+
+    private void btnTentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTentangActionPerformed
+        // TODO add your handling code here:
+        new tentangView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnTentangActionPerformed
+
+    private void btnLaporanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaporanActionPerformed
+        // TODO add your handling code here:
+        new laporanView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnLaporanActionPerformed
+
+    private void btnTabunganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTabunganActionPerformed
+        // TODO add your handling code here:
+        new wishlistView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnTabunganActionPerformed
+
+    private void btnProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProfileActionPerformed
+        // TODO add your handling code here:
+       loadProfile();
+        JOptionPane.showMessageDialog(this, "Data sudah paling update!");
+    }//GEN-LAST:event_btnProfileActionPerformed
+
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        // TODO add your handling code here:
+        // Pastikan ada user yang login
+        if (loginView.currentUser != null) {
+            User u = loginView.currentUser;
+
+            // 1. Ambil Data dari Text Field
+            String nama = txtNama.getText();
+            String email = txtEmail.getText();
+            String telp = txtTelp.getText();
+            String pekerjaan = txtPekerjaan.getText();
+            String lahir = txtLahir.getText(); // Kita ambil string langsung dari text field
+            String pass = new String(txtPassword.getPassword());
+
+            // 2. Validasi sederhana
+            if (nama.isEmpty() || email.isEmpty() || pass.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Nama, Email, dan Password tidak boleh kosong!");
+                return;
+            }
+
+            // 3. Update data User (SETTER)
+            u.setFullName(nama);
+            u.setEmail(email);
+            u.setPhoneNumber(telp);
+            u.setOccupation(pekerjaan);
+            u.setDateOfBirth(lahir);
+            u.setPassword(pass);
+
+            JOptionPane.showMessageDialog(this, "Profil Berhasil Diupdate!");
+            loadProfile(); // Refresh tampilan
+        }
+    }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void cbShowPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbShowPassActionPerformed
+        // TODO add your handling code here:
+        // Cek: Apakah kotak dicentang?
+        if (cbShowPass.isSelected()) {
+            // Jika Dicentang: Tampilkan karakter asli (char 0 artinya null/tanpa topeng)
+            txtPassword.setEchoChar((char) 0); 
+        } else {
+            // Jika Tidak Dicentang: Tutup dengan bintang/titik
+            txtPassword.setEchoChar('*'); 
+        }
+    }//GEN-LAST:event_cbShowPassActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        int jawab = JOptionPane.showConfirmDialog(this, "Yakin ingin Logout?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
+        if (jawab == JOptionPane.YES_OPTION) {
+            loginView.currentUser = null; // Hapus sesi login
+            new loginView().setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,6 +349,58 @@ public class profileView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton btnBeranda;
+    private javax.swing.JButton btnLaporan;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnProfile;
+    private javax.swing.JButton btnSimpan;
+    private javax.swing.JButton btnTabungan;
+    private javax.swing.JButton btnTentang;
+    private javax.swing.JCheckBox cbShowPass;
+    private javax.swing.JPanel isiProfile;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblFoto;
+    private javax.swing.JLabel lblLahir;
+    private javax.swing.JLabel lblNama;
+    private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblPekerjaan;
+    private javax.swing.JLabel lblRegister;
+    private javax.swing.JLabel lblTelpon;
+    private javax.swing.JPanel pnlBg;
+    private javax.swing.JPanel pnlNavbar;
+    private javax.swing.JPanel pnlProfile;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtLahir;
+    private javax.swing.JTextField txtNama;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtPekerjaan;
+    private javax.swing.JTextField txtTelp;
     // End of variables declaration//GEN-END:variables
+
+    private void updateTampilan() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void initTanggal() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void loadProfile() {
+        // Cek apakah ada user yang sedang login?
+        if (loginView.currentUser != null) {
+            User u = loginView.currentUser;
+            
+            // Isi form dengan data user
+            txtNama.setText(u.getFullName());
+            txtEmail.setText(u.getEmail());
+            txtTelp.setText(u.getPhoneNumber());
+            txtPekerjaan.setText(u.getOccupation());
+            txtLahir.setText(u.getDateOfBirth());
+            txtPassword.setText(u.getPassword());
+            
+            // Reset Show Password Checkbox
+            cbShowPass.setSelected(false);
+            txtPassword.setEchoChar('*');
+        }
+    }
 }

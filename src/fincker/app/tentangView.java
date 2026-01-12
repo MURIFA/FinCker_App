@@ -199,13 +199,13 @@ public class tentangView extends javax.swing.JFrame {
         lblNama2.setText("Rahmania");
 
         lblNIM2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblNIM2.setText("NIM: 2510130013");
+        lblNIM2.setText("NIM: 2510130015");
 
         lblNama3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblNama3.setText("Muhammad Fathul Aziz");
 
         lblNIM3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblNIM3.setText("NIM: 2510130013");
+        lblNIM3.setText("NIM: 2510130008");
 
         javax.swing.GroupLayout pnlCreatorLayout = new javax.swing.GroupLayout(pnlCreator);
         pnlCreator.setLayout(pnlCreatorLayout);
@@ -265,7 +265,7 @@ public class tentangView extends javax.swing.JFrame {
 
         pnlTentang.add(pnlCreator, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 370, 520));
 
-        pnlAbout.setBackground(new java.awt.Color(255, 255, 255));
+        pnlAbout.setBackground(new java.awt.Color(204, 204, 255));
 
         lblAbout.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblAbout.setText("About FinCker");
@@ -273,7 +273,7 @@ public class tentangView extends javax.swing.JFrame {
         jScrollPane1.setBorder(null);
 
         jTextArea1.setEditable(false);
-        jTextArea1.setBackground(new java.awt.Color(255, 255, 255));
+        jTextArea1.setBackground(new java.awt.Color(204, 204, 255));
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextArea1.setLineWrap(true);
