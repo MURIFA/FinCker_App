@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 /**
  *
- * @author Muham
+ * @author Aziz
  */
 public class loginView extends javax.swing.JFrame {
     
@@ -19,8 +19,13 @@ public class loginView extends javax.swing.JFrame {
     /**
      * Creates new form loginView
      */
+    
+    private User currentUser;
+    
     public loginView() {
         initComponents();
+        this.setSize(1280, 720);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -46,12 +51,12 @@ public class loginView extends javax.swing.JFrame {
             }
         };
         pnlLogin = new javax.swing.JPanel();
-        lblUsername = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
-        usernameTextField1 = new javax.swing.JTextField();
-        pwPasswordField1 = new javax.swing.JPasswordField();
-        cancelButton1 = new javax.swing.JButton();
-        loginButton2 = new javax.swing.JButton();
+        txtEmail = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
+        btnCancel = new javax.swing.JButton();
+        btnLogin = new javax.swing.JButton();
         registLabel3 = new javax.swing.JLabel();
         lblLogin = new javax.swing.JLabel();
 
@@ -64,17 +69,24 @@ public class loginView extends javax.swing.JFrame {
 
         pnlLogin.setBackground(new java.awt.Color(153, 204, 255));
 
-        lblUsername.setText("USERNAME    :");
+        lblEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblEmail.setText("Email");
 
-        lblPassword.setText("PASSWORD    :");
+        lblPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblPassword.setText("Password");
 
-        pwPasswordField1.addActionListener(this::pwPasswordField1ActionPerformed);
+        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        cancelButton1.setText("CANCEL");
-        cancelButton1.addActionListener(this::cancelButton1ActionPerformed);
+        txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtPassword.addActionListener(this::txtPasswordActionPerformed);
 
-        loginButton2.setText("LOGIN");
-        loginButton2.addActionListener(this::loginButton2ActionPerformed);
+        btnCancel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCancel.setText("KEMBALI");
+        btnCancel.addActionListener(this::btnCancelActionPerformed);
+
+        btnLogin.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnLogin.setText("LOGIN");
+        btnLogin.addActionListener(this::btnLoginActionPerformed);
 
         registLabel3.setText("Click Here ! to Create your new account ");
         registLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -92,116 +104,111 @@ public class loginView extends javax.swing.JFrame {
         pnlLoginLayout.setHorizontalGroup(
             pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLoginLayout.createSequentialGroup()
-                .addContainerGap(86, Short.MAX_VALUE)
+                .addGap(44, 44, 44)
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlLoginLayout.createSequentialGroup()
+                        .addComponent(lblPassword)
+                        .addGap(37, 37, 37)
+                        .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(txtEmail))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createSequentialGroup()
-                        .addComponent(lblLogin)
-                        .addGap(186, 186, 186))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createSequentialGroup()
-                        .addComponent(registLabel3)
-                        .addGap(104, 104, 104))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createSequentialGroup()
+                        .addComponent(lblEmail)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                         .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(pnlLoginLayout.createSequentialGroup()
-                                .addComponent(cancelButton1)
+                                .addComponent(btnCancel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(loginButton2))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlLoginLayout.createSequentialGroup()
-                                .addComponent(lblUsername)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(usernameTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pnlLoginLayout.createSequentialGroup()
-                                .addComponent(lblPassword)
-                                .addGap(18, 18, 18)
-                                .addComponent(pwPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(78, 78, 78))))
+                                .addComponent(btnLogin))
+                            .addComponent(registLabel3))
+                        .addGap(104, 104, 104))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblLogin)
+                .addGap(177, 177, 177))
         );
         pnlLoginLayout.setVerticalGroup(
             pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLoginLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(28, 28, 28)
                 .addComponent(lblLogin)
-                .addGap(79, 79, 79)
+                .addGap(40, 40, 40)
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUsername)
-                    .addComponent(usernameTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmail))
+                .addGap(36, 36, 36)
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPassword)
-                    .addComponent(pwPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPassword))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelButton1)
-                    .addComponent(loginButton2))
-                .addGap(77, 77, 77)
+                    .addComponent(btnCancel)
+                    .addComponent(btnLogin))
+                .addGap(29, 29, 29)
                 .addComponent(registLabel3)
                 .addGap(38, 38, 38))
         );
 
-        pnlBg.add(pnlLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 80, -1, -1));
+        pnlBg.add(pnlLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 161, -1, 360));
 
         getContentPane().add(pnlBg, "card2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void pwPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwPasswordField1ActionPerformed
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_pwPasswordField1ActionPerformed
+    }//GEN-LAST:event_txtPasswordActionPerformed
 
+    // --- 1. LINK KE REGISTER ---
     private void registLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registLabel3MouseClicked
         // TODO add your handling code here:
-        registerView db = new registerView();
-        db.setLocationRelativeTo(null);
-        db.setVisible(true);
-        this.dispose(); // menutup form register
-
+        registerView rv = new registerView();
+        rv.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_registLabel3MouseClicked
 
-    private void loginButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButton2ActionPerformed
+    // --- 2. TOMBOL LOGIN (UPDATED: EMAIL BASED) ---
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        String username = usernameTextField1.getText();
-    String password = new String(pwPasswordField1.getPassword());
+        String email = txtEmail.getText();
+        String password = new String(txtPassword.getPassword());
 
-    if (username.isEmpty() || password.isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Username dan Password wajib diisi");
-        return;
-    }
-
-    boolean loginBerhasil = false;
-
-    for (User u : registerView.listUser) {
-        if (u.getUsername().equals(username) &&
-            u.getPassword().equals(password)) {
-            loginBerhasil = true;
-            break;
+        if (email.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Email dan Password wajib diisi!");
+            return;
         }
-    }
 
-    if (loginBerhasil) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Login berhasil");
-        // Pindah ke login
-        dashboardView db = new dashboardView();
-        db.setLocationRelativeTo(null);
-        db.setVisible(true);
-        this.dispose(); // menutup form register
+        boolean loginBerhasil = false;
 
-    } else {
-        javax.swing.JOptionPane.showMessageDialog(this, "Username atau Password salah");
+        // Loop cek data user di list
+        for (User u : registerView.listUser) {
+            // [PENTING] Cek getEmail(), bukan getUsername()
+            if (u.getEmail().equalsIgnoreCase(email) && u.getPassword().equals(password)) {
+                loginBerhasil = true;
+                currentUser = u; // Simpan siapa yang login (untuk Profile nanti)
+                break;
+            }
+        }
 
-    }
-    }//GEN-LAST:event_loginButton2ActionPerformed
+        if (loginBerhasil) {
+            JOptionPane.showMessageDialog(this, "Login Berhasil!");
+            // Masuk Dashboard
+            new dashboardView().setVisible(true);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Email atau Password salah!");
+        }
+    }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void cancelButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButton1ActionPerformed
+    // --- 3. TOMBOL KEMBALI ---
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
-        // 1. Buka Welcome View
         welcomeView wv = new welcomeView();
-        wv.setLocationRelativeTo(null);
         wv.setVisible(true);
-        
-        // 2. Tutup Login View
         this.dispose();
-    }//GEN-LAST:event_cancelButton1ActionPerformed
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,15 +236,15 @@ public class loginView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelButton1;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JLabel lblEmail;
     private javax.swing.JLabel lblLogin;
     private javax.swing.JLabel lblPassword;
-    private javax.swing.JLabel lblUsername;
-    private javax.swing.JButton loginButton2;
     private javax.swing.JPanel pnlBg;
     private javax.swing.JPanel pnlLogin;
-    private javax.swing.JPasswordField pwPasswordField1;
     private javax.swing.JLabel registLabel3;
-    private javax.swing.JTextField usernameTextField1;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 }

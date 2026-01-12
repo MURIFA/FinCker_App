@@ -6,52 +6,40 @@ package fincker.app;
 
 /**
  *
- * @author User
+ * @author Aziz
  */
 public class User {
-    private String username = "";
-    private String password = "";
-    private String rtp = "";
-    
-    
-    public void setUsername (String username){
-        this.username = username;
-    }
-    
-        
-    public String getUsername(){
-        return this.username;
-    }
-    
-    public void setPassword(String password){
+   // --- DATA USER (Tanpa Username) ---
+    private String fullName;
+    private String email;
+    private String phoneNumber;
+    private String occupation;
+    private String dateOfBirth;
+    private String password;
+
+    // --- CONSTRUCTOR ---
+    public User(String fullName, String email, String phoneNumber, String occupation, String dateOfBirth, String password) {
+        this.fullName = fullName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.occupation = occupation;
+        this.dateOfBirth = dateOfBirth;
         this.password = password;
     }
-    
-    public String getPassword(){
-        return this.password;
-    }
-    
-    public void setRtp(String rtp){
-        this.rtp = rtp;
-    }
-    
-    public String getRtp(){
-        return this.rtp;
-    }
-    
-    public User(String username, String password, String rtp){
-        this.username = username;
-        this.password = password;
-        this.rtp = rtp;
-    }
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
-        registerView rv = new registerView();
-        rv.setLocationRelativeTo(null);
-        rv.setVisible(true);
-    }
 
+    // --- GETTER ---
+    public String getFullName() { return fullName; }
+    public String getEmail() { return email; } // Ini nanti dipakai buat Login
+    public String getPhoneNumber() { return phoneNumber; }
+    public String getOccupation() { return occupation; }
+    public String getDateOfBirth() { return dateOfBirth; }
+    public String getPassword() { return password; }
 
-    
+    // --- SETTER ---
+    public void setFullName(String fullName) { this.fullName = fullName; }
+    public void setEmail(String email) { this.email = email; }
+    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+    public void setOccupation(String occupation) { this.occupation = occupation; }
+    public void setDateOfBirth(String dateOfBirth) { this.dateOfBirth = dateOfBirth; }
+    public void setPassword(String password) { this.password = password; } 
 }

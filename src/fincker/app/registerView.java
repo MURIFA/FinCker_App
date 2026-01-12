@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Muham
+ * @author Aziz
  */
 public class registerView extends javax.swing.JFrame {
     
@@ -22,6 +22,8 @@ public class registerView extends javax.swing.JFrame {
      */
     public registerView() {
         initComponents();
+        this.setSize(1280, 720);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -46,121 +48,218 @@ public class registerView extends javax.swing.JFrame {
                 g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
             }
         };
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        usernameTextField1 = new javax.swing.JTextField();
-        pwPasswordField1 = new javax.swing.JPasswordField();
-        rpwPasswordField2 = new javax.swing.JPasswordField();
-        registButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        pnlRegister = new javax.swing.JPanel();
+        txtNama = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
+        txtKonfirmasi = new javax.swing.JPasswordField();
+        btnRegister = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        txtTelp = new javax.swing.JTextField();
+        txtPekerjaan = new javax.swing.JTextField();
+        lblTelpon = new javax.swing.JLabel();
+        lblNama = new javax.swing.JLabel();
+        lblPekerjaan = new javax.swing.JLabel();
+        lblLahir = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        lblKonfirmasi = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
+        dcLahir = new com.toedter.calendar.JDateChooser();
+        lblRegister = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("USERNAME      :");
+        pnlRegister.setBackground(new java.awt.Color(153, 204, 255));
 
-        jLabel2.setText("PASSWORD      :");
+        txtNama.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        jLabel3.setText("RETYPE PASS    :");
+        txtPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        rpwPasswordField2.addActionListener(this::rpwPasswordField2ActionPerformed);
+        txtKonfirmasi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtKonfirmasi.addActionListener(this::txtKonfirmasiActionPerformed);
 
-        registButton1.setText("REGIST");
-        registButton1.addActionListener(this::registButton1ActionPerformed);
+        btnRegister.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnRegister.setText("DAFTAR");
+        btnRegister.addActionListener(this::btnRegisterActionPerformed);
 
-        jButton2.setText("CANCEL");
+        btnCancel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCancel.setText("KEMBALI");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(400, 400, 400)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+        txtTelp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        txtPekerjaan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        lblTelpon.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblTelpon.setText("No. Telpon");
+
+        lblNama.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblNama.setText("Nama Lengkap");
+
+        lblPekerjaan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblPekerjaan.setText("Pekerjaan");
+
+        lblLahir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblLahir.setText("Tanggal Lahir");
+
+        lblEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblEmail.setText("Email");
+
+        txtEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        lblKonfirmasi.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblKonfirmasi.setText("Konfirmasi Password");
+
+        lblPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblPassword.setText("Password");
+
+        lblRegister.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblRegister.setText("REGISTRASI");
+
+        javax.swing.GroupLayout pnlRegisterLayout = new javax.swing.GroupLayout(pnlRegister);
+        pnlRegister.setLayout(pnlRegisterLayout);
+        pnlRegisterLayout.setHorizontalGroup(
+            pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRegisterLayout.createSequentialGroup()
+                .addContainerGap(59, Short.MAX_VALUE)
+                .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegisterLayout.createSequentialGroup()
+                        .addComponent(btnCancel)
+                        .addGap(60, 60, 60)
+                        .addComponent(btnRegister)
+                        .addGap(134, 134, 134))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegisterLayout.createSequentialGroup()
+                        .addComponent(lblRegister)
+                        .addGap(176, 176, 176))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegisterLayout.createSequentialGroup()
+                        .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegisterLayout.createSequentialGroup()
+                                .addComponent(lblNama)
+                                .addGap(69, 69, 69))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegisterLayout.createSequentialGroup()
+                                .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPassword)
+                                    .addComponent(lblKonfirmasi))
+                                .addGap(35, 35, 35))
+                            .addGroup(pnlRegisterLayout.createSequentialGroup()
+                                .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPekerjaan)
+                                    .addComponent(lblLahir)
+                                    .addComponent(lblTelpon)
+                                    .addComponent(lblEmail))
+                                .addGap(79, 79, 79)))
+                        .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtPekerjaan)
+                                .addComponent(txtEmail)
+                                .addComponent(txtPassword)
+                                .addComponent(txtKonfirmasi)
+                                .addComponent(dcLahir, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNama, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtTelp, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40))))
+        );
+        pnlRegisterLayout.setVerticalGroup(
+            pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlRegisterLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(lblRegister)
+                .addGap(55, 55, 55)
+                .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(pnlRegisterLayout.createSequentialGroup()
+                        .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(txtTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(dcLahir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlRegisterLayout.createSequentialGroup()
+                        .addComponent(lblNama)
+                        .addGap(28, 28, 28)
+                        .addComponent(lblTelpon)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(registButton1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(usernameTextField1)
-                            .addComponent(pwPasswordField1)
-                            .addComponent(rpwPasswordField2, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))))
-                .addContainerGap(211, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(145, 145, 145)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(usernameTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblLahir)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(pwPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPekerjaan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPekerjaan))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(rpwPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(registButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmail))
+                .addGap(21, 21, 21)
+                .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPassword))
+                .addGap(30, 30, 30)
+                .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtKonfirmasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblKonfirmasi))
+                .addGap(40, 40, 40)
+                .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegister)
+                    .addComponent(btnCancel))
+                .addContainerGap())
         );
+
+        jPanel1.add(pnlRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 490, 570));
 
         getContentPane().add(jPanel1, "card2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void rpwPasswordField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rpwPasswordField2ActionPerformed
+    private void txtKonfirmasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKonfirmasiActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_rpwPasswordField2ActionPerformed
+    }//GEN-LAST:event_txtKonfirmasiActionPerformed
 
-    private void registButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registButton1ActionPerformed
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
-    String username = usernameTextField1.getText();
-    String password = new String(pwPasswordField1.getPassword());
-    String retype   = new String(rpwPasswordField2.getPassword());
+    // 1. AMBIL DATA
+        String nama = txtNama.getText();
+        String telp = txtTelp.getText();
+        String pekerjaan = txtPekerjaan.getText();
+        String email = txtEmail.getText();
+        String pass = new String(txtPassword.getPassword());
+        String konfirmasi = new String(txtKonfirmasi.getPassword());
 
-    if (username.isEmpty() || password.isEmpty() || retype.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Data tidak boleh kosong");
-        return;
-    }
+        // Ambil Tanggal
+        String tglLahir = "";
+        if (dcLahir.getDate() != null) {
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy");
+            tglLahir = sdf.format(dcLahir.getDate());
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Tanggal Lahir belum dipilih!");
+            return;
+        }
 
-    if (!password.equals(retype)) {
-        JOptionPane.showMessageDialog(this, "Password tidak sama");
-        return;
-    }
+        // 2. VALIDASI KOSONG
+        if (nama.isEmpty() || telp.isEmpty() || pekerjaan.isEmpty() || email.isEmpty() || pass.isEmpty() || konfirmasi.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Harap isi semua data!");
+            return;
+        }
 
-    // SIMPAN KE ARRAYLIST GLOBAL
-    registerView.listUser.add(new User(username, password, retype));
+        // 3. VALIDASI PASSWORD
+        if (!pass.equals(konfirmasi)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Password tidak cocok!");
+            txtPassword.setText("");
+            txtKonfirmasi.setText("");
+            return;
+        }
 
-    JOptionPane.showMessageDialog(this, "Registrasi berhasil");
+        // 4. SIMPAN DATA (Tanpa Username)
+        User newUser = new User(nama, email, telp, pekerjaan, tglLahir, pass);
+        listUser.add(newUser);
 
-    // Reset form
-    usernameTextField1.setText("");
-    pwPasswordField1.setText("");
-    rpwPasswordField2.setText("");
-// Pindah ke login
-    loginView lg = new loginView();
-    lg.setLocationRelativeTo(null);
-    lg.setVisible(true);
-    this.dispose(); // menutup form register
+        javax.swing.JOptionPane.showMessageDialog(this, "Registrasi Berhasil! Silakan Login dengan Email.");
 
-
-    }//GEN-LAST:event_registButton1ActionPerformed
+        // 5. PINDAH KE LOGIN
+        new loginView().setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,14 +287,24 @@ public class registerView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnRegister;
+    private com.toedter.calendar.JDateChooser dcLahir;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField pwPasswordField1;
-    private javax.swing.JButton registButton1;
-    private javax.swing.JPasswordField rpwPasswordField2;
-    private javax.swing.JTextField usernameTextField1;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblKonfirmasi;
+    private javax.swing.JLabel lblLahir;
+    private javax.swing.JLabel lblNama;
+    private javax.swing.JLabel lblPassword;
+    private javax.swing.JLabel lblPekerjaan;
+    private javax.swing.JLabel lblRegister;
+    private javax.swing.JLabel lblTelpon;
+    private javax.swing.JPanel pnlRegister;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JPasswordField txtKonfirmasi;
+    private javax.swing.JTextField txtNama;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtPekerjaan;
+    private javax.swing.JTextField txtTelp;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,7 +6,7 @@ package fincker.app;
 
 /**
  *
- * @author USER
+ * @author Rizky
  */
 public class dashboardView extends javax.swing.JFrame {
 
