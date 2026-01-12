@@ -94,7 +94,8 @@ public class dashboardView extends javax.swing.JFrame {
         btnPK = new javax.swing.JButton();
         pnlKanan = new javax.swing.JPanel();
         txtKalender = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
+        lblKalender = new javax.swing.JLabel();
+        kalenderUtama = new com.toedter.calendar.JCalendar();
         pnlBawah = new javax.swing.JPanel();
         txtRiwayat = new javax.swing.JTextField();
         financeHealth = new javax.swing.JProgressBar();
@@ -161,7 +162,7 @@ public class dashboardView extends javax.swing.JFrame {
         });
 
         btnProfile.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnProfile.setText("Profile");
+        btnProfile.setText("Akun");
         btnProfile.setBorderPainted(false);
         btnProfile.setContentAreaFilled(false);
         btnProfile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -177,7 +178,7 @@ public class dashboardView extends javax.swing.JFrame {
         pnlNavbarLayout.setHorizontalGroup(
             pnlNavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlNavbarLayout.createSequentialGroup()
-                .addContainerGap(318, Short.MAX_VALUE)
+                .addContainerGap(326, Short.MAX_VALUE)
                 .addComponent(btnBeranda)
                 .addGap(97, 97, 97)
                 .addComponent(btnTentang, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -315,19 +316,22 @@ public class dashboardView extends javax.swing.JFrame {
                 .addContainerGap(81, Short.MAX_VALUE))
         );
 
+        pnlKanan.setBackground(new java.awt.Color(153, 204, 255));
         pnlKanan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtKalender.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        txtKalender.setText("KALENDER");
+        txtKalender.setText("HARI INI");
         txtKalender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtKalenderActionPerformed(evt);
             }
         });
-        pnlKanan.add(txtKalender, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
+        pnlKanan.add(txtKalender, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, -1, -1));
 
-        jPanel2.setBackground(new java.awt.Color(153, 204, 255));
-        pnlKanan.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 340, 340));
+        lblKalender.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblKalender.setText("KALENDER");
+        pnlKanan.add(lblKalender, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
+        pnlKanan.add(kalenderUtama, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 320, 280));
 
         pnlBawah.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -431,6 +435,8 @@ public class dashboardView extends javax.swing.JFrame {
 
     private void txtKalenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKalenderActionPerformed
         // TODO add your handling code here:
+        // Set tanggal kalender ke "new Date()" (Waktu sekarang saat tombol ditekan)
+        kalenderUtama.setDate(new java.util.Date());
     }//GEN-LAST:event_txtKalenderActionPerformed
 
     private void txtProgresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProgresActionPerformed
@@ -552,8 +558,9 @@ public class dashboardView extends javax.swing.JFrame {
     private javax.swing.JButton btnTentang;
     private javax.swing.JProgressBar financeHealth;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private com.toedter.calendar.JCalendar kalenderUtama;
+    private javax.swing.JLabel lblKalender;
     private javax.swing.JLabel lblPemasukan;
     private javax.swing.JLabel lblPengeluaran;
     private javax.swing.JLabel lblRiwayat;

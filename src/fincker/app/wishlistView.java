@@ -280,7 +280,7 @@ public class wishlistView extends javax.swing.JFrame {
         });
 
         btnProfile.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnProfile.setText("Profile");
+        btnProfile.setText("Akun");
         btnProfile.setBorderPainted(false);
         btnProfile.setContentAreaFilled(false);
         btnProfile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -296,7 +296,7 @@ public class wishlistView extends javax.swing.JFrame {
         pnlNavbarLayout.setHorizontalGroup(
             pnlNavbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlNavbarLayout.createSequentialGroup()
-                .addContainerGap(318, Short.MAX_VALUE)
+                .addContainerGap(326, Short.MAX_VALUE)
                 .addComponent(btnBeranda)
                 .addGap(97, 97, 97)
                 .addComponent(btnTentang, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -353,6 +353,7 @@ public class wishlistView extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 0, 0);
         pnlWishlist.add(scpWishlist, gridBagConstraints);
 
+        btnEdit.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEdit.setText("Edit");
         btnEdit.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(204, 204, 204)));
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -368,6 +369,7 @@ public class wishlistView extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(12, 37, 16, 0);
         pnlWishlist.add(btnEdit, gridBagConstraints);
 
+        btnHapus.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnHapus.setText("Hapus");
         btnHapus.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(204, 204, 204)));
         btnHapus.addActionListener(new java.awt.event.ActionListener() {

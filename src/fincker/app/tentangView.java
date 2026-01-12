@@ -133,7 +133,7 @@ public class tentangView extends javax.swing.JFrame {
         btnTabungan.addActionListener(this::btnTabunganActionPerformed);
 
         btnProfile.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        btnProfile.setText("Profile");
+        btnProfile.setText("Akun");
         btnProfile.setBorderPainted(false);
         btnProfile.setContentAreaFilled(false);
         btnProfile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
