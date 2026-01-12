@@ -172,9 +172,10 @@ public class tentangView extends javax.swing.JFrame {
 
         bg.add(pnlNavbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 80));
 
+        pnlTentang.setBackground(new java.awt.Color(255, 255, 255));
         pnlTentang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnlCreator.setBackground(new java.awt.Color(230, 255, 240));
+        pnlCreator.setBackground(new java.awt.Color(204, 255, 204));
         pnlCreator.setBorder(new javax.swing.border.MatteBorder(null));
 
         lblFoto1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fincker/app/gambar/1.jpg"))); // NOI18N

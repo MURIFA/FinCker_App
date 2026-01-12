@@ -90,6 +90,7 @@ public class registerView extends javax.swing.JFrame {
 
         btnCancel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnCancel.setText("KEMBALI");
+        btnCancel.addActionListener(this::btnCancelActionPerformed);
 
         txtTelp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -175,10 +176,10 @@ public class registerView extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addComponent(lblRegister)
                 .addGap(55, 55, 55)
-                .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlRegisterLayout.createSequentialGroup()
-                        .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
+                        .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(dcLahir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -186,7 +187,7 @@ public class registerView extends javax.swing.JFrame {
                         .addComponent(lblNama)
                         .addGap(28, 28, 28)
                         .addComponent(lblTelpon)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(33, 33, 33)
                         .addComponent(lblLahir)))
                 .addGap(18, 18, 18)
                 .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -282,6 +283,13 @@ public class registerView extends javax.swing.JFrame {
             txtKonfirmasi.setEchoChar('*'); 
         }
     }//GEN-LAST:event_cbShowPassActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        loginView lv = new loginView();
+        lv.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments

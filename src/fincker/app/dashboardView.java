@@ -207,35 +207,46 @@ public class dashboardView extends javax.swing.JFrame {
 
         pnlBeranda.setOpaque(false);
 
-        pnlKiri.setBackground(new java.awt.Color(255, 153, 0));
+        pnlKiri.setBackground(new java.awt.Color(204, 204, 255));
 
         pnlSaldo.setBackground(new java.awt.Color(255, 255, 255));
+        pnlSaldo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlSaldo.setLayout(new java.awt.GridBagLayout());
 
         lblSaldo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblSaldo.setText("S");
         pnlSaldo.add(lblSaldo, new java.awt.GridBagConstraints());
 
+        pnlPemasukan.setBackground(new java.awt.Color(255, 255, 255));
+        pnlPemasukan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlPemasukan.setLayout(new java.awt.GridBagLayout());
 
         lblPemasukan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblPemasukan.setText("M");
         pnlPemasukan.add(lblPemasukan, new java.awt.GridBagConstraints());
 
+        pnlPengeluaran.setBackground(new java.awt.Color(255, 255, 255));
+        pnlPengeluaran.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         pnlPengeluaran.setLayout(new java.awt.GridBagLayout());
 
         lblPengeluaran.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblPengeluaran.setText("K");
         pnlPengeluaran.add(lblPengeluaran, new java.awt.GridBagConstraints());
 
+        txtSaldo.setBackground(new java.awt.Color(204, 204, 255));
         txtSaldo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtSaldo.setText("SALDO");
+        txtSaldo.setBorder(null);
 
+        txtPemasukan.setBackground(new java.awt.Color(204, 204, 255));
         txtPemasukan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtPemasukan.setText("PEMASUKAN");
+        txtPemasukan.setBorder(null);
 
+        txtPengeluaran.setBackground(new java.awt.Color(204, 204, 255));
         txtPengeluaran.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtPengeluaran.setText("PENGELUARAN");
+        txtPengeluaran.setBorder(null);
         txtPengeluaran.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPengeluaranActionPerformed(evt);
@@ -273,9 +284,9 @@ public class dashboardView extends javax.swing.JFrame {
             .addGroup(pnlKiriLayout.createSequentialGroup()
                 .addGap(118, 118, 118)
                 .addComponent(txtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(169, 169, 169)
-                .addComponent(txtPemasukan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtPemasukan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(151, 151, 151)
                 .addComponent(txtPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(89, 89, 89))
             .addGroup(pnlKiriLayout.createSequentialGroup()
@@ -313,7 +324,7 @@ public class dashboardView extends javax.swing.JFrame {
                     .addComponent(btnPS, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPM, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPK, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         pnlKanan.setBackground(new java.awt.Color(153, 204, 255));
@@ -326,36 +337,45 @@ public class dashboardView extends javax.swing.JFrame {
                 txtKalenderActionPerformed(evt);
             }
         });
-        pnlKanan.add(txtKalender, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, -1, -1));
+        pnlKanan.add(txtKalender, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, -1, -1));
 
         lblKalender.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblKalender.setText("KALENDER");
-        pnlKanan.add(lblKalender, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
+        pnlKanan.add(lblKalender, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
         pnlKanan.add(kalenderUtama, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 320, 280));
 
+        pnlBawah.setBackground(new java.awt.Color(204, 255, 204));
         pnlBawah.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txtRiwayat.setBackground(new java.awt.Color(204, 255, 204));
         txtRiwayat.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtRiwayat.setText("RIWAYAT");
+        txtRiwayat.setBorder(null);
         txtRiwayat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtRiwayatActionPerformed(evt);
             }
         });
         pnlBawah.add(txtRiwayat, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
-        pnlBawah.add(financeHealth, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 310, 20));
 
+        financeHealth.setBackground(new java.awt.Color(255, 255, 255));
+        pnlBawah.add(financeHealth, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, 350, 20));
+
+        txtProgres.setBackground(new java.awt.Color(204, 255, 204));
         txtProgres.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtProgres.setText("KESEHATAN KEUANGAN");
+        txtProgres.setBorder(null);
         txtProgres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtProgresActionPerformed(evt);
             }
         });
-        pnlBawah.add(txtProgres, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, -1, -1));
+        pnlBawah.add(txtProgres, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, -1, -1));
 
+        lblRiwayat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblRiwayat.setText("Beli makan 20.000");
-        pnlBawah.add(lblRiwayat, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
+        lblRiwayat.setToolTipText("");
+        pnlBawah.add(lblRiwayat, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 120, -1));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 153));
         pnlBawah.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 20, 140));
@@ -383,7 +403,7 @@ public class dashboardView extends javax.swing.JFrame {
                         .addComponent(pnlKiri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(pnlBawah, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         jPanel1.add(pnlBeranda, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1280, 640));

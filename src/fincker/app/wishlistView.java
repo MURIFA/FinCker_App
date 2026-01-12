@@ -331,7 +331,7 @@ public class wishlistView extends javax.swing.JFrame {
         pnlWishlist.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.darkGray, java.awt.Color.lightGray, java.awt.Color.darkGray));
         pnlWishlist.setLayout(new java.awt.GridBagLayout());
 
-        lstWishlist.setBackground(new java.awt.Color(204, 204, 255));
+        lstWishlist.setBackground(new java.awt.Color(204, 255, 204));
         lstWishlist.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lstWishlist.setModel(new javax.swing.AbstractListModel<Object>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -387,7 +387,7 @@ public class wishlistView extends javax.swing.JFrame {
 
         pnlTabungan.add(pnlWishlist, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 100, 540, 400));
 
-        pnlProgres.setBackground(new java.awt.Color(4, 116, 185));
+        pnlProgres.setBackground(new java.awt.Color(0, 102, 102));
         pnlProgres.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 2, 1, 2, new java.awt.Color(204, 204, 204)));
 
         txtProgres.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -442,8 +442,8 @@ public class wishlistView extends javax.swing.JFrame {
                         .addComponent(lblProgresPersen, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlProgresLayout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(progresTabungan, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addComponent(progresTabungan, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(pnlProgresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnMin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -474,9 +474,9 @@ public class wishlistView extends javax.swing.JFrame {
                     .addGroup(pnlProgresLayout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(txtProgres)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(progresTabungan, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnlProgresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtStatus)
                             .addComponent(lblProgresPersen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -485,7 +485,7 @@ public class wishlistView extends javax.swing.JFrame {
 
         pnlTabungan.add(pnlProgres, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, 550, 120));
 
-        pnlInput.setBackground(new java.awt.Color(0, 51, 153));
+        pnlInput.setBackground(new java.awt.Color(204, 204, 255));
         pnlInput.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.darkGray, java.awt.Color.lightGray, java.awt.Color.darkGray));
         pnlInput.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -510,12 +510,10 @@ public class wishlistView extends javax.swing.JFrame {
         pnlInput.add(btnReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 70, -1));
 
         lblNamaBarang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblNamaBarang.setForeground(new java.awt.Color(255, 255, 255));
         lblNamaBarang.setText("Nama Barang  ");
         pnlInput.add(lblNamaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         lblTanggal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblTanggal.setForeground(new java.awt.Color(255, 255, 255));
         lblTanggal.setText("Target Terkumpul");
         pnlInput.add(lblTanggal, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
 
@@ -528,7 +526,6 @@ public class wishlistView extends javax.swing.JFrame {
         pnlInput.add(lblStatusValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 220, -1));
 
         lblHargaBarang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblHargaBarang.setForeground(new java.awt.Color(255, 255, 255));
         lblHargaBarang.setText("Harga");
         pnlInput.add(lblHargaBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
