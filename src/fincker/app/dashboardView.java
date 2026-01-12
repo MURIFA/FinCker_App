@@ -447,10 +447,19 @@ public class dashboardView extends javax.swing.JFrame {
         if (input != null && !input.isEmpty()) {
             try {
                 int nominal = Integer.parseInt(input);
+                
+                // 1. Update Data Lokal & Saldo Pusat
                 pemasukan += nominal; 
-                DataKeuangan.saldoUtama += nominal;     
-                updateTampilan();     // Refresh angka
+                DataKeuangan.saldoUtama += nominal;      
+                
+                // --- [PENTING] CATAT KE LAPORAN ---
+                // Tambahkan baris ini agar masuk ke Tabel Laporan
+                DataKeuangan.catat("Pemasukan", "Tambahan Dashboard", nominal);
+                
+                // 2. Update Tampilan
+                updateTampilan();     
                 tambahRiwayat("Masuk: " + kursIDR.format(nominal));
+                
             } catch (NumberFormatException e) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Harap masukkan angka saja!");
             }
@@ -463,10 +472,19 @@ public class dashboardView extends javax.swing.JFrame {
         if (input != null && !input.isEmpty()) {
             try {
                 int nominal = Integer.parseInt(input);
+                
+                // 1. Update Data Lokal & Saldo Pusat
                 pengeluaran += nominal; 
                 DataKeuangan.saldoUtama -= nominal;      
-                updateTampilan();       // Refresh angka
+                
+                // --- [PENTING] CATAT KE LAPORAN ---
+                // Tambahkan baris ini agar masuk ke Tabel Laporan
+                DataKeuangan.catat("Pengeluaran", "Pengeluaran Dashboard", nominal);
+                
+                // 2. Update Tampilan
+                updateTampilan();       
                 tambahRiwayat("Keluar: " + kursIDR.format(nominal));
+                
             } catch (NumberFormatException e) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Harap masukkan angka saja!");
             }

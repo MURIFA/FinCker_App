@@ -21,10 +21,6 @@ public class welcomeView extends javax.swing.JFrame {
         // 1. Agar window muncul persis di tengah layar monitor
     this.setLocationRelativeTo(null); 
     
-    // 2. KUNCI UKURAN (Solusi paling gampang untuk Absolute Layout)
-    // Dengan ini, user tidak bisa maximize window, jadi desainmu tetap rapi & tidak ada area abu-abu.
-    this.setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
-    
     // 3. (Opsional) Kasih Judul di atas window
     this.setTitle("FinCker - Selamat Datang");
 }

@@ -4,20 +4,126 @@
  */
 package fincker.app;
 
+import javax.swing.table.DefaultTableModel;
+import java.awt.Color;
+import java.awt.Graphics;
+import javax.swing.JPanel;
+
 /**
  *
- * @author USER
+ * @author Rizky
  */
 public class laporanView extends javax.swing.JFrame {
 
+    java.text.NumberFormat kursIDR = java.text.NumberFormat.getCurrencyInstance(new java.util.Locale("id", "ID"));
+    
+    // Variabel untuk menyimpan data statistik diagram
+    long statMasuk = 0, statKeluar = 0, statWishlist = 0;
     /**
      * Creates new form laporanView
      */
+    
+    // (Ini kita buat sebagai panel custom)
+    class PanelDiagram extends JPanel {
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            gambarDiagram(g, this.getWidth(), this.getHeight());
+        }
+    }
+
+        private void gambarDiagram(Graphics g, int w, int h) {
+        long maxVal = Math.max(statMasuk, Math.max(statKeluar, statWishlist));
+        if (maxVal == 0) maxVal = 1; 
+
+        int barWidth = 80;       
+        int bottomBase = h - 50; 
+
+        // Hijau (Masuk)
+        int hMasuk = (int) ((statMasuk * (h - 100)) / maxVal);
+        g.setColor(new Color(46, 204, 113)); 
+        g.fillRect(50, bottomBase - hMasuk, barWidth, hMasuk);
+        g.setColor(Color.BLACK);
+        g.drawString("Masuk", 50, bottomBase + 20);
+        g.drawString(kursIDR.format(statMasuk), 50, bottomBase - hMasuk - 5);
+
+        // Merah (Keluar)
+        int hKeluar = (int) ((statKeluar * (h - 100)) / maxVal);
+        g.setColor(new Color(231, 76, 60)); 
+        g.fillRect(200, bottomBase - hKeluar, barWidth, hKeluar);
+        g.setColor(Color.BLACK);
+        g.drawString("Keluar", 200, bottomBase + 20);
+        g.drawString(kursIDR.format(statKeluar), 200, bottomBase - hKeluar - 5);
+
+        // Biru (Wishlist)
+        int hWish = (int) ((statWishlist * (h - 100)) / maxVal);
+        g.setColor(new Color(52, 152, 219)); 
+        g.fillRect(350, bottomBase - hWish, barWidth, hWish);
+        g.setColor(Color.BLACK);
+        g.drawString("Tabungan", 350, bottomBase + 20);
+        g.drawString(kursIDR.format(statWishlist), 350, bottomBase - hWish - 5);
+
+        g.setColor(Color.BLACK);
+        g.drawLine(20, bottomBase, w - 20, bottomBase);
+    }
+    
     public laporanView() {
         initComponents();
         
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
+        
+        // 1. SETUP DIAGRAM
+        // Kita masukkan PanelDiagram buatan kita ke dalam pnlGrafik yang ada di desain
+        pnlGrafik.setLayout(new java.awt.BorderLayout());
+        PanelDiagram kanvas = new PanelDiagram();
+        kanvas.setOpaque(false); // Biar transparan/ngikut background
+        pnlGrafik.add(kanvas, java.awt.BorderLayout.CENTER);
+        
+        loadDataTabel();
+        updateStatistik();
+    }
+    
+    private void loadDataTabel() {
+        // Setup Judul Kolom Tabel
+        String[] judul = {"Tanggal", "Tipe", "Keterangan", "Jumlah"};
+        DefaultTableModel model = new DefaultTableModel(null, judul);
+        jTable1.setModel(model); // Pasang model ke tabel
+        
+        // Loop ambil data dari DataKeuangan
+        for (DataKeuangan.Transaksi t : DataKeuangan.riwayat) {
+            Object[] baris = {
+                t.tanggal,
+                t.tipe,
+                t.keterangan,
+                kursIDR.format(t.jumlah)
+            };
+            model.addRow(baris);
+        }
+    }
+
+    private void updateStatistik() {
+        long masuk = 0;
+        long keluar = 0;
+        long wishlist = 0;
+        
+        for (DataKeuangan.Transaksi t : DataKeuangan.riwayat) {
+            if (t.tipe.equalsIgnoreCase("Pemasukan")) masuk += t.jumlah;
+            else if (t.tipe.equalsIgnoreCase("Pengeluaran")) keluar += t.jumlah;
+            else if (t.tipe.equalsIgnoreCase("Wishlist")) wishlist += t.jumlah;
+        }
+        
+        // Update Label Angka di Atas
+        lblTotalMasuk.setText(kursIDR.format(masuk));
+        lblTotalKeluar.setText(kursIDR.format(keluar));
+        lblSisaSaldo.setText(kursIDR.format(DataKeuangan.saldoUtama));
+        
+        // Simpan data untuk diagram & Refresh Gambar
+        this.statMasuk = masuk;
+        this.statKeluar = keluar;
+        this.statWishlist = wishlist;
+        pnlGrafik.repaint(); 
+        pnlGrafik.revalidate();
     }
 
     /**
@@ -28,7 +134,6 @@ public class laporanView extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         bg = new javax.swing.JPanel() {
             // 1. Muat Gambar (Ganti nama file sesuai punyamu)
@@ -51,15 +156,20 @@ public class laporanView extends javax.swing.JFrame {
         btnProfile = new javax.swing.JButton();
         pnlLaporan = new javax.swing.JPanel();
         pnlStatistik = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         pnlMasuk = new javax.swing.JPanel();
         lblTotalMasuk = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         pnlKeluar = new javax.swing.JPanel();
         lblTotalKeluar = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         pnlSaldo = new javax.swing.JPanel();
         lblSisaSaldo = new javax.swing.JLabel();
         pnlGrafik = new javax.swing.JPanel();
         scpTabel = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        txtStatistik = new javax.swing.JLabel();
+        txtGrafik = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
@@ -167,30 +277,106 @@ public class laporanView extends javax.swing.JFrame {
         pnlLaporan.setOpaque(false);
         pnlLaporan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnlStatistik.setLayout(new java.awt.GridBagLayout());
+        pnlStatistik.setBackground(new java.awt.Color(255, 255, 255));
+        pnlStatistik.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnlMasuk.setBackground(new java.awt.Color(255, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
+        pnlMasuk.setBackground(new java.awt.Color(255, 153, 153));
+        pnlMasuk.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        pnlMasuk.setOpaque(false);
+
+        lblTotalMasuk.setBackground(new java.awt.Color(204, 204, 204));
+        lblTotalMasuk.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblTotalMasuk.setText("Pemasukan");
         pnlMasuk.add(lblTotalMasuk);
 
-        pnlStatistik.add(pnlMasuk, new java.awt.GridBagConstraints());
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 180, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlMasuk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlMasuk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
-        pnlKeluar.setBackground(new java.awt.Color(51, 51, 255));
+        pnlStatistik.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 180, 80));
 
+        pnlKeluar.setBackground(new java.awt.Color(102, 102, 255));
+        pnlKeluar.setOpaque(false);
+
+        lblTotalKeluar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblTotalKeluar.setText("Pengeluaran");
         pnlKeluar.add(lblTotalKeluar);
 
-        pnlStatistik.add(pnlKeluar, new java.awt.GridBagConstraints());
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 180, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
-        pnlSaldo.setBackground(new java.awt.Color(51, 255, 102));
+        pnlStatistik.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 180, 80));
 
+        pnlSaldo.setBackground(new java.awt.Color(204, 255, 204));
+        pnlSaldo.setOpaque(false);
+
+        lblSisaSaldo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblSisaSaldo.setText("Saldo Akhir");
         pnlSaldo.add(lblSisaSaldo);
 
-        pnlStatistik.add(pnlSaldo, new java.awt.GridBagConstraints());
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 180, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 80, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(pnlSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
-        pnlLaporan.add(pnlStatistik, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 590, 270));
+        pnlStatistik.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, 180, 80));
+
+        pnlLaporan.add(pnlStatistik, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 640, 210));
+
+        pnlGrafik.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout pnlGrafikLayout = new javax.swing.GroupLayout(pnlGrafik);
         pnlGrafik.setLayout(pnlGrafikLayout);
@@ -203,7 +389,7 @@ public class laporanView extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        pnlLaporan.add(pnlGrafik, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 40, 590, 270));
+        pnlLaporan.add(pnlGrafik, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 100, 540, 210));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -219,6 +405,16 @@ public class laporanView extends javax.swing.JFrame {
         scpTabel.setViewportView(jTable1);
 
         pnlLaporan.add(scpTabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 1180, 190));
+
+        txtStatistik.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtStatistik.setForeground(new java.awt.Color(255, 255, 255));
+        txtStatistik.setText("Grafik Keuangan");
+        pnlLaporan.add(txtStatistik, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 50, -1, 30));
+
+        txtGrafik.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtGrafik.setForeground(new java.awt.Color(255, 255, 255));
+        txtGrafik.setText("Statistik Keuangan");
+        pnlLaporan.add(txtGrafik, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 160, 30));
 
         bg.add(pnlLaporan, new org.netbeans.lib.awtextra.AbsoluteConstraints(-60, 80, 1280, 640));
 
@@ -304,6 +500,9 @@ public class laporanView extends javax.swing.JFrame {
     private javax.swing.JButton btnProfile;
     private javax.swing.JButton btnTabungan;
     private javax.swing.JButton btnTentang;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblSisaSaldo;
     private javax.swing.JLabel lblTotalKeluar;
@@ -316,6 +515,8 @@ public class laporanView extends javax.swing.JFrame {
     private javax.swing.JPanel pnlSaldo;
     private javax.swing.JPanel pnlStatistik;
     private javax.swing.JScrollPane scpTabel;
+    private javax.swing.JLabel txtGrafik;
+    private javax.swing.JLabel txtStatistik;
     // End of variables declaration//GEN-END:variables
 
     private void updateTampilan() {

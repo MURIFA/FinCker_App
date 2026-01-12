@@ -199,6 +199,8 @@ public class wishlistView extends javax.swing.JFrame {
         progresTabungan = new javax.swing.JProgressBar();
         btnAdd = new javax.swing.JButton();
         btnMin = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         pnlInput = new javax.swing.JPanel();
         btnSimpan = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
@@ -398,41 +400,6 @@ public class wishlistView extends javax.swing.JFrame {
         lblProgresPersen.setForeground(new java.awt.Color(255, 255, 255));
         lblProgresPersen.setText("0%");
 
-        javax.swing.GroupLayout pnlProgresLayout = new javax.swing.GroupLayout(pnlProgres);
-        pnlProgres.setLayout(pnlProgresLayout);
-        pnlProgresLayout.setHorizontalGroup(
-            pnlProgresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlProgresLayout.createSequentialGroup()
-                .addGroup(pnlProgresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlProgresLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(pnlProgresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(progresTabungan, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(pnlProgresLayout.createSequentialGroup()
-                                .addComponent(txtStatus)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblProgresPersen, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(pnlProgresLayout.createSequentialGroup()
-                        .addGap(194, 194, 194)
-                        .addComponent(txtProgres)))
-                .addContainerGap(35, Short.MAX_VALUE))
-        );
-        pnlProgresLayout.setVerticalGroup(
-            pnlProgresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlProgresLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addComponent(txtProgres)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(progresTabungan, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlProgresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtStatus)
-                    .addComponent(lblProgresPersen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
-
-        pnlTabungan.add(pnlProgres, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, 490, 120));
-
         btnAdd.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnAdd.setText("+");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -440,7 +407,6 @@ public class wishlistView extends javax.swing.JFrame {
                 btnAddActionPerformed(evt);
             }
         });
-        pnlTabungan.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 420, 30, 30));
 
         btnMin.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnMin.setText("-");
@@ -449,7 +415,73 @@ public class wishlistView extends javax.swing.JFrame {
                 btnMinActionPerformed(evt);
             }
         });
-        pnlTabungan.add(btnMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 460, 30, 30));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("+");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("-");
+
+        javax.swing.GroupLayout pnlProgresLayout = new javax.swing.GroupLayout(pnlProgres);
+        pnlProgres.setLayout(pnlProgresLayout);
+        pnlProgresLayout.setHorizontalGroup(
+            pnlProgresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProgresLayout.createSequentialGroup()
+                .addGroup(pnlProgresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlProgresLayout.createSequentialGroup()
+                        .addGap(194, 194, 194)
+                        .addComponent(txtProgres))
+                    .addGroup(pnlProgresLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(txtStatus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblProgresPersen, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlProgresLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(progresTabungan, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGroup(pnlProgresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnMin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlProgresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(pnlProgresLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel2)))
+                .addGap(33, 33, 33))
+        );
+        pnlProgresLayout.setVerticalGroup(
+            pnlProgresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProgresLayout.createSequentialGroup()
+                .addGroup(pnlProgresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnlProgresLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnlProgresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGroup(pnlProgresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlProgresLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(btnMin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnlProgresLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2))))
+                    .addGroup(pnlProgresLayout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(txtProgres)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(progresTabungan, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pnlProgresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtStatus)
+                            .addComponent(lblProgresPersen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        pnlTabungan.add(pnlProgres, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, 550, 120));
 
         pnlInput.setBackground(new java.awt.Color(0, 51, 153));
         pnlInput.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.darkGray, java.awt.Color.lightGray, java.awt.Color.darkGray));
@@ -735,6 +767,9 @@ public class wishlistView extends javax.swing.JFrame {
                 item.terkumpul -= nominal;          // Kurangi dari Barang
                 DataKeuangan.saldoUtama += nominal; // Balikin ke Saldo Pusat
                 
+                // --- TAMBAHAN: CATAT KE LAPORAN ---
+                DataKeuangan.catat("Pemasukan", "Tarik Tabungan " + item.nama, nominal);
+                
                 // 5. Refresh UI
                 lstWishlist.repaint();
                 tampilkanDetailItem();
@@ -792,7 +827,10 @@ public class wishlistView extends javax.swing.JFrame {
                 
                 // 4. TRANSAKSI BERHASIL
                 DataKeuangan.saldoUtama -= nominal; 
-                item.terkumpul += nominal;          
+                item.terkumpul += nominal;   
+                
+                // --- TAMBAHAN: CATAT KE LAPORAN ---
+                DataKeuangan.catat("Wishlist", "Nabung: " + item.nama, nominal);
                 
                 // Cek jika pas lunas (Tanpa logika kembalian lagi karena sudah dicek di atas)
                 if (item.terkumpul == item.targetUang) {
@@ -844,6 +882,8 @@ public class wishlistView extends javax.swing.JFrame {
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnTabungan;
     private javax.swing.JButton btnTentang;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblDaftarWishlist;
     private javax.swing.JLabel lblHargaBarang;
