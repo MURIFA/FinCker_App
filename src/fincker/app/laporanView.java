@@ -73,32 +73,53 @@ public class laporanView extends javax.swing.JFrame {
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         
-        // 1. SETUP DIAGRAM
-        // Kita masukkan PanelDiagram buatan kita ke dalam pnlGrafik yang ada di desain
+        // 1. SETUP DIAGRAM (Tetap Sama)
         pnlGrafik.setLayout(new java.awt.BorderLayout());
         PanelDiagram kanvas = new PanelDiagram();
-        kanvas.setOpaque(false); // Biar transparan/ngikut background
+        kanvas.setOpaque(false); 
         pnlGrafik.add(kanvas, java.awt.BorderLayout.CENTER);
         
+        // --- [BAGIAN PERBAIKAN TABEL] ---
+        
+        // A. Kunci Header (Tidak Bisa Geser Kolom)
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        
+        // B. Muat Data dengan Model Read-Only
         loadDataTabel();
+        
+        // C. Update Statistik Angka
         updateStatistik();
     }
     
+    // --- METHOD LOAD DATA YANG DIPERBAIKI ---
     private void loadDataTabel() {
-        // Setup Judul Kolom Tabel
-        String[] judul = {"Tanggal", "Tipe", "Keterangan", "Jumlah"};
-        DefaultTableModel model = new DefaultTableModel(null, judul);
-        jTable1.setModel(model); // Pasang model ke tabel
+        // 1. Buat Judul Kolom
+        String[] judul = {"Tanggal", "Tipe", "Keterangan", "Nominal"};
         
-        // Loop ambil data dari DataKeuangan
-        for (DataKeuangan.Transaksi t : DataKeuangan.riwayat) {
-            Object[] baris = {
-                t.tanggal,
-                t.tipe,
-                t.keterangan,
-                kursIDR.format(t.jumlah)
-            };
-            model.addRow(baris);
+        // 2. Buat Model Tabel CUSTOM (Agar tidak bisa diedit)
+        DefaultTableModel model = new DefaultTableModel(null, judul) {
+            // Override method ini untuk mengunci sel
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // False = Tidak bisa diedit
+            }
+        };
+        
+        // 3. Pasang Model ke Tabel
+        jTable1.setModel(model); 
+        
+        // 4. Isi Data dari DataKeuangan (Looping)
+        // Pastikan DataKeuangan.riwayat sudah ada isinya dari dashboard/wishlist
+        if (DataKeuangan.riwayat != null) {
+            for (DataKeuangan.Transaksi t : DataKeuangan.riwayat) {
+                Object[] baris = {
+                    t.tanggal,
+                    t.tipe,
+                    t.keterangan, // Menampilkan catatan (Contoh: Beli Bakso)
+                    kursIDR.format(t.jumlah)
+                };
+                model.addRow(baris);
+            }
         }
     }
 

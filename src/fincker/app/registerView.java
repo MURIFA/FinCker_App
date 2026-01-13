@@ -250,6 +250,14 @@ public class registerView extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Harap isi semua data!");
             return;
         }
+        
+        // Validasi Email Sederhana
+if (!email.contains("@") || !email.contains(".")) {
+    javax.swing.JOptionPane.showMessageDialog(this, 
+        "Format Email salah! Haruss mengandung '@' dan domain (contoh: .com)", 
+        "Validasi Gagal", javax.swing.JOptionPane.WARNING_MESSAGE);
+    return;
+}
 
         // 3. VALIDASI PASSWORD
         if (!pass.equals(konfirmasi)) {

@@ -8,6 +8,8 @@
 package fincker.app;
 import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class wishlistView extends javax.swing.JFrame {
 
@@ -26,26 +28,26 @@ public class wishlistView extends javax.swing.JFrame {
     private void tampilkanDetailItem() {
         Object selected = lstWishlist.getSelectedValue();
         
-        // Cek validitas item
         if (selected instanceof WishlistItem) {
             WishlistItem item = (WishlistItem) selected;
             
             // 1. Hitung Persen
             int persen = item.getProgress();
             
-            // 2. Update Progress Bar (Angka persen muncul di sini)
+            // 2. Update Progress Bar
             progresTabungan.setValue(persen);
-            progresTabungan.setStringPainted(true); // Wajib true agar angka muncul di dalam bar
+            progresTabungan.setStringPainted(true);
             
-            // 3. Update Status (Hapus bagian update lblProgresPersen)
-            // lblProgresPersen.setText(""); // Kita kosongkan saja atau hapus barisnya
-            
+            // 3. Update Text Status
             txtStatus.setText("Terkumpul: " + kursIDR.format(item.terkumpul) + 
                               " / " + kursIDR.format(item.targetUang));
             
-            // Update detail kiri
+            // 4. Update Detail Kecil
             lblProgressValue.setText(kursIDR.format(item.terkumpul));
-            lblStatusValue.setText("Target: " + item.tanggal);
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            String tgl = (item.tanggalTarget != null) ? sdf.format(item.tanggalTarget) : "-";
+            lblStatusValue.setText("Target: " + tgl);
             
             // Warna Bar
             if (persen >= 100) {
@@ -61,10 +63,7 @@ public class wishlistView extends javax.swing.JFrame {
 
     private void resetDetail() {
         progresTabungan.setValue(0);
-        
-        // Kosongkan label persen agar hilang dari layar
         if (lblProgresPersen != null) lblProgresPersen.setText(""); 
-        
         txtStatus.setText("Status: -");
         lblProgressValue.setText("-");
         lblStatusValue.setText("-");
@@ -99,24 +98,24 @@ public class wishlistView extends javax.swing.JFrame {
 
     private static class WishlistItem {
         String nama;
-        long targetUang; 
-        long terkumpul;  
-        String tanggal;  
-        private Object harga;
+        long targetUang;  // Pakai LONG agar muat Triliunan
+        long terkumpul;   // Pakai LONG
+        Date tanggalTarget; // Pakai Date biar enak diolah
 
-        public WishlistItem(String nama, long targetUang, String tanggal) {
+        public WishlistItem(String nama, long targetUang, Date tanggalTarget) {
             this.nama = nama;
             this.targetUang = targetUang;
-            this.tanggal = tanggal;
+            this.tanggalTarget = tanggalTarget;
             this.terkumpul = 0;
         }
  
  @Override
         public String toString() {
-            // UBAH JADI: Nama Barang - Target Tanggal
-            // (Info uang dihapus karena sudah ada di panel bawah)
-            return nama + " - Target: " + tanggal + "";
+            SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
+            String tglStr = (tanggalTarget != null) ? sdf.format(tanggalTarget) : "-";
+            return nama + " (Target: " + tglStr + ")";
         }
+        
         public int getProgress() {
             if (targetUang == 0) return 0;
             return (int) (((double) terkumpul / targetUang) * 100);
@@ -207,11 +206,11 @@ public class wishlistView extends javax.swing.JFrame {
         lblNamaBarang = new javax.swing.JLabel();
         lblTanggal = new javax.swing.JLabel();
         txtBarang = new javax.swing.JTextField();
-        txtTarget = new javax.swing.JTextField();
         lblProgressValue = new javax.swing.JLabel();
         lblStatusValue = new javax.swing.JLabel();
         lblHargaBarang = new javax.swing.JLabel();
         txtBarang1 = new javax.swing.JTextField();
+        dcTarget = new com.toedter.calendar.JDateChooser();
         lblDaftarWishlist = new javax.swing.JLabel();
         lblHeader = new javax.swing.JLabel();
         lblSaldoku = new javax.swing.JPanel();
@@ -519,9 +518,6 @@ public class wishlistView extends javax.swing.JFrame {
 
         txtBarang.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(204, 204, 204)));
         pnlInput.add(txtBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 320, 30));
-
-        txtTarget.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(204, 204, 204)));
-        pnlInput.add(txtTarget, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 320, 30));
         pnlInput.add(lblProgressValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 160, -1));
         pnlInput.add(lblStatusValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 220, -1));
 
@@ -531,6 +527,7 @@ public class wishlistView extends javax.swing.JFrame {
 
         txtBarang1.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(204, 204, 204)));
         pnlInput.add(txtBarang1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 320, 30));
+        pnlInput.add(dcTarget, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 320, 30));
 
         pnlTabungan.add(pnlInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 550, 240));
 
@@ -596,14 +593,18 @@ public class wishlistView extends javax.swing.JFrame {
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
     try {
             String nama = txtBarang.getText().trim();
-            String tgl = txtTarget.getText().trim(); // Input Tanggal
+            Date tgl = dcTarget.getDate(); // Ambil dari JDateChooser
             
             if (nama.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Nama barang harus diisi!");
                 return;
             }
+            if (tgl == null) {
+                JOptionPane.showMessageDialog(this, "Pilih target tanggal dulu!");
+                return;
+            }
             
-            // Ambil Harga dari txtBarang1
+            // Ambil Harga (Pakai LONG)
             long harga = Long.parseLong(txtBarang1.getText().trim());
             
             if (harga <= 0) {
@@ -611,19 +612,17 @@ public class wishlistView extends javax.swing.JFrame {
                 return;
             }
 
-            // Buat Item Baru & Masukkan ke List
+            // Simpan Data
             WishlistItem itemBaru = new WishlistItem(nama, harga, tgl);
             listModel.addElement(itemBaru);
             
             // Reset Form
-            txtBarang.setText("");
-            txtBarang1.setText("");
-            txtTarget.setText("");
+            btnResetActionPerformed(null);
             
-            JOptionPane.showMessageDialog(this, "Berhasil menambahkan " + nama + " ke wishlist!");
+            JOptionPane.showMessageDialog(this, "Berhasil menambahkan " + nama);
 
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Kolom Harga harus berupa angka!");
+            JOptionPane.showMessageDialog(this, "Kolom Harga harus angka (Tanpa titik/koma)!");
         }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
@@ -631,16 +630,10 @@ public class wishlistView extends javax.swing.JFrame {
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
      // --- LOGIKA RESET FORM INPUT ---
         
-        // 1. Kosongkan semua kolom input
-        txtBarang.setText("");   // Nama Barang
-        txtBarang1.setText("");  // Harga
-        txtTarget.setText("");   // Tanggal
-        
-        // 2. Kembalikan kursor ke kolom pertama biar enak ngetik
+        txtBarang.setText("");   
+        txtBarang1.setText("");  
+        dcTarget.setDate(null); // Kosongkan Tanggal
         txtBarang.requestFocus();
-        
-        // (Opsional) Tampilkan pesan kecil
-        // javax.swing.JOptionPane.showMessageDialog(this, "Input dibersihkan.");
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -649,59 +642,52 @@ public class wishlistView extends javax.swing.JFrame {
         
         Object selected = lstWishlist.getSelectedValue();
         if (selected == null || !(selected instanceof WishlistItem)) {
-            JOptionPane.showMessageDialog(this, "Pilih barang yang mau diedit dulu!");
+            JOptionPane.showMessageDialog(this, "Pilih barang dulu!");
             return;
         }
         WishlistItem item = (WishlistItem) selected;
 
-        // Edit Nama
-        String namaBaru = JOptionPane.showInputDialog(this, "Ubah Nama Barang:", item.nama);
+        // 1. Edit Nama
+        String namaBaru = JOptionPane.showInputDialog(this, "Ubah Nama:", item.nama);
         if (namaBaru != null && !namaBaru.isEmpty()) item.nama = namaBaru;
 
-        // Edit Harga
-        String hargaStr = JOptionPane.showInputDialog(this, "Ubah Harga Barang (Rp):", item.harga);
+        // 2. Edit Harga (LONG)
+        String hargaStr = JOptionPane.showInputDialog(this, "Ubah Harga (Rp):", item.targetUang);
         if (hargaStr != null && !hargaStr.isEmpty()) {
             try {
                 long hargaBaru = Long.parseLong(hargaStr);
                 if (hargaBaru < item.terkumpul) {
-                     JOptionPane.showMessageDialog(this, "Gagal! Harga baru lebih kecil dari uang yang terkumpul!");
+                     JOptionPane.showMessageDialog(this, "Gagal! Harga baru lebih kecil dari uang terkumpul!");
                 } else {
-                    item.harga = hargaBaru;
+                    item.targetUang = hargaBaru;
                 }
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Harga harus angka!");
             }
         }
-        
-        // Edit Tanggal
-        String tglBaru = JOptionPane.showInputDialog(this, "Ubah Target Tanggal:", item.tanggal);
-        if (tglBaru != null) item.tanggal = tglBaru;
-
-        lstWishlist.repaint();
-        tampilkanDetailItem();
-        JOptionPane.showMessageDialog(this, "Data berhasil diperbarui!");
+        // 3. Refresh
+        refreshUI();
+        JOptionPane.showMessageDialog(this, "Data diperbarui!");
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
  // --- LOGIKA HAPUS DATA ---
         
-        int index = lstWishlist.getSelectedIndex();
+       int index = lstWishlist.getSelectedIndex();
         Object selected = lstWishlist.getSelectedValue();
         
         if (index != -1 && selected instanceof WishlistItem) {
             WishlistItem item = (WishlistItem) selected;
             if (item.terkumpul > 0) {
                 int confirm = JOptionPane.showConfirmDialog(this, 
-                        "Item ini masih ada uangnya (" + kursIDR.format(item.terkumpul) + ").\n" +
-                        "Hapus akan menghanguskan uang ini. Lanjut?", 
+                        "Masih ada saldo " + kursIDR.format(item.terkumpul) + ".\nHapus akan menghanguskan uang ini. Lanjut?", 
                         "Konfirmasi", JOptionPane.YES_NO_OPTION);
                 if (confirm != JOptionPane.YES_OPTION) return;
             }
             listModel.remove(index);
-            tampilkanDetailItem(); // Reset detail
-            JOptionPane.showMessageDialog(this, "Item dihapus.");
+            resetDetail();
         } else {
-            JOptionPane.showMessageDialog(this, "Pilih item yang mau dihapus.");
+            JOptionPane.showMessageDialog(this, "Pilih item dulu.");
         }
     }//GEN-LAST:event_btnHapusActionPerformed
 
@@ -881,6 +867,7 @@ public class wishlistView extends javax.swing.JFrame {
     private javax.swing.JButton btnSimpan;
     private javax.swing.JButton btnTabungan;
     private javax.swing.JButton btnTentang;
+    private com.toedter.calendar.JDateChooser dcTarget;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -908,7 +895,6 @@ public class wishlistView extends javax.swing.JFrame {
     private javax.swing.JLabel txtProgres;
     private javax.swing.JTextField txtSaldo;
     private javax.swing.JLabel txtStatus;
-    private javax.swing.JTextField txtTarget;
     // End of variables declaration//GEN-END:variables
 
 }

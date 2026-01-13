@@ -511,13 +511,21 @@ public class dashboardView extends javax.swing.JFrame {
     private void btnPKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPKActionPerformed
         // TODO add your handling code here:
         // LANGKAH 1: Tanya Keterangan (Untuk apa duitnya?)
-        String keterangan = javax.swing.JOptionPane.showInputDialog(this, 
-                "Pengeluaran ini untuk apa?\n(Contoh: Beli Bakso, Bensin, Kuota)");
-        
-        // Validasi: Kalau user klik Cancel atau membiarkan kosong, batalkan proses
-        if (keterangan == null || keterangan.trim().isEmpty()) {
-            return; // Berhenti di sini
-        }
+        // 1. Tanya Keterangan
+    String keterangan = javax.swing.JOptionPane.showInputDialog(this, 
+            "Pengeluaran ini untuk apa?\n(Contoh: Beli Bakso, Bensin)");
+    
+    // Validasi 1: Tidak boleh kosong
+    if (keterangan == null || keterangan.trim().isEmpty()) return;
+
+    // Validasi 2: TIDAK BOLEH ADA ANGKA (Cek pakai Regex)
+    // ".*\\d.*" artinya: apakah mengandung digit/angka?
+    if (keterangan.matches(".*\\d.*")) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Keterangan tidak boleh mengandung angka! Harap gunakan huruf saja.",
+            "Peringatan", javax.swing.JOptionPane.WARNING_MESSAGE);
+        return; // Batalkan proses
+    }
 
         // LANGKAH 2: Tanya Nominal
         String inputNominal = javax.swing.JOptionPane.showInputDialog(this, 
