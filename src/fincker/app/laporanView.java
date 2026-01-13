@@ -280,8 +280,6 @@ public class laporanView extends javax.swing.JFrame {
         pnlStatistik.setBackground(new java.awt.Color(255, 255, 255));
         pnlStatistik.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
-
         pnlMasuk.setBackground(new java.awt.Color(255, 153, 153));
         pnlMasuk.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         pnlMasuk.setOpaque(false);

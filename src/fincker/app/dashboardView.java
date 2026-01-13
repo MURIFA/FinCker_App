@@ -24,6 +24,14 @@ public class dashboardView extends javax.swing.JFrame {
     public dashboardView() {
         initComponents();
         
+        // --- TAMBAHKAN KODE INI (LOAD DATA DARI SESSION) ---
+        this.pemasukan = UserSession.pemasukan;
+        this.pengeluaran = UserSession.pengeluaran;
+        
+        // Kembalikan tulisan riwayat terakhir
+        if (lblRiwayat != null) {
+            lblRiwayat.setText(UserSession.riwayatTerakhir);
+        }
         // 1. Settingan Layar (Resolusi & Posisi Tengah)
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null); 
@@ -298,9 +306,9 @@ public class dashboardView extends javax.swing.JFrame {
                 .addComponent(pnlPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51))
             .addGroup(pnlKiriLayout.createSequentialGroup()
-                .addGap(132, 132, 132)
+                .addGap(122, 122, 122)
                 .addComponent(btnPS, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(219, 219, 219)
+                .addGap(222, 222, 222)
                 .addComponent(btnPM, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnPK, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -356,7 +364,7 @@ public class dashboardView extends javax.swing.JFrame {
                 txtRiwayatActionPerformed(evt);
             }
         });
-        pnlBawah.add(txtRiwayat, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, -1, -1));
+        pnlBawah.add(txtRiwayat, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, -1));
 
         financeHealth.setBackground(new java.awt.Color(255, 255, 255));
         pnlBawah.add(financeHealth, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, 350, 20));
@@ -373,9 +381,11 @@ public class dashboardView extends javax.swing.JFrame {
         pnlBawah.add(txtProgres, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, -1, -1));
 
         lblRiwayat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblRiwayat.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRiwayat.setText("Beli makan 20.000");
         lblRiwayat.setToolTipText("");
-        pnlBawah.add(lblRiwayat, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 120, -1));
+        lblRiwayat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        pnlBawah.add(lblRiwayat, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 290, -1));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 153));
         pnlBawah.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, 20, 140));
@@ -469,22 +479,28 @@ public class dashboardView extends javax.swing.JFrame {
 
     private void btnPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPMActionPerformed
         // TODO add your handling code here:
-        String input = javax.swing.JOptionPane.showInputDialog(this, "Masukkan Nominal Pemasukan:");
-        if (input != null && !input.isEmpty()) {
+        // 1. Tanya Sumber Pemasukan
+        String keterangan = javax.swing.JOptionPane.showInputDialog(this, 
+                "Sumber pemasukan dari mana?\n(Contoh: Gaji, Dikasih Ortu, Bonus)");
+
+        if (keterangan == null || keterangan.trim().isEmpty()) return;
+
+        // 2. Tanya Nominal
+        String inputNominal = javax.swing.JOptionPane.showInputDialog(this, 
+                "Berapa nominal pemasukan dari '" + keterangan + "'?");
+        
+        if (inputNominal != null && !inputNominal.isEmpty()) {
             try {
-                int nominal = Integer.parseInt(input);
+                int nominal = Integer.parseInt(inputNominal);
                 
-                // 1. Update Data Lokal & Saldo Pusat
                 pemasukan += nominal; 
-                DataKeuangan.saldoUtama += nominal;      
+                DataKeuangan.saldoUtama += nominal;       
                 
-                // --- [PENTING] CATAT KE LAPORAN ---
-                // Tambahkan baris ini agar masuk ke Tabel Laporan
-                DataKeuangan.catat("Pemasukan", "Tambahan Dashboard", nominal);
+                // Catat ke Laporan dengan Keterangan
+                DataKeuangan.catat("Pemasukan", keterangan, nominal);
                 
-                // 2. Update Tampilan
-                updateTampilan();     
-                tambahRiwayat("Masuk: " + kursIDR.format(nominal));
+                tambahRiwayat(keterangan + ": " + kursIDR.format(nominal));
+                updateTampilan();      
                 
             } catch (NumberFormatException e) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Harap masukkan angka saja!");
@@ -494,25 +510,39 @@ public class dashboardView extends javax.swing.JFrame {
 
     private void btnPKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPKActionPerformed
         // TODO add your handling code here:
-        String input = javax.swing.JOptionPane.showInputDialog(this, "Masukkan Nominal Pengeluaran:");
-        if (input != null && !input.isEmpty()) {
+        // LANGKAH 1: Tanya Keterangan (Untuk apa duitnya?)
+        String keterangan = javax.swing.JOptionPane.showInputDialog(this, 
+                "Pengeluaran ini untuk apa?\n(Contoh: Beli Bakso, Bensin, Kuota)");
+        
+        // Validasi: Kalau user klik Cancel atau membiarkan kosong, batalkan proses
+        if (keterangan == null || keterangan.trim().isEmpty()) {
+            return; // Berhenti di sini
+        }
+
+        // LANGKAH 2: Tanya Nominal
+        String inputNominal = javax.swing.JOptionPane.showInputDialog(this, 
+                "Berapa rupiah untuk '" + keterangan + "'?");
+        
+        if (inputNominal != null && !inputNominal.isEmpty()) {
             try {
-                int nominal = Integer.parseInt(input);
+                int nominal = Integer.parseInt(inputNominal);
                 
                 // 1. Update Data Lokal & Saldo Pusat
                 pengeluaran += nominal; 
-                DataKeuangan.saldoUtama -= nominal;      
+                DataKeuangan.saldoUtama -= nominal;       
                 
-                // --- [PENTING] CATAT KE LAPORAN ---
-                // Tambahkan baris ini agar masuk ke Tabel Laporan
-                DataKeuangan.catat("Pengeluaran", "Pengeluaran Dashboard", nominal);
+                // 2. CATAT KE LAPORAN (Sesuai Keterangan User)
+                // Parameter: ("Kategori", "Deskripsi dari User", Nominal)
+                DataKeuangan.catat("Pengeluaran", keterangan, nominal);
                 
-                // 2. Update Tampilan
-                updateTampilan();       
-                tambahRiwayat("Keluar: " + kursIDR.format(nominal));
+                // 3. Update Tampilan & Riwayat
+                // Format Riwayat jadi: "Beli Bakso: Rp 15.000"
+                tambahRiwayat(keterangan + ": " + kursIDR.format(nominal));
+                
+                updateTampilan();        
                 
             } catch (NumberFormatException e) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Harap masukkan angka saja!");
+                javax.swing.JOptionPane.showMessageDialog(this, "Harap masukkan angka saja untuk nominal!");
             }
         }
     }//GEN-LAST:event_btnPKActionPerformed
@@ -603,51 +633,102 @@ public class dashboardView extends javax.swing.JFrame {
 
     // 1. METHOD UPDATE TAMPILAN
     private void updateTampilan() {
-        // 1. UPDATE ANGKA KE LABEL (Bukan TextField lagi)
-        // Ini akan mengganti huruf "S", "M", "K" dengan angka Rupiah
+        // 1. Tampilkan Angka ke Label
         lblSaldo.setText(kursIDR.format(DataKeuangan.saldoUtama));
         lblPemasukan.setText(kursIDR.format(pemasukan));
         lblPengeluaran.setText(kursIDR.format(pengeluaran));
 
-        // 2. LOGIKA KESEHATAN KEUANGAN (Tetap Sama)
-        if (pemasukan > 0) {
-            int sisa = pemasukan - pengeluaran;
-            // Hitung persentase
-            int skor = (int) (((double) sisa / pemasukan) * 100);
+        // --- SIMPAN KE SESSION ---
+        UserSession.pemasukan = this.pemasukan;
+        UserSession.pengeluaran = this.pengeluaran;
 
-            // Batas aman (0 - 100)
-            if (skor < 0) skor = 0;
-            if (skor > 100) skor = 100;
+        // 2. LOGIKA KESEHATAN KEUANGAN (REVISI)
+        int skor = 0;
+        String pesanKesehatan = "";
+        java.awt.Color warnaBar;
 
-            financeHealth.setValue(skor);
-            financeHealth.setStringPainted(true);
-
-            // Warna Warni Bar
-            if (skor >= 50) {
-                financeHealth.setForeground(new java.awt.Color(46, 204, 113)); // Hijau
-                financeHealth.setString("Sehat (" + skor + "%)");
-            } else if (skor >= 20) {
-                financeHealth.setForeground(new java.awt.Color(243, 156, 18)); // Kuning
-                financeHealth.setString("Waspada (" + skor + "%)");
+        // Cek 1: Apakah baru mulai (Belum ada transaksi sama sekali)?
+        if (pemasukan == 0 && pengeluaran == 0) {
+            // Cek Session lama jika ada
+            if (UserSession.nilaiKesehatan > 0) {
+                skor = UserSession.nilaiKesehatan;
+                pesanKesehatan = UserSession.pesanKesehatan;
+                // Logika warna simpel untuk data lama
+                if(skor >= 70) warnaBar = new java.awt.Color(46, 204, 113);
+                else if(skor >= 40) warnaBar = new java.awt.Color(243, 156, 18);
+                else warnaBar = new java.awt.Color(231, 76, 60);
             } else {
-                financeHealth.setForeground(new java.awt.Color(231, 76, 60)); // Merah
-                financeHealth.setString("Kritis (" + skor + "%)");
+                // Benar-benar kosong
+                financeHealth.setValue(0);
+                financeHealth.setString("Belum ada data");
+                financeHealth.setForeground(java.awt.Color.GRAY);
+                return; // Keluar dari method
             }
-        } else {
-            // Jika belum ada data
-            financeHealth.setValue(0);
-            financeHealth.setString("Belum ada data");
-            financeHealth.setForeground(java.awt.Color.GRAY);
+        } 
+        // Cek 2: Boros tapi tidak ada pemasukan (BAHAYA)
+        else if (pemasukan == 0 && pengeluaran > 0) {
+            skor = 10; // Kritis banget
+            pesanKesehatan = "Boros (Tanpa Pemasukan!)";
+            warnaBar = new java.awt.Color(231, 76, 60); // Merah
+        } 
+        // Cek 3: Perhitungan Normal
+        else {
+            // Hitung Rasio Pengeluaran dibanding Pemasukan
+            double rasio = (double) pengeluaran / pemasukan;
+            
+            // --- LOGIKA SKOR ---
+            if (rasio <= 0.5) { 
+                // Pengeluaran di bawah 50% (Sangat Hemat)
+                skor = 100;
+                pesanKesehatan = "Sangat Sehat (Hemat)";
+                warnaBar = new java.awt.Color(46, 204, 113); // Hijau
+                
+            } else if (rasio <= 0.8) { 
+                // Pengeluaran 50% - 80% (Normal/Sehat)
+                skor = 80;
+                pesanKesehatan = "Sehat (Aman)";
+                warnaBar = new java.awt.Color(46, 204, 113); // Hijau
+                
+            } else if (rasio <= 1.0) { 
+                // Pengeluaran 80% - 100% (Hampir Habis)
+                skor = 50;
+                pesanKesehatan = "Waspada (Tipis)";
+                warnaBar = new java.awt.Color(243, 156, 18); // Kuning
+                
+            } else { 
+                // Pengeluaran > Pemasukan (Besar Pasak daripada Tiang)
+                // --- DISINI KITA CEK SALDO UTAMA ---
+                if (DataKeuangan.saldoUtama > 0) {
+                    skor = 30; // Masih ketolong saldo
+                    pesanKesehatan = "Defisit (Pakai Tabungan)";
+                    warnaBar = new java.awt.Color(243, 156, 18); // Kuning/Oranye
+                } else {
+                    skor = 0; // Saldo minus/kosong
+                    pesanKesehatan = "Kritis (Berhutang)";
+                    warnaBar = new java.awt.Color(231, 76, 60); // Merah
+                }
+            }
         }
+
+        // 3. Pasang Nilai ke Bar
+        financeHealth.setValue(skor);
+        financeHealth.setString(pesanKesehatan);
+        financeHealth.setForeground(warnaBar);
+        financeHealth.setStringPainted(true);
+
+        // 4. Simpan Session Terakhir
+        UserSession.nilaiKesehatan = skor;
+        UserSession.pesanKesehatan = pesanKesehatan;
     } // <--- Jangan lupa kurung tutup ini!
 
     // 2. METHOD RIWAYAT (Dibuat sejajar, bukan di dalam)
     private void tambahRiwayat(String pesan) {
-        // Kita hanya update lblRiwayat (Isi Transaksi)
-        // txtRiwayat (Judul) kita biarkan saja, tidak perlu dicek atau diubah
-        
         if (lblRiwayat != null) {
             lblRiwayat.setText(pesan);
+            
+            // --- TAMBAHKAN INI ---
+            UserSession.riwayatTerakhir = pesan; 
+            // ---------------------
         }
     }
 
