@@ -586,7 +586,7 @@ public class dashboardView extends javax.swing.JFrame {
                      continue;
                 }
                 
-                break; // Valid, keluar dari loop
+                break; 
             } catch (NumberFormatException e) {
                 javax.swing.JOptionPane.showMessageDialog(this, 
                     "Nominal HARUS berupa angka tanpa titik/koma!\n(Contoh: 15000)", 
@@ -700,19 +700,19 @@ public class dashboardView extends javax.swing.JFrame {
         int skor = 0;
         String pesanKesehatan = "";
         
-        java.awt.Color warnaHijau = new java.awt.Color(46, 204, 113); // Emerald (Hijau Segar)
-        java.awt.Color warnaKuning = new java.awt.Color(230, 126, 34);  // Carrot (Oranye Gelap biar teks kebaca)
-        java.awt.Color warnaMerah = new java.awt.Color(231, 76, 60);  // Alizarin (Merah Kalem)
-        java.awt.Color warnaAbu = new java.awt.Color(189, 195, 199);  // Silver (Untuk kosong)
+        java.awt.Color warnaHijau = new java.awt.Color(46, 204, 113); 
+        java.awt.Color warnaKuning = new java.awt.Color(230, 126, 34);  
+        java.awt.Color warnaMerah = new java.awt.Color(231, 76, 60);  
+        java.awt.Color warnaAbu = new java.awt.Color(189, 195, 199);  
         
-        java.awt.Color warnaFinal = warnaAbu; // Default
+        java.awt.Color warnaFinal = warnaAbu; 
 
         
         if (pemasukan == 0 && pengeluaran == 0) {
             if (UserSession.nilaiKesehatan > 0) {
                 skor = UserSession.nilaiKesehatan;
                 pesanKesehatan = UserSession.pesanKesehatan;
-                // Balikin warna sesuai skor lama
+            
                 if(skor >= 80) warnaFinal = warnaHijau;
                 else if(skor >= 40) warnaFinal = warnaKuning;
                 else warnaFinal = warnaMerah;
@@ -720,7 +720,7 @@ public class dashboardView extends javax.swing.JFrame {
                 financeHealth.setValue(0);
                 financeHealth.setString("Belum ada data transaksi");
                 financeHealth.setForeground(warnaAbu);
-                return; // Stop di sini
+                return; 
             }
         } 
         else if (pemasukan == 0 && pengeluaran > 0) {
@@ -733,27 +733,27 @@ public class dashboardView extends javax.swing.JFrame {
             
             
             if (rasio <= 0.5) { 
-                skor = 100; // Bar Penuh
+                skor = 100; 
                 pesanKesehatan = "Sangat Sehat (Hemat)";
                 warnaFinal = warnaHijau;
                 
             } else if (rasio <= 0.8) { 
-                skor = 80; // Bar agak penuh
+                skor = 80; 
                 pesanKesehatan = "Sehat (Aman)";
                 warnaFinal = warnaHijau;
                 
             } else if (rasio <= 1.0) { 
-                skor = 50; // Bar setengah
+                skor = 50; 
                 pesanKesehatan = "Waspada (Hampir Habis)";
                 warnaFinal = warnaKuning;
                 
             } else { 
                 if (DataKeuangan.saldoUtama > 0) {
-                    skor = 30; // Masih ada tabungan
+                    skor = 30; 
                     pesanKesehatan = "Defisit (Pakai Saldo Utama)";
                     warnaFinal = warnaKuning;
                 } else {
-                    skor = 5; // Habis total
+                    skor = 5; 
                     pesanKesehatan = "KRITIS (Berhutang)";
                     warnaFinal = warnaMerah;
                 }
@@ -767,11 +767,11 @@ public class dashboardView extends javax.swing.JFrame {
         financeHealth.setUI(new javax.swing.plaf.basic.BasicProgressBarUI() {
             @Override
             protected java.awt.Color getSelectionForeground() {
-                return java.awt.Color.WHITE; // Warna teks saat kena bar
+                return java.awt.Color.WHITE; 
             }
             @Override
             protected java.awt.Color getSelectionBackground() {
-                return java.awt.Color.DARK_GRAY; // Warna teks di area kosong
+                return java.awt.Color.DARK_GRAY; 
             }
         });
         
@@ -781,7 +781,7 @@ public class dashboardView extends javax.swing.JFrame {
         UserSession.pesanKesehatan = pesanKesehatan;
     } 
 
-    // 2. METHOD RIWAYAT (Dibuat sejajar, bukan di dalam)
+   
     private void tambahRiwayat(String pesan) {
         if (lblRiwayat != null) {
             lblRiwayat.setText(pesan);

@@ -691,8 +691,8 @@ public class wishlistView extends javax.swing.JFrame {
                     return;
                 }
                 
-                item.terkumpul -= nominal;          // Kurangi dari Barang
-                DataKeuangan.saldoUtama += nominal; // Balikin ke Saldo Pusat
+                item.terkumpul -= nominal;          
+                DataKeuangan.saldoUtama += nominal; 
                 
                 DataKeuangan.catat("Pemasukan", "Tarik Tabungan " + item.nama, nominal);
                 
@@ -720,7 +720,7 @@ public class wishlistView extends javax.swing.JFrame {
         if (item.terkumpul >= item.targetUang) {
             JOptionPane.showMessageDialog(this, 
                 "Eits! Barang ini sudah LUNAS.\nTidak perlu menabung lagi ya! 😊");
-            return; // STOP DI SINI
+            return; 
         }
         
         String input = JOptionPane.showInputDialog(this, "Nabung berapa untuk " + item.nama + "?");

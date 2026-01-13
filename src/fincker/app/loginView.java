@@ -178,7 +178,6 @@ public class loginView extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_registLabel3MouseClicked
 
-    // --- 2. TOMBOL LOGIN (UPDATED: EMAIL BASED) ---
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
         String email = txtEmail.getText();

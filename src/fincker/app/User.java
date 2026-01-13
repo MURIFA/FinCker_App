@@ -26,7 +26,7 @@ public class User {
     }
 
     public String getFullName() { return fullName; }
-    public String getEmail() { return email; } // Ini nanti dipakai buat Login
+    public String getEmail() { return email; } 
     public String getPhoneNumber() { return phoneNumber; }
     public String getOccupation() { return occupation; }
     public String getDateOfBirth() { return dateOfBirth; }

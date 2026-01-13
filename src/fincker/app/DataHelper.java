@@ -11,13 +11,13 @@ import java.util.ArrayList;
  * @author Muham
  */
 public class DataHelper {
-    // Nama file database lokal
+    
     private static final String FILE_TRANSAKSI = "db_transaksi.txt";
     private static final String FILE_USER = "db_user.txt";
 
     public static void simpanTransaksi(String tanggal, String tipe, String kategori, String jumlah, String ket) {
         try {
-            FileWriter fw = new FileWriter(FILE_TRANSAKSI, true); // true = append (nambah bawah)
+            FileWriter fw = new FileWriter(FILE_TRANSAKSI, true); 
             BufferedWriter bw = new BufferedWriter(fw);
             String data = tanggal + "##" + tipe + "##" + kategori + "##" + jumlah + "##" + ket;
             bw.write(data);
@@ -77,7 +77,7 @@ public class DataHelper {
             String baris;
             while ((baris = br.readLine()) != null) {
                 String[] data = baris.split("##");
-                // Cek apakah username & password cocok
+               
                 if (data[0].equals(username) && data[1].equals(password)) {
                     return true;
                 }
