@@ -17,13 +17,11 @@ public class laporanView extends javax.swing.JFrame {
 
     java.text.NumberFormat kursIDR = java.text.NumberFormat.getCurrencyInstance(new java.util.Locale("id", "ID"));
     
-    // Variabel untuk menyimpan data statistik diagram
     long statMasuk = 0, statKeluar = 0, statWishlist = 0;
     /**
      * Creates new form laporanView
      */
     
-    // (Ini kita buat sebagai panel custom)
     class PanelDiagram extends JPanel {
         @Override
         protected void paintComponent(Graphics g) {
@@ -39,7 +37,7 @@ public class laporanView extends javax.swing.JFrame {
         int barWidth = 80;       
         int bottomBase = h - 50; 
 
-        // Hijau (Masuk)
+     
         int hMasuk = (int) ((statMasuk * (h - 100)) / maxVal);
         g.setColor(new Color(46, 204, 113)); 
         g.fillRect(50, bottomBase - hMasuk, barWidth, hMasuk);
@@ -47,7 +45,7 @@ public class laporanView extends javax.swing.JFrame {
         g.drawString("Masuk", 50, bottomBase + 20);
         g.drawString(kursIDR.format(statMasuk), 50, bottomBase - hMasuk - 5);
 
-        // Merah (Keluar)
+       
         int hKeluar = (int) ((statKeluar * (h - 100)) / maxVal);
         g.setColor(new Color(231, 76, 60)); 
         g.fillRect(200, bottomBase - hKeluar, barWidth, hKeluar);
@@ -55,7 +53,7 @@ public class laporanView extends javax.swing.JFrame {
         g.drawString("Keluar", 200, bottomBase + 20);
         g.drawString(kursIDR.format(statKeluar), 200, bottomBase - hKeluar - 5);
 
-        // Biru (Wishlist)
+       
         int hWish = (int) ((statWishlist * (h - 100)) / maxVal);
         g.setColor(new Color(52, 152, 219)); 
         g.fillRect(350, bottomBase - hWish, barWidth, hWish);
@@ -73,49 +71,40 @@ public class laporanView extends javax.swing.JFrame {
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         
-        // 1. SETUP DIAGRAM (Tetap Sama)
+      
         pnlGrafik.setLayout(new java.awt.BorderLayout());
         PanelDiagram kanvas = new PanelDiagram();
         kanvas.setOpaque(false); 
         pnlGrafik.add(kanvas, java.awt.BorderLayout.CENTER);
         
-        // --- [BAGIAN PERBAIKAN TABEL] ---
+      
         
-        // A. Kunci Header (Tidak Bisa Geser Kolom)
         jTable1.getTableHeader().setReorderingAllowed(false);
         
-        // B. Muat Data dengan Model Read-Only
         loadDataTabel();
         
-        // C. Update Statistik Angka
         updateStatistik();
     }
     
-    // --- METHOD LOAD DATA YANG DIPERBAIKI ---
     private void loadDataTabel() {
-        // 1. Buat Judul Kolom
         String[] judul = {"Tanggal", "Tipe", "Keterangan", "Nominal"};
         
-        // 2. Buat Model Tabel CUSTOM (Agar tidak bisa diedit)
         DefaultTableModel model = new DefaultTableModel(null, judul) {
-            // Override method ini untuk mengunci sel
+ 
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false; // False = Tidak bisa diedit
+                return false; 
             }
         };
         
-        // 3. Pasang Model ke Tabel
         jTable1.setModel(model); 
         
-        // 4. Isi Data dari DataKeuangan (Looping)
-        // Pastikan DataKeuangan.riwayat sudah ada isinya dari dashboard/wishlist
         if (DataKeuangan.riwayat != null) {
             for (DataKeuangan.Transaksi t : DataKeuangan.riwayat) {
                 Object[] baris = {
                     t.tanggal,
                     t.tipe,
-                    t.keterangan, // Menampilkan catatan (Contoh: Beli Bakso)
+                    t.keterangan,
                     kursIDR.format(t.jumlah)
                 };
                 model.addRow(baris);
@@ -134,12 +123,10 @@ public class laporanView extends javax.swing.JFrame {
             else if (t.tipe.equalsIgnoreCase("Wishlist")) wishlist += t.jumlah;
         }
         
-        // Update Label Angka di Atas
         lblTotalMasuk.setText(kursIDR.format(masuk));
         lblTotalKeluar.setText(kursIDR.format(keluar));
         lblSisaSaldo.setText(kursIDR.format(DataKeuangan.saldoUtama));
         
-        // Simpan data untuk diagram & Refresh Gambar
         this.statMasuk = masuk;
         this.statKeluar = keluar;
         this.statWishlist = wishlist;
@@ -462,15 +449,13 @@ public class laporanView extends javax.swing.JFrame {
 
     private void btnBerandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBerandaActionPerformed
         // TODO add your handling code here:
-        // 1. Panggil method loadData() yang sudah kita buat sebelumnya
-        // Karena kita sudah ada di Beranda, cukup refresh data saja
         new dashboardView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBerandaActionPerformed
 
     private void btnTentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTentangActionPerformed
         // TODO add your handling code here:
-        // 1. Buka View Tujuan
+
         new tentangView().setVisible(true);
 
         this.dispose();

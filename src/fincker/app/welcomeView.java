@@ -18,10 +18,8 @@ public class welcomeView extends javax.swing.JFrame {
     public welcomeView() {
         initComponents();
     
-        // 1. Agar window muncul persis di tengah layar monitor
     this.setLocationRelativeTo(null); 
     
-    // 3. (Opsional) Kasih Judul di atas window
     this.setTitle("FinCker - Selamat Datang");
 }
 
@@ -82,16 +80,12 @@ public class welcomeView extends javax.swing.JFrame {
 
     private void btnMulaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMulaiActionPerformed
         // TODO add your handling code here:
-        // 1. Siapkan halaman Login
         loginView loginPage = new loginView();
 
-        // 2. Trik agar Login muncul pas di tengah layar (biar transisinya mulus)
         loginPage.setLocationRelativeTo(null);
 
-        // 3. Tampilkan halaman Login
         loginPage.setVisible(true);
 
-        // 4. Tutup halaman Welcome (agar tidak menumpuk di memori)
         this.dispose();
     }//GEN-LAST:event_btnMulaiActionPerformed
 

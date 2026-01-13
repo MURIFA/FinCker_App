@@ -9,7 +9,6 @@ package fincker.app;
  * @author Aziz
  */
 public class User {
-   // --- DATA USER (Tanpa Username) ---
     private String fullName;
     private String email;
     private String phoneNumber;
@@ -17,7 +16,6 @@ public class User {
     private String dateOfBirth;
     private String password;
 
-    // --- CONSTRUCTOR ---
     public User(String fullName, String email, String phoneNumber, String occupation, String dateOfBirth, String password) {
         this.fullName = fullName;
         this.email = email;
@@ -27,7 +25,6 @@ public class User {
         this.password = password;
     }
 
-    // --- GETTER ---
     public String getFullName() { return fullName; }
     public String getEmail() { return email; } // Ini nanti dipakai buat Login
     public String getPhoneNumber() { return phoneNumber; }
@@ -35,7 +32,6 @@ public class User {
     public String getDateOfBirth() { return dateOfBirth; }
     public String getPassword() { return password; }
 
-    // --- SETTER ---
     public void setFullName(String fullName) { this.fullName = fullName; }
     public void setEmail(String email) { this.email = email; }
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }

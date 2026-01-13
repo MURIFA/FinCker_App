@@ -15,16 +15,10 @@ public class DataHelper {
     private static final String FILE_TRANSAKSI = "db_transaksi.txt";
     private static final String FILE_USER = "db_user.txt";
 
-    // ==========================================================
-    // BAGIAN 1: KELOLA TRANSAKSI (Pemasukan/Pengeluaran)
-    // ==========================================================
-    
-    // Fungsi Simpan Transaksi
     public static void simpanTransaksi(String tanggal, String tipe, String kategori, String jumlah, String ket) {
         try {
             FileWriter fw = new FileWriter(FILE_TRANSAKSI, true); // true = append (nambah bawah)
             BufferedWriter bw = new BufferedWriter(fw);
-            // Format: Tanggal##Tipe##Kategori##Jumlah##Keterangan
             String data = tanggal + "##" + tipe + "##" + kategori + "##" + jumlah + "##" + ket;
             bw.write(data);
             bw.newLine();
@@ -34,14 +28,12 @@ public class DataHelper {
         }
     }
 
-    // Fungsi Hitung Saldo untuk Dashboard
-    // Return: [TotalMasuk, TotalKeluar, SaldoSaatIni]
     public static int[] hitungRingkasan() {
         int totalMasuk = 0;
         int totalKeluar = 0;
         
         File f = new File(FILE_TRANSAKSI);
-        if (!f.exists()) return new int[]{0,0,0}; // Kalau file belum ada, return 0
+        if (!f.exists()) return new int[]{0,0,0}; 
 
         try {
             BufferedReader br = new BufferedReader(new FileReader(FILE_TRANSAKSI));
@@ -49,7 +41,7 @@ public class DataHelper {
             while ((baris = br.readLine()) != null) {
                 String[] data = baris.split("##");
                 if (data.length >= 4) {
-                    int nilai = Integer.parseInt(data[3]); // Ambil angka jumlah
+                    int nilai = Integer.parseInt(data[3]); 
                     if (data[1].equalsIgnoreCase("Pemasukan")) {
                         totalMasuk += nilai;
                     } else if (data[1].equalsIgnoreCase("Pengeluaran")) {
@@ -64,11 +56,6 @@ public class DataHelper {
         return new int[]{totalMasuk, totalKeluar, (totalMasuk - totalKeluar)};
     }
 
-    // ==========================================================
-    // BAGIAN 2: KELOLA USER (Register & Login)
-    // ==========================================================
-    
-    // Fungsi Register User Baru
     public static void registerUser(String username, String password) {
         try {
             FileWriter fw = new FileWriter(FILE_USER, true);
@@ -81,7 +68,6 @@ public class DataHelper {
         }
     }
 
-    // Fungsi Cek Login
     public static boolean cekLogin(String username, String password) {
         File f = new File(FILE_USER);
         if (!f.exists()) return false;

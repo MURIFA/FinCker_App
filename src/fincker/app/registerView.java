@@ -232,7 +232,6 @@ public class registerView extends javax.swing.JFrame {
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
-    // 1. AMBIL DATA
         String nama = txtNama.getText();
         String telp = txtTelp.getText();
         String pekerjaan = txtPekerjaan.getText();
@@ -240,8 +239,12 @@ public class registerView extends javax.swing.JFrame {
         String pass = new String(txtPassword.getPassword());
         String konfirmasi = new String(txtKonfirmasi.getPassword());
 
-        // Ambil Tanggal
-        String tglLahir = "";
+        if (nama.isEmpty() || telp.isEmpty() || pekerjaan.isEmpty() || email.isEmpty() || pass.isEmpty() || konfirmasi.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Harap isi semua data!");
+            return;
+        }
+        
+                String tglLahir = "";
         if (dcLahir.getDate() != null) {
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy");
             tglLahir = sdf.format(dcLahir.getDate());
@@ -250,21 +253,14 @@ public class registerView extends javax.swing.JFrame {
             return;
         }
 
-        // 2. VALIDASI KOSONG
-        if (nama.isEmpty() || telp.isEmpty() || pekerjaan.isEmpty() || email.isEmpty() || pass.isEmpty() || konfirmasi.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Harap isi semua data!");
-            return;
-        }
         
-        // Validasi Email Sederhana
-if (!email.contains("@") || !email.contains(".")) {
-    javax.swing.JOptionPane.showMessageDialog(this, 
+        if (!email.contains("@") || !email.contains(".")) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
         "Format Email salah! Haruss mengandung '@' dan domain (contoh: .com)", 
         "Validasi Gagal", javax.swing.JOptionPane.WARNING_MESSAGE);
-    return;
-}
+        return;
+        }
 
-        // 3. VALIDASI PASSWORD
         if (!pass.equals(konfirmasi)) {
             javax.swing.JOptionPane.showMessageDialog(this, "Password tidak cocok!");
             txtPassword.setText("");
@@ -272,26 +268,22 @@ if (!email.contains("@") || !email.contains(".")) {
             return;
         }
 
-        // 4. SIMPAN DATA (Tanpa Username)
         User newUser = new User(nama, email, telp, pekerjaan, tglLahir, pass);
         listUser.add(newUser);
 
         javax.swing.JOptionPane.showMessageDialog(this, "Registrasi Berhasil! Silakan Login dengan Email.");
 
-        // 5. PINDAH KE LOGIN
         new loginView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void cbShowPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbShowPassActionPerformed
         // TODO add your handling code here:
-        // Cek: Apakah kotak dicentang?
+
         if (cbShowPass.isSelected()) {
-            // Jika dicentang, BUKA dua-duanya
             txtPassword.setEchoChar((char) 0); 
-            txtKonfirmasi.setEchoChar((char) 0); // Pastikan nama variabelnya benar (txtKonfirmasi atau txtRetype)
+            txtKonfirmasi.setEchoChar((char) 0); 
         } else {
-            // Jika tidak dicentang, TUTUP dua-duanya
             txtPassword.setEchoChar('*'); 
             txtKonfirmasi.setEchoChar('*'); 
         }
@@ -306,10 +298,8 @@ if (!email.contains("@") || !email.contains(".")) {
 
     private void txtTelpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelpKeyTyped
         // TODO add your handling code here:
-        // Ambil karakter yang sedang ditekan
         char c = evt.getKeyChar();
         
-        // Cek: Jika BUKAN angka, maka batalkan (consume)
         if (!Character.isDigit(c)) {
             evt.consume();
         }

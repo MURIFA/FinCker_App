@@ -10,52 +10,46 @@ package fincker.app;
  */
 public class dashboardView extends javax.swing.JFrame {
 
-    // --- COPY DARI SINI (VARIABEL GLOBAL) ---
     int pemasukan = 0;
     int pengeluaran = 0;
-    int targetTabungan = 10000000; // Default target 10 Juta
+    int targetTabungan = 10000000;
     
-    // Format mata uang Rupiah
+    
     java.text.NumberFormat kursIDR = java.text.NumberFormat.getCurrencyInstance(new java.util.Locale("id", "ID"));
-    // --- SAMPAI SINI ---
+   
     /**
      * Creates new form dashboardView
      */
     public dashboardView() {
         initComponents();
         
-        // --- TAMBAHKAN KODE INI (LOAD DATA DARI SESSION) ---
+
         this.pemasukan = UserSession.pemasukan;
         this.pengeluaran = UserSession.pengeluaran;
-        
-        // Kembalikan tulisan riwayat terakhir
+       
         if (lblRiwayat != null) {
             lblRiwayat.setText(UserSession.riwayatTerakhir);
         }
-        // 1. Settingan Layar (Resolusi & Posisi Tengah)
+
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null); 
 
-        // 2. KODE WAJIB: Paksa Navbar Melar Mengikuti jPanel1
-        // Karena jPanel1 pakai Custom Code/Absolute, kita harus update manual saat resize
         jPanel1.addComponentListener(new java.awt.event.ComponentAdapter() {
             @Override
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 int lebarLayar = jPanel1.getWidth();
-                int tinggiNavbar = 70; // Tinggi navbar (sesuaikan dengan design)
+                int tinggiNavbar = 70;
                 
-                // SetBounds(x, y, width, height)
                 pnlNavbar.setBounds(0, 0, lebarLayar, tinggiNavbar);
                 
-                // Validasi ulang biar tombol di dalamnya ikut geser/update
+
                 pnlNavbar.revalidate();
                 pnlNavbar.repaint();
             }
         });
 
-        // 3. Panggil Helper Methods (Otak Aplikasi)
-        updateTampilan(); // Agar angka saldo/pemasukan muncul saat dibuka
-        initTanggal();    // CUKUP PANGGIL INI SAJA. (Kode manual tanggal dihapus biar rapi)
+        updateTampilan();
+        initTanggal();   
     }
 
     /**
@@ -429,18 +423,15 @@ public class dashboardView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTentangActionPerformed
-        // TODO add your handling code here:
-        // 1. Buka View Tujuan
+
     new tentangView().setVisible(true);
     
-    // 2. Tutup View Saat Ini (Dashboard)
+
     this.dispose();
     }//GEN-LAST:event_btnTentangActionPerformed
 
     private void btnBerandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBerandaActionPerformed
         // TODO add your handling code here:
-        // 1. Panggil method loadData() yang sudah kita buat sebelumnya
-        // Karena kita sudah ada di Beranda, cukup refresh data saja
         updateTampilan(); 
         initTanggal();
         javax.swing.JOptionPane.showMessageDialog(this, "Tampilan berhasil diperbarui!");
@@ -470,7 +461,6 @@ public class dashboardView extends javax.swing.JFrame {
 
     private void txtKalenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKalenderActionPerformed
         // TODO add your handling code here:
-        // Set tanggal kalender ke "new Date()" (Waktu sekarang saat tombol ditekan)
         kalenderUtama.setDate(new java.util.Date());
     }//GEN-LAST:event_txtKalenderActionPerformed
 
@@ -484,23 +474,19 @@ public class dashboardView extends javax.swing.JFrame {
 
     private void btnPMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPMActionPerformed
         // TODO add your handling code here:
-        // --- STEP 1: LOOPING INPUT KETERANGAN (SUMBER) ---
         String keterangan = "";
         while (true) {
             keterangan = javax.swing.JOptionPane.showInputDialog(this, 
                 "Sumber pemasukan dari mana?\n(Contoh: Gaji, Dikasih Ortu)", 
                 "Input Pemasukan", javax.swing.JOptionPane.QUESTION_MESSAGE);
 
-            // 1. Cek jika user menekan Cancel / Close
             if (keterangan == null) return; // Batalkan proses
 
-            // 2. Cek jika kosong
             if (keterangan.trim().isEmpty()) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Keterangan tidak boleh kosong!", "Eits!", javax.swing.JOptionPane.WARNING_MESSAGE);
                 continue; // Ulangi loop
             }
 
-            // 3. VALIDASI: TIDAK BOLEH ADA ANGKA (Regex)
             if (keterangan.matches(".*\\d.*")) {
                 javax.swing.JOptionPane.showMessageDialog(this, 
                     "Nama sumber TIDAK BOLEH mengandung angka!\nSilakan tulis menggunakan huruf saja.", 
@@ -508,47 +494,41 @@ public class dashboardView extends javax.swing.JFrame {
                 continue; // Ulangi loop, tanya lagi
             }
 
-            // Jika lolos semua cek di atas, hentikan loop
             break; 
         }
 
-        // --- STEP 2: LOOPING INPUT NOMINAL (ANGKA) ---
         int nominal = 0;
         while (true) {
             String inputNominal = javax.swing.JOptionPane.showInputDialog(this, 
                 "Berapa nominal dari '" + keterangan + "'?", 
                 "Input Nominal", javax.swing.JOptionPane.QUESTION_MESSAGE);
 
-            // 1. Cek jika user Cancel
+       
             if (inputNominal == null) return;
 
-            // 2. Cek jika kosong
+    
             if (inputNominal.trim().isEmpty()) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Nominal harus diisi!", "Eits!", javax.swing.JOptionPane.WARNING_MESSAGE);
                 continue;
             }
 
-            // 3. VALIDASI: HARUS ANGKA
             try {
                 nominal = Integer.parseInt(inputNominal);
                 
-                // Opsional: Cek minus
                 if (nominal <= 0) {
                      javax.swing.JOptionPane.showMessageDialog(this, "Nominal harus lebih dari 0!", "Error", javax.swing.JOptionPane.WARNING_MESSAGE);
                      continue;
                 }
                 
-                // Jika berhasil jadi angka, hentikan loop
                 break; 
             } catch (NumberFormatException e) {
                 javax.swing.JOptionPane.showMessageDialog(this, 
                     "Nominal HARUS berupa angka saja!\nJangan pakai titik atau koma (Contoh: 50000)", 
                     "Format Salah", javax.swing.JOptionPane.ERROR_MESSAGE);
-                // Loop akan otomatis mengulang karena tidak ada 'break' di sini
+               
             }
         }
 
-        // --- STEP 3: PROSES DATA (Jika semua input sudah benar) ---
         pemasukan += nominal; 
         DataKeuangan.saldoUtama += nominal;        
         
@@ -562,34 +542,29 @@ public class dashboardView extends javax.swing.JFrame {
 
     private void btnPKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPKActionPerformed
         // TODO add your handling code here:
-        // --- STEP 1: LOOPING INPUT KETERANGAN (TUJUAN) ---
         String keterangan = "";
         while (true) {
             keterangan = javax.swing.JOptionPane.showInputDialog(this, 
                 "Pengeluaran ini untuk beli apa?\n(Contoh: Bakso, Bensin)", 
                 "Input Pengeluaran", javax.swing.JOptionPane.QUESTION_MESSAGE);
 
-            // 1. Cek Cancel
             if (keterangan == null) return; 
 
-            // 2. Cek Kosong
             if (keterangan.trim().isEmpty()) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Keterangan tidak boleh kosong!", "Peringatan", javax.swing.JOptionPane.WARNING_MESSAGE);
                 continue; 
             }
 
-            // 3. VALIDASI: TIDAK BOLEH ADA ANGKA
             if (keterangan.matches(".*\\d.*")) {
                 javax.swing.JOptionPane.showMessageDialog(this, 
                     "Nama pengeluaran TIDAK BOLEH mengandung angka!\nGunakan huruf saja.", 
                     "Format Salah", javax.swing.JOptionPane.ERROR_MESSAGE);
-                continue; // Tanya lagi
+                continue; 
             }
 
-            break; // Valid
+            break; 
         }
 
-        // --- STEP 2: LOOPING INPUT NOMINAL (ANGKA) ---
         int nominal = 0;
         while (true) {
             String inputNominal = javax.swing.JOptionPane.showInputDialog(this, 
@@ -619,7 +594,6 @@ public class dashboardView extends javax.swing.JFrame {
             }
         }
 
-        // --- STEP 3: PROSES DATA ---
         pengeluaran += nominal; 
         DataKeuangan.saldoUtama -= nominal;        
         
@@ -632,8 +606,7 @@ public class dashboardView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPKActionPerformed
 
     private void btnPSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPSActionPerformed
-        // TODO add your handling code here:                                  
-         // Kita fungsikan ini untuk koreksi saldo manual jika perlu
+        // TODO add your handling code here:                        
         String input = javax.swing.JOptionPane.showInputDialog(this, "Atur Saldo Manual (Koreksi):");
         if (input != null && !input.isEmpty()) {
             try {
@@ -715,22 +688,18 @@ public class dashboardView extends javax.swing.JFrame {
     private javax.swing.JTextField txtSaldo;
     // End of variables declaration//GEN-END:variables
 
-    // 1. METHOD UPDATE TAMPILAN
+
     private void updateTampilan() {
-        // 1. Tampilkan Angka ke Label (Format Rupiah)
         lblSaldo.setText(kursIDR.format(DataKeuangan.saldoUtama));
         lblPemasukan.setText(kursIDR.format(pemasukan));
         lblPengeluaran.setText(kursIDR.format(pengeluaran));
 
-        // --- SIMPAN KE SESSION ---
         UserSession.pemasukan = this.pemasukan;
         UserSession.pengeluaran = this.pengeluaran;
 
-        // 2. LOGIKA KESEHATAN KEUANGAN & PEWARNAAN MODERN
         int skor = 0;
         String pesanKesehatan = "";
         
-        // Palet Warna Modern (Flat Design)
         java.awt.Color warnaHijau = new java.awt.Color(46, 204, 113); // Emerald (Hijau Segar)
         java.awt.Color warnaKuning = new java.awt.Color(230, 126, 34);  // Carrot (Oranye Gelap biar teks kebaca)
         java.awt.Color warnaMerah = new java.awt.Color(231, 76, 60);  // Alizarin (Merah Kalem)
@@ -738,9 +707,7 @@ public class dashboardView extends javax.swing.JFrame {
         
         java.awt.Color warnaFinal = warnaAbu; // Default
 
-        // --- MULAI PENGECEKAN LOGIKA ---
         
-        // Kondisi 1: Belum ada data sama sekali
         if (pemasukan == 0 && pengeluaran == 0) {
             if (UserSession.nilaiKesehatan > 0) {
                 skor = UserSession.nilaiKesehatan;
@@ -756,38 +723,31 @@ public class dashboardView extends javax.swing.JFrame {
                 return; // Stop di sini
             }
         } 
-        // Kondisi 2: Besar Pasak daripada Tiang (Boros tanpa pemasukan)
         else if (pemasukan == 0 && pengeluaran > 0) {
             skor = 10; 
             pesanKesehatan = "BOROS (Tanpa Pemasukan!)";
             warnaFinal = warnaMerah;
         } 
-        // Kondisi 3: Perhitungan Normal
         else {
             double rasio = (double) pengeluaran / pemasukan;
             
-            // LOGIKA: Semakin kecil rasio pengeluaran, semakin SEHAT (Bar Penuh)
             
             if (rasio <= 0.5) { 
-                // Pengeluaran di bawah 50% (Sangat Hemat)
                 skor = 100; // Bar Penuh
                 pesanKesehatan = "Sangat Sehat (Hemat)";
                 warnaFinal = warnaHijau;
                 
             } else if (rasio <= 0.8) { 
-                // Pengeluaran 50% - 80% (Wajar)
                 skor = 80; // Bar agak penuh
                 pesanKesehatan = "Sehat (Aman)";
                 warnaFinal = warnaHijau;
                 
             } else if (rasio <= 1.0) { 
-                // Pengeluaran 80% - 100% (Ngepas banget)
                 skor = 50; // Bar setengah
                 pesanKesehatan = "Waspada (Hampir Habis)";
                 warnaFinal = warnaKuning;
                 
             } else { 
-                // Pengeluaran > Pemasukan (Minus)
                 if (DataKeuangan.saldoUtama > 0) {
                     skor = 30; // Masih ada tabungan
                     pesanKesehatan = "Defisit (Pakai Saldo Utama)";
@@ -800,14 +760,10 @@ public class dashboardView extends javax.swing.JFrame {
             }
         }
 
-        // 3. TERAPKAN KE PROGRESS BAR
         financeHealth.setValue(skor);
         financeHealth.setString(pesanKesehatan);
         financeHealth.setForeground(warnaFinal);
         
-        // --- TRIK UI: MEMBUAT TEKS JADI PUTIH OTOMATIS ---
-        // Kode ini memaksa teks yang tertimpa warna bar menjadi PUTIH
-        // dan teks yang di area kosong menjadi ABU TUA.
         financeHealth.setUI(new javax.swing.plaf.basic.BasicProgressBarUI() {
             @Override
             protected java.awt.Color getSelectionForeground() {
@@ -821,29 +777,23 @@ public class dashboardView extends javax.swing.JFrame {
         
         financeHealth.setStringPainted(true);
 
-        // 4. Simpan Session
         UserSession.nilaiKesehatan = skor;
         UserSession.pesanKesehatan = pesanKesehatan;
-    } // <--- Jangan lupa kurung tutup ini!
+    } 
 
     // 2. METHOD RIWAYAT (Dibuat sejajar, bukan di dalam)
     private void tambahRiwayat(String pesan) {
         if (lblRiwayat != null) {
             lblRiwayat.setText(pesan);
             
-            // --- TAMBAHKAN INI ---
             UserSession.riwayatTerakhir = pesan; 
-            // ---------------------
         }
     }
 
-    // 3. METHOD TANGGAL (Logika yang benar)
     private void initTanggal() {
-        // Mengambil tanggal hari ini dari sistem
         java.time.LocalDate today = java.time.LocalDate.now();
         java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd MMMM yyyy");
         
-        // Menampilkan ke txtKalender jika komponennya ada
         if (txtKalender != null) {
             txtKalender.setText(today.format(formatter));
         }

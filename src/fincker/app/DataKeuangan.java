@@ -11,12 +11,10 @@ import java.util.ArrayList;
  * @author Muham
  */
 public class DataKeuangan {
-    // 1. Saldo Utama (Sudah ada)
     public static long saldoUtama = 0; 
     
-    // 2. STRUKTUR DATA TRANSAKSI (Tambahan Baru)
     public static class Transaksi {
-        String tipe;       // "Pemasukan", "Pengeluaran", "Wishlist"
+        String tipe;      
         String keterangan; 
         long jumlah;
         String tanggal;    
@@ -29,12 +27,10 @@ public class DataKeuangan {
         }
     }
     
-    // 3. LIST PENYIMPAN RIWAYAT (Global)
     public static ArrayList<Transaksi> riwayat = new ArrayList<>();
     
-    // 4. METHOD PENCATAT (Panggil ini dari Dashboard & Wishlist)
     public static void catat(String tipe, String ket, long jumlah) {
-        String tgl = java.time.LocalDate.now().toString(); // Ambil tanggal hari ini
+        String tgl = java.time.LocalDate.now().toString(); 
         riwayat.add(new Transaksi(tipe, ket, jumlah, tgl));
     }
 }

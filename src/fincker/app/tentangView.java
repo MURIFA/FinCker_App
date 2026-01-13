@@ -18,22 +18,17 @@ public class tentangView extends javax.swing.JFrame {
     public tentangView() {
         initComponents();
         
-        // 1. Settingan Layar (Resolusi & Posisi Tengah)
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null); 
 
-        // 2. KODE WAJIB: Paksa Navbar Melar Mengikuti jPanel1
-        // Karena jPanel1 pakai Custom Code/Absolute, kita harus update manual saat resize
         bg.addComponentListener(new java.awt.event.ComponentAdapter() {
             @Override
             public void componentResized(java.awt.event.ComponentEvent evt) {
                 int lebarLayar = bg.getWidth();
-                int tinggiNavbar = 70; // Tinggi navbar (sesuaikan dengan design)
+                int tinggiNavbar = 70;
                 
-                // SetBounds(x, y, width, height)
                 pnlNavbar.setBounds(0, 0, lebarLayar, tinggiNavbar);
                 
-                // Validasi ulang biar tombol di dalamnya ikut geser/update
                 pnlNavbar.revalidate();
                 pnlNavbar.repaint();
             }
@@ -360,8 +355,6 @@ public class tentangView extends javax.swing.JFrame {
 
     private void btnBerandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBerandaActionPerformed
         // TODO add your handling code here:
-        // 1. Panggil method loadData() yang sudah kita buat sebelumnya
-        // Karena kita sudah ada di Beranda, cukup refresh data saja
         new dashboardView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBerandaActionPerformed

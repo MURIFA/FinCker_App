@@ -12,10 +12,8 @@ public class UserSession {
     public static int pemasukan = 0;
     public static int pengeluaran = 0;
     
-    // Untuk menyimpan kondisi Bar Kesehatan terakhir
     public static int nilaiKesehatan = 0;
     public static String pesanKesehatan = "Belum ada data";
     
-    // Untuk menyimpan teks riwayat terakhir
     public static String riwayatTerakhir = "Belum ada transaksi";
 }

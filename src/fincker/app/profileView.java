@@ -18,11 +18,9 @@ public class profileView extends javax.swing.JFrame {
      */
     public profileView() {
         initComponents();
-        // 1. Settingan Layar (Resolusi & Posisi Tengah)
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null); 
         
-        // 2. Panggil Data User saat aplikasi dibuka
         loadProfile();
     }
 
@@ -240,8 +238,6 @@ public class profileView extends javax.swing.JFrame {
 
     private void btnBerandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBerandaActionPerformed
         // TODO add your handling code here:
-        // 1. Panggil method loadData() yang sudah kita buat sebelumnya
-        // Karena kita sudah ada di Beranda, cukup refresh data saja
         new dashboardView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBerandaActionPerformed
@@ -272,25 +268,21 @@ public class profileView extends javax.swing.JFrame {
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         // TODO add your handling code here:
-        // Pastikan ada user yang login
         if (loginView.currentUser != null) {
             User u = loginView.currentUser;
 
-            // 1. Ambil Data dari Text Field
             String nama = txtNama.getText();
             String email = txtEmail.getText();
             String telp = txtTelp.getText();
             String pekerjaan = txtPekerjaan.getText();
-            String lahir = txtLahir.getText(); // Kita ambil string langsung dari text field
+            String lahir = txtLahir.getText(); 
             String pass = new String(txtPassword.getPassword());
 
-            // 2. Validasi sederhana
             if (nama.isEmpty() || email.isEmpty() || pass.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Nama, Email, dan Password tidak boleh kosong!");
                 return;
             }
 
-            // 3. Update data User (SETTER)
             u.setFullName(nama);
             u.setEmail(email);
             u.setPhoneNumber(telp);
@@ -299,18 +291,16 @@ public class profileView extends javax.swing.JFrame {
             u.setPassword(pass);
 
             JOptionPane.showMessageDialog(this, "Profil Berhasil Diupdate!");
-            loadProfile(); // Refresh tampilan
+            loadProfile();
         }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void cbShowPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbShowPassActionPerformed
         // TODO add your handling code here:
-        // Cek: Apakah kotak dicentang?
+   
         if (cbShowPass.isSelected()) {
-            // Jika Dicentang: Tampilkan karakter asli (char 0 artinya null/tanpa topeng)
             txtPassword.setEchoChar((char) 0); 
         } else {
-            // Jika Tidak Dicentang: Tutup dengan bintang/titik
             txtPassword.setEchoChar('*'); 
         }
     }//GEN-LAST:event_cbShowPassActionPerformed
@@ -388,11 +378,9 @@ public class profileView extends javax.swing.JFrame {
     }
 
     private void loadProfile() {
-        // Cek apakah ada user yang sedang login?
         if (loginView.currentUser != null) {
             User u = loginView.currentUser;
             
-            // Isi form dengan data user
             txtNama.setText(u.getFullName());
             txtEmail.setText(u.getEmail());
             txtTelp.setText(u.getPhoneNumber());
@@ -400,7 +388,6 @@ public class profileView extends javax.swing.JFrame {
             txtLahir.setText(u.getDateOfBirth());
             txtPassword.setText(u.getPassword());
             
-            // Reset Show Password Checkbox
             cbShowPass.setSelected(false);
             txtPassword.setEchoChar('*');
         }

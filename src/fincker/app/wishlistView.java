@@ -13,15 +13,11 @@ import java.util.Date;
 
 public class wishlistView extends javax.swing.JFrame {
 
-    // --- 1. MODEL & FORMATTER (PERBAIKAN UTAMA) ---
-    // Menggunakan WishlistItem, BUKAN String
     private static DefaultListModel<WishlistItem> listModel; 
     
-    // Definisi Format Rupiah (Wajib ada biar tidak error)
     java.text.NumberFormat kursIDR = java.text.NumberFormat.getCurrencyInstance(new java.util.Locale("id", "ID"));
 
     private void updateInfoSaldo() {
-        // Ambil data dari Pusat
         lblSaldo.setText(kursIDR.format(DataKeuangan.saldoUtama));
     }
 
@@ -31,29 +27,24 @@ public class wishlistView extends javax.swing.JFrame {
         if (selected instanceof WishlistItem) {
             WishlistItem item = (WishlistItem) selected;
             
-            // 1. Hitung Persen
             int persen = item.getProgress();
             
-            // 2. Update Progress Bar
             progresTabungan.setValue(persen);
             progresTabungan.setStringPainted(true);
             
-            // 3. Update Text Status
             txtStatus.setText("Terkumpul: " + kursIDR.format(item.terkumpul) + 
                               " / " + kursIDR.format(item.targetUang));
             
-            // 4. Update Detail Kecil
             lblProgressValue.setText(kursIDR.format(item.terkumpul));
             
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
             String tgl = (item.tanggalTarget != null) ? sdf.format(item.tanggalTarget) : "-";
             lblStatusValue.setText("Target: " + tgl);
             
-            // Warna Bar
             if (persen >= 100) {
-                progresTabungan.setForeground(new java.awt.Color(46, 204, 113)); // Hijau
+                progresTabungan.setForeground(new java.awt.Color(46, 204, 113)); 
             } else {
-                progresTabungan.setForeground(new java.awt.Color(51, 153, 255)); // Biru
+                progresTabungan.setForeground(new java.awt.Color(51, 153, 255)); 
             }
             
         } else {
@@ -78,7 +69,6 @@ public class wishlistView extends javax.swing.JFrame {
     }
 
     private void refreshUI() {
-        // 1. UPDATE LIST (PENTING: Pakai setElementAt biar teksnya berubah)
         int index = lstWishlist.getSelectedIndex();
         if (index != -1) {
             listModel.setElementAt(listModel.getElementAt(index), index);
@@ -86,21 +76,17 @@ public class wishlistView extends javax.swing.JFrame {
             lstWishlist.repaint();
         }
         
-        // 2. Update Tampilan Bawah (Bar & Persen)
         tampilkanDetailItem();      
         
-        // 3. Update Saldo Atas (PENTING: Biar saldo berkurang saat nabung)
         updateInfoSaldo();
     }
 
-    // --- 2. CLASS DATA BARANG (Inner Class) ---
-    // Hapus 'static' agar bisa akses kursIDR
 
     private static class WishlistItem {
         String nama;
-        long targetUang;  // Pakai LONG agar muat Triliunan
-        long terkumpul;   // Pakai LONG
-        Date tanggalTarget; // Pakai Date biar enak diolah
+        long targetUang;  
+        long terkumpul;   
+        Date tanggalTarget; 
 
         public WishlistItem(String nama, long targetUang, Date tanggalTarget) {
             this.nama = nama;
@@ -128,32 +114,23 @@ public class wishlistView extends javax.swing.JFrame {
         this.setSize(1280, 720);
         this.setLocationRelativeTo(null);
         
-        // --- LOGIKA AGAR DATA TIDAK HILANG (PERSISTENCE) ---
-        // Cek apakah listModel sudah ada di memori static?
         if (listModel == null) {
-            // Jika belum ada (aplikasi baru buka), buat baru
             listModel = new DefaultListModel();
         }
         
-        // Pasangkan model ke List
-        // Kita pakai casting (javax.swing.ListModel) biar tidak eror merah
         lstWishlist.setModel((javax.swing.ListModel) listModel);
 
-        // Update Saldo Awal (Ambil dari DataKeuangan)
         updateInfoSaldo();
 
-        // Listener: Deteksi Klik pada List
         lstWishlist.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 tampilkanDetailItem();
             }
         });
         
-        // --- RESET TAMPILAN AWAL ---
         if (progresTabungan != null) progresTabungan.setValue(0);
         if (txtStatus != null) txtStatus.setText("Status: -");
         
-        // SESUAI REQUEST: Label persen dikosongkan (bukan "0%") biar bersih
         if (lblProgresPersen != null) lblProgresPersen.setText("");
     }
     /**
@@ -572,7 +549,7 @@ public class wishlistView extends javax.swing.JFrame {
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
     try {
             String nama = txtBarang.getText().trim();
-            Date tgl = dcTarget.getDate(); // Ambil dari JDateChooser
+            Date tgl = dcTarget.getDate(); 
             
             if (nama.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Nama barang harus diisi!");
@@ -583,7 +560,6 @@ public class wishlistView extends javax.swing.JFrame {
                 return;
             }
             
-            // Ambil Harga (Pakai LONG)
             long harga = Long.parseLong(txtBarang1.getText().trim());
             
             if (harga <= 0) {
@@ -591,11 +567,9 @@ public class wishlistView extends javax.swing.JFrame {
                 return;
             }
 
-            // Simpan Data
             WishlistItem itemBaru = new WishlistItem(nama, harga, tgl);
             listModel.addElement(itemBaru);
             
-            // Reset Form
             btnResetActionPerformed(null);
             
             JOptionPane.showMessageDialog(this, "Berhasil menambahkan " + nama);
@@ -607,17 +581,16 @@ public class wishlistView extends javax.swing.JFrame {
 
     
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-     // --- LOGIKA RESET FORM INPUT ---
+
         
         txtBarang.setText("");   
         txtBarang1.setText("");  
-        dcTarget.setDate(null); // Kosongkan Tanggal
+        dcTarget.setDate(null); 
         txtBarang.requestFocus();
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
  
-        // --- LOGIKA EDIT DATA ---
         
         Object selected = lstWishlist.getSelectedValue();
         if (selected == null || !(selected instanceof WishlistItem)) {
@@ -626,11 +599,9 @@ public class wishlistView extends javax.swing.JFrame {
         }
         WishlistItem item = (WishlistItem) selected;
 
-        // 1. Edit Nama
         String namaBaru = JOptionPane.showInputDialog(this, "Ubah Nama:", item.nama);
         if (namaBaru != null && !namaBaru.isEmpty()) item.nama = namaBaru;
 
-        // 2. Edit Harga (LONG)
         String hargaStr = JOptionPane.showInputDialog(this, "Ubah Harga (Rp):", item.targetUang);
         if (hargaStr != null && !hargaStr.isEmpty()) {
             try {
@@ -644,13 +615,12 @@ public class wishlistView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Harga harus angka!");
             }
         }
-        // 3. Refresh
         refreshUI();
         JOptionPane.showMessageDialog(this, "Data diperbarui!");
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
- // --- LOGIKA HAPUS DATA ---
+ 
         
        int index = lstWishlist.getSelectedIndex();
         Object selected = lstWishlist.getSelectedValue();
@@ -672,15 +642,12 @@ public class wishlistView extends javax.swing.JFrame {
 
     private void btnBerandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBerandaActionPerformed
         // TODO add your handling code here:
-        // 1. Panggil method loadData() yang sudah kita buat sebelumnya
-        // Karena kita sudah ada di Beranda, cukup refresh data saja
         new dashboardView().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnBerandaActionPerformed
 
     private void btnTentangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTentangActionPerformed
         // TODO add your handling code here:
-        // 1. Buka View Tujuan
         new tentangView().setVisible(true);
 
         this.dispose();
@@ -707,7 +674,6 @@ public class wishlistView extends javax.swing.JFrame {
 
     private void btnMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinActionPerformed
         // TODO add your handling code here:
-        // 1. Cek User pilih barang mana
         Object selected = lstWishlist.getSelectedValue();
         if (selected == null || !(selected instanceof WishlistItem)) {
             JOptionPane.showMessageDialog(this, "Pilih barang dulu!");
@@ -715,26 +681,21 @@ public class wishlistView extends javax.swing.JFrame {
         }
         WishlistItem item = (WishlistItem) selected;
         
-        // 2. Input Dialog
         String input = JOptionPane.showInputDialog(this, "Tarik kembali berapa dari " + item.nama + "?");
         if (input != null && !input.isEmpty()) {
             try {
                 long nominal = Long.parseLong(input);
                 
-                // 3. Cek Uang di Barang Cukup Gak?
                 if (item.terkumpul < nominal) {
                     JOptionPane.showMessageDialog(this, "Uang di tabungan barang ini kurang!");
                     return;
                 }
                 
-                // 4. Transaksi
                 item.terkumpul -= nominal;          // Kurangi dari Barang
                 DataKeuangan.saldoUtama += nominal; // Balikin ke Saldo Pusat
                 
-                // --- TAMBAHAN: CATAT KE LAPORAN ---
                 DataKeuangan.catat("Pemasukan", "Tarik Tabungan " + item.nama, nominal);
                 
-                // 5. Refresh UI
                 lstWishlist.repaint();
                 tampilkanDetailItem();
                 updateInfoSaldo();
@@ -749,7 +710,6 @@ public class wishlistView extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        // 1. Cek User pilih barang mana
         Object selected = lstWishlist.getSelectedValue();
         if (selected == null || !(selected instanceof WishlistItem)) {
             JOptionPane.showMessageDialog(this, "Pilih barang di list kanan dulu!");
@@ -757,15 +717,12 @@ public class wishlistView extends javax.swing.JFrame {
         }
         WishlistItem item = (WishlistItem) selected;
         
-        // --- LOGIKA BARU 1: CEK APAKAH SUDAH LUNAS? ---
-        // Kalau sudah penuh, langsung tolak. Jangan tanya mau nabung berapa.
         if (item.terkumpul >= item.targetUang) {
             JOptionPane.showMessageDialog(this, 
                 "Eits! Barang ini sudah LUNAS.\nTidak perlu menabung lagi ya! 😊");
             return; // STOP DI SINI
         }
         
-        // 2. Input Dialog
         String input = JOptionPane.showInputDialog(this, "Nabung berapa untuk " + item.nama + "?");
         
         if (input != null && !input.isEmpty()) {
@@ -773,35 +730,29 @@ public class wishlistView extends javax.swing.JFrame {
                 input = input.replaceAll("[^0-9]", ""); 
                 long nominal = Long.parseLong(input);
                 
-                // --- LOGIKA BARU 2: CEK KELEBIHAN BAYAR ---
                 long sisaKekurangan = item.targetUang - item.terkumpul;
                 
                 if (nominal > sisaKekurangan) {
                     JOptionPane.showMessageDialog(this, 
                         "Ups, kebanyakan! Kamu cuma butuh " + kursIDR.format(sisaKekurangan) + " lagi.\n" +
                         "Silakan masukkan nominal yang pas atau kurang dari itu.");
-                    return; // STOP, Jangan kurangi saldo
+                    return; 
                 }
                 
-                // 3. Cek Saldo Utama (Cukup gak?)
                 if (DataKeuangan.saldoUtama < nominal) {
                     JOptionPane.showMessageDialog(this, "Saldo Utama tidak cukup!");
                     return;
                 }
                 
-                // 4. TRANSAKSI BERHASIL
                 DataKeuangan.saldoUtama -= nominal; 
                 item.terkumpul += nominal;   
                 
-                // --- TAMBAHAN: CATAT KE LAPORAN ---
                 DataKeuangan.catat("Wishlist", "Nabung: " + item.nama, nominal);
                 
-                // Cek jika pas lunas (Tanpa logika kembalian lagi karena sudah dicek di atas)
                 if (item.terkumpul == item.targetUang) {
                      JOptionPane.showMessageDialog(this, "🎉 Selamat! Target " + item.nama + " Tercapai!");
                 }
 
-                // 5. Update Tampilan
                 refreshUI(); 
                 lblSaldo.setText(kursIDR.format(DataKeuangan.saldoUtama));
 

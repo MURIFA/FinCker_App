@@ -191,15 +191,11 @@ public class loginView extends javax.swing.JFrame {
 
         boolean loginBerhasil = false;
 
-        // Loop cek data user di list
         for (User u : registerView.listUser) {
-            // Cek Email & Password
             if (u.getEmail().equalsIgnoreCase(email) && u.getPassword().equals(password)) {
                 loginBerhasil = true;
                 
-                // --- TAMBAHKAN BARIS INI ---
-                currentUser = u; // Simpan user yang berhasil login!
-                // ---------------------------
+                currentUser = u; 
                 
                 break;
             }
@@ -214,7 +210,6 @@ public class loginView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    // --- 3. TOMBOL KEMBALI ---
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
         welcomeView wv = new welcomeView();
@@ -224,12 +219,9 @@ public class loginView extends javax.swing.JFrame {
 
     private void cbShowPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbShowPassActionPerformed
         // TODO add your handling code here:
-        // Cek: Apakah kotak dicentang?
         if (cbShowPass.isSelected()) {
-            // Jika Dicentang: Tampilkan karakter asli (char 0 artinya null/tanpa topeng)
             txtPassword.setEchoChar((char) 0);
         } else {
-            // Jika Tidak Dicentang: Tutup dengan bintang/titik
             txtPassword.setEchoChar('*');
         }
     }//GEN-LAST:event_cbShowPassActionPerformed
