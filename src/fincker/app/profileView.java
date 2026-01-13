@@ -161,6 +161,7 @@ public class profileView extends javax.swing.JFrame {
         pnlProfile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         isiProfile.setBackground(new java.awt.Color(153, 204, 255));
+        isiProfile.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 4, true));
         isiProfile.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblFoto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -223,11 +224,12 @@ public class profileView extends javax.swing.JFrame {
         txtPekerjaan.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         isiProfile.add(txtPekerjaan, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 340, -1));
 
-        pnlProfile.add(isiProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 780, 440));
+        pnlProfile.add(isiProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 780, 440));
 
         lblRegister.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblRegister.setForeground(new java.awt.Color(255, 255, 255));
         lblRegister.setText("PROFILE");
-        pnlProfile.add(lblRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, -1, -1));
+        pnlProfile.add(lblRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 30, -1, -1));
 
         pnlBg.add(pnlProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 1280, 640));
 

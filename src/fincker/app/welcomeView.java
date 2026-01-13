@@ -33,7 +33,6 @@ public class welcomeView extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel() {
             // 1. Muat Gambar (Ganti nama file sesuai punyamu)
@@ -57,43 +56,24 @@ public class welcomeView extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setPreferredSize(new java.awt.Dimension(1280, 720));
-        jPanel1.setLayout(new java.awt.GridBagLayout());
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblJudul.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         lblJudul.setForeground(new java.awt.Color(255, 255, 255));
         lblJudul.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblJudul.setText("FINCKER");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(183, 353, 0, 0);
-        jPanel1.add(lblJudul, gridBagConstraints);
+        jPanel1.add(lblJudul, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 260, -1, -1));
 
-        lblTagline.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblTagline.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         lblTagline.setForeground(new java.awt.Color(255, 255, 255));
         lblTagline.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTagline.setText("Solusi Cerdas Keuangan Anda.");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 333, 0, 316);
-        jPanel1.add(lblTagline, gridBagConstraints);
+        lblTagline.setText("Kelola Keuangan, Wujudkan Masa Depan.");
+        jPanel1.add(lblTagline, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 360, -1, -1));
 
         btnMulai.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnMulai.setText("MULAI SEKARANG");
         btnMulai.addActionListener(this::btnMulaiActionPerformed);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 33;
-        gridBagConstraints.ipady = 18;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(82, 350, 90, 0);
-        jPanel1.add(btnMulai, gridBagConstraints);
+        jPanel1.add(btnMulai, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 490, 210, 50));
 
         getContentPane().add(jPanel1, "card2");
 

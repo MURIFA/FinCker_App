@@ -76,6 +76,7 @@ public class registerView extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlRegister.setBackground(new java.awt.Color(153, 204, 255));
+        pnlRegister.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 4, true));
 
         txtNama.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -93,6 +94,11 @@ public class registerView extends javax.swing.JFrame {
         btnCancel.addActionListener(this::btnCancelActionPerformed);
 
         txtTelp.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txtTelp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelpKeyTyped(evt);
+            }
+        });
 
         txtPekerjaan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -130,7 +136,7 @@ public class registerView extends javax.swing.JFrame {
         pnlRegisterLayout.setHorizontalGroup(
             pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRegisterLayout.createSequentialGroup()
-                .addContainerGap(59, Short.MAX_VALUE)
+                .addContainerGap(51, Short.MAX_VALUE)
                 .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegisterLayout.createSequentialGroup()
                         .addComponent(lblRegister)
@@ -162,27 +168,26 @@ public class registerView extends javax.swing.JFrame {
                             .addComponent(txtNama, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTelp, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbShowPass, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(40, 40, 40))))
-            .addGroup(pnlRegisterLayout.createSequentialGroup()
-                .addGap(129, 129, 129)
-                .addComponent(btnCancel)
-                .addGap(60, 60, 60)
-                .addComponent(btnRegister)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(40, 40, 40))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegisterLayout.createSequentialGroup()
+                        .addComponent(btnCancel)
+                        .addGap(60, 60, 60)
+                        .addComponent(btnRegister)
+                        .addGap(126, 126, 126))))
         );
         pnlRegisterLayout.setVerticalGroup(
             pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlRegisterLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(lblRegister)
-                .addGap(55, 55, 55)
+                .addGap(35, 35, 35)
                 .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlRegisterLayout.createSequentialGroup()
-                        .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(txtTelp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(dcLahir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(dcLahir, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlRegisterLayout.createSequentialGroup()
                         .addComponent(lblNama)
                         .addGap(28, 28, 28)
@@ -207,11 +212,11 @@ public class registerView extends javax.swing.JFrame {
                     .addComponent(lblKonfirmasi))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbShowPass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(pnlRegisterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegister)
                     .addComponent(btnCancel))
-                .addGap(49, 49, 49))
+                .addGap(50, 50, 50))
         );
 
         jPanel1.add(pnlRegister, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 490, 570));
@@ -298,6 +303,17 @@ if (!email.contains("@") || !email.contains(".")) {
         lv.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void txtTelpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelpKeyTyped
+        // TODO add your handling code here:
+        // Ambil karakter yang sedang ditekan
+        char c = evt.getKeyChar();
+        
+        // Cek: Jika BUKAN angka, maka batalkan (consume)
+        if (!Character.isDigit(c)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTelpKeyTyped
 
     /**
      * @param args the command line arguments

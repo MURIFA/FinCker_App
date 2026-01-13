@@ -69,6 +69,7 @@ public class loginView extends javax.swing.JFrame {
         pnlBg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlLogin.setBackground(new java.awt.Color(153, 204, 255));
+        pnlLogin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 4, true));
 
         lblEmail.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblEmail.setText("Email");
@@ -89,7 +90,7 @@ public class loginView extends javax.swing.JFrame {
         btnLogin.setText("LOGIN");
         btnLogin.addActionListener(this::btnLoginActionPerformed);
 
-        registLabel3.setText("Click Here ! to Create your new account ");
+        registLabel3.setText("Belum punya akun? Daftar di sini!");
         registLabel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         registLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -109,27 +110,27 @@ public class loginView extends javax.swing.JFrame {
             pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLoginLayout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlLoginLayout.createSequentialGroup()
+                        .addComponent(lblEmail)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlLoginLayout.createSequentialGroup()
                         .addComponent(lblPassword)
-                        .addGap(37, 37, 37)
+                        .addGap(25, 25, 25)
                         .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(pnlLoginLayout.createSequentialGroup()
+                                    .addComponent(btnCancel)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnLogin))
+                                .addComponent(registLabel3))
                             .addGroup(pnlLoginLayout.createSequentialGroup()
                                 .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cbShowPass)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createSequentialGroup()
-                        .addComponent(lblEmail)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                        .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(pnlLoginLayout.createSequentialGroup()
-                                .addComponent(btnCancel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnLogin))
-                            .addComponent(registLabel3))
-                        .addGap(104, 104, 104))))
+                        .addGap(0, 40, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblLogin)
@@ -149,7 +150,7 @@ public class loginView extends javax.swing.JFrame {
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPassword)
                     .addComponent(cbShowPass, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
                     .addComponent(btnLogin))
@@ -158,7 +159,7 @@ public class loginView extends javax.swing.JFrame {
                 .addGap(38, 38, 38))
         );
 
-        pnlBg.add(pnlLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 161, -1, 360));
+        pnlBg.add(pnlLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 161, 430, 360));
 
         getContentPane().add(pnlBg, "card2");
 

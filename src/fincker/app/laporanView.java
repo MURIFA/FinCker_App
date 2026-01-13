@@ -186,6 +186,9 @@ public class laporanView extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         pnlSaldo = new javax.swing.JPanel();
         lblSisaSaldo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         pnlGrafik = new javax.swing.JPanel();
         scpTabel = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -299,6 +302,7 @@ public class laporanView extends javax.swing.JFrame {
         pnlLaporan.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlStatistik.setBackground(new java.awt.Color(255, 255, 255));
+        pnlStatistik.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlStatistik.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlMasuk.setBackground(new java.awt.Color(255, 153, 153));
@@ -331,7 +335,7 @@ public class laporanView extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        pnlStatistik.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 180, 80));
+        pnlStatistik.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 180, 80));
 
         pnlKeluar.setBackground(new java.awt.Color(102, 102, 255));
         pnlKeluar.setOpaque(false);
@@ -361,7 +365,7 @@ public class laporanView extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        pnlStatistik.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 180, 80));
+        pnlStatistik.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 180, 80));
 
         pnlSaldo.setBackground(new java.awt.Color(204, 255, 204));
         pnlSaldo.setOpaque(false);
@@ -391,11 +395,24 @@ public class laporanView extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        pnlStatistik.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, 180, 80));
+        pnlStatistik.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, 180, 80));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setText("PEMASUKAN");
+        pnlStatistik.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("PENGELUARAN");
+        pnlStatistik.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("SALDO");
+        pnlStatistik.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 40, -1, -1));
 
         pnlLaporan.add(pnlStatistik, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 640, 210));
 
         pnlGrafik.setBackground(new java.awt.Color(255, 255, 255));
+        pnlGrafik.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout pnlGrafikLayout = new javax.swing.GroupLayout(pnlGrafik);
         pnlGrafik.setLayout(pnlGrafikLayout);
@@ -410,6 +427,7 @@ public class laporanView extends javax.swing.JFrame {
 
         pnlLaporan.add(pnlGrafik, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 100, 540, 210));
 
+        jTable1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -519,6 +537,9 @@ public class laporanView extends javax.swing.JFrame {
     private javax.swing.JButton btnProfile;
     private javax.swing.JButton btnTabungan;
     private javax.swing.JButton btnTentang;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

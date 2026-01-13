@@ -173,10 +173,11 @@ public class tentangView extends javax.swing.JFrame {
         bg.add(pnlNavbar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 80));
 
         pnlTentang.setBackground(new java.awt.Color(255, 255, 255));
+        pnlTentang.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         pnlTentang.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlCreator.setBackground(new java.awt.Color(204, 255, 204));
-        pnlCreator.setBorder(new javax.swing.border.MatteBorder(null));
+        pnlCreator.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         lblFoto1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fincker/app/gambar/1.jpg"))); // NOI18N
         lblFoto1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -266,7 +267,8 @@ public class tentangView extends javax.swing.JFrame {
 
         pnlTentang.add(pnlCreator, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 0, 370, 520));
 
-        pnlAbout.setBackground(new java.awt.Color(204, 204, 255));
+        pnlAbout.setBackground(new java.awt.Color(153, 204, 255));
+        pnlAbout.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblAbout.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblAbout.setText("About FinCker");
@@ -274,7 +276,7 @@ public class tentangView extends javax.swing.JFrame {
         jScrollPane1.setBorder(null);
 
         jTextArea1.setEditable(false);
-        jTextArea1.setBackground(new java.awt.Color(204, 204, 255));
+        jTextArea1.setBackground(new java.awt.Color(153, 204, 255));
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextArea1.setLineWrap(true);
@@ -293,7 +295,7 @@ public class tentangView extends javax.swing.JFrame {
                 .addGroup(pnlAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblAbout)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         pnlAboutLayout.setVerticalGroup(
             pnlAboutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,12 +304,13 @@ public class tentangView extends javax.swing.JFrame {
                 .addComponent(lblAbout)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlTentang.add(pnlAbout, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 770, 220));
 
         pnlFitur.setBackground(new java.awt.Color(255, 204, 204));
+        pnlFitur.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblFitur.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lblFitur.setText("Kenapa Memilih FinCker?");
@@ -321,7 +324,7 @@ public class tentangView extends javax.swing.JFrame {
         jTextArea2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTextArea2.setLineWrap(true);
         jTextArea2.setRows(5);
-        jTextArea2.setText("1. DASHBOARD TERINTEGRASI\n   Menampilkan ringkasan Saldo, Pemasukan, dan Pengeluaran dalam satu tampilan real-time.\n2. LOGIKA KESEHATAN KEUANGAN\n   Sistem otomatis menghitung rasio pengeluaran dan memberikan status (Sehat / Waspada / Kritis).\n3. INPUT TRANSAKSI CEPAT\n   Antarmuka sederhana yang memudahkan pengguna menambah data transaksi tanpa langkah yang rumit.");
+        jTextArea2.setText("1. Diagnosa Keuangan Otomatis:\n    Tahu status keuanganmu (Sehat, Waspada, atau Kritis) secara instan tanpa hitungan manual.\n2. Tabungan Target Impian: \n    Atur target barang impian, pantau progres tabungan, dan wujudkan tepat waktu.\n3. Visualisasi Arus Kas:\n    Pantau perbandingan pemasukan dan pengeluaran lewat grafik yang mudah dipahami.");
         jTextArea2.setBorder(null);
         jScrollPane2.setViewportView(jTextArea2);
 
@@ -334,7 +337,7 @@ public class tentangView extends javax.swing.JFrame {
                 .addGroup(pnlFiturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblFitur)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 725, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         pnlFiturLayout.setVerticalGroup(
             pnlFiturLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -343,10 +346,10 @@ public class tentangView extends javax.swing.JFrame {
                 .addComponent(lblFitur)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        pnlTentang.add(pnlFitur, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 770, 200));
+        pnlTentang.add(pnlFitur, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 770, 210));
 
         bg.add(pnlTentang, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 1200, 520));
 
